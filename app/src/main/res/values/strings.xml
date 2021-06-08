@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">ghtk</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tao_don">Tạo đơn</string>
+    <string name="don_hang">Đơn hàng</string>
+    <string name="tien_hang">Tiền hàng</string>
+    <string name="cskh">CSKH</string>
+    <string name="doanh_thu">Doanh thu</string>
+    <string name="kho_hang">Kho hàng</string>
+    <string name="hoa_hong">Hoa hồng</string>
+    <string name="lien_he">Liên hệ</string>
+
+
+    <string name="diem_thuong">Điểm thưởng</string>
+    <string name="tai_khoan">Tài khoản</string>
+    <string name="sign_in_multi">Sign in with Google, Facebook or Twitter</string>
+    <string name="sign_in_w_google">Sign in with Google</string>
+    <string name="about">18520944 - App Logistic</string>
+
+    <string name="giamgia50_lientinh">Giảm giá 50% khi giao hàng liên tỉnh</string>
+    <string name="uudai77">Ưu đãi đặc biệt nhân dịp 7/7</string>
+    <string name="mienphi_khmoi">Miễn phí giao hàng cho khách hàng mới</string>
+    <string name="freeship_99k">Phí giao hàng 0 đồng cho đơn từ 99k</string>
+    <string name="contact"><![CDATA[
+        Liên hệ với dịch vụ của chúng tôi chưa bao giờ dễ dàng và đơn giản đến như vậy <br />
+        Hotline: 0912 250 721
+        Website: tuvanghtk.con.vn
+        Fanpage: https://facebook.com/ghtkuit
+
+        Hợp tác vận chuyển quy mô lớn và lâu dài, trở thành đối tác gắn bó bền vững, vui lòng liên hệ:
+        Gmail: ghtk@gmail.com
+        Địa chỉ: Khu phố 6, phường Linh Trung, quận Thủ Đức, Thành phố Hồ Chí Minh.
+    ]]>
+
+    </string>
+
+    <string name="answer1">
+        Theo quy định của Nhà nước, các loại hàng hoá sau bị cấm gửi:
+        1. Các chất ma tuý và chất kích thích thần kinh.
+        2. Vũ khí đạn dược, trang thiết bị kỹ thuật quân sự, hiện vật thuộc di tích văn hoá lịch sử.
+        3. Các loại văn hoá phẩm đồi truỵ, phản động, ấn phẩm tài liệu nhằm phá hoại trật tự công cộng chống lại Nhà nước Cộng hoà xã hội Chủ nghĩa Việt Nam.
+        4. Vật hoặc chất dễ nổ, dễ cháy và các chất gây nguy hiểm hoặc làm mất vệ sinh, gây ô nhiễm môi trường.
+        5. Các loại vật phẩm hàng hoá mà Nhà nước cấm lưu thông, cấm kinh doanh, cấm xuất nhập khẩu.
+        6. Vật phẩm, ấn phẩm, hàng hoá cấm nhập vào nước nhận theo thông báo của Liên minh Bưu chính thế giới (UPU).
+        7. Thư trong bưu kiện (thư gửi kèm trong hàng hoá).
+        8. Vật phẩm, hàng hoá trong thư, ấn phẩm, học phẩm dùng cho người mù.
+        9. Bưu gửi chứa nhiều bưu gửi, gửi cho nhiều địa chỉ nhận khác nhau.
+        10. Sinh vật sống.
+        11. Tiền Việt Nam, tiền nước ngoài và các loại giấy tờ khác có giá trị như tiền.
+        12. Các loại kim khí quý (vàng, bạc, bạch kim, v.v).
+        Lưu ý: GHTK không hỗ trợ giao những hàng hoá nằm trong danh mục hàng hoá cấm vận chuyển, nếu quý khách cố ý gửi các hàng hoá trên, GHTK sẽ không chịu trách nhiệm nếu xảy ra hư hỏng, thất lạc hoặc bị pháp luật truy cứu.
+    </string>
+    <string name="answer2">
+        Hàng gửi có điều kiện được quy định như sau:
+        1. Bưu phẩm, bưu kiện chứa hàng hoá để kinh doanh phải có chứng từ thuế và các chứng từ hợp lệ khác theo quy định của pháp luật.
+        2. Vật phẩm, hàng hoá xuất khẩu, nhập khẩu thuộc quản lý chuyên ngành phải thực hiện theo quy định của cơ quan quản lý chuyên ngành có thẩm quyền.
+        3. Ong, tằm, đỉa, côn trùng phục vụ nghiêm cứu khoa học, vật phẩm, hàng hoá dễ hư hỏng, chất bột đóng gói phải đảm bảo để không hư hỏng, ô nhiễm bưu phẩm, bưu kiện khác.
+        4. Vật phẩm, hàng hoá gửi trong bưu phẩm, bưu kiện sử dụng dịch vụ máy bay phải tuân thủ những quy định về an ninh hàng không.
+        Lưu ý: GHTK sẽ nhận hàng hoá gửi có điều kiện nếu khách hàng tuân theo và thực hiện đủ đúng các điều kiện ràng buộc đối với loại hàng hoá đó. Nếu quý khách cố tình gửi hàng không tuân theo quy định, GHTK sẽ không chịu trách nhiệm nếu xảy ra hư hỏng, thất lạc hoặc bị pháp luật truy cứu.
+    </string>
+
+    <string name="question1">Hàng hoá cấm vận chuyển gồm những loại hàng hoá nào?</string>
+    <string name="question2">Hàng gửi có điều kiện gồm những loại hàng hoá nào?</string>
+    <string name="question3">Hàng hoá cấm vận chuyển bay sẽ được vận chuyển như thế nào?</string>
+    <string name="question4">Tại sao cần được đóng gói theo quy chuẩn?</string>
+
+
+
+</resources>

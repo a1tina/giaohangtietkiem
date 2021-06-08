@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateOrderActivity">
+
+    <TextView
+        android:id="@+id/tv_create_order_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="45dp"
+        android:background="#9F5A7B"
+        android:text="Tạo mới"
+        android:paddingTop="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textAlignment="center"/>
+    <ImageButton
+        android:id="@+id/ibBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="?android:selectableItemBackground"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_back" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_create_order_title">
+        <RelativeLayout
+            android:id="@+id/rl_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_create_order_sender_receiver"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="NGƯỜI GỬI - NGƯỜI NHẬN"
+                android:padding="10dp"
+                android:background="#E0E1E3"/>
+
+
+            <TextView
+                android:id="@+id/tv_create_order_sender_name"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_create_order_sender_receiver"
+                android:textColor="#9F5A7B"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Người gửi" />
+
+            <EditText
+                android:id="@+id/et_sender_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_below="@id/tv_create_order_sender_receiver"
+                android:layout_toEndOf="@id/tv_create_order_sender_name"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingVertical="10dp"
+                android:textSize="16sp"
+                android:inputType="textPersonName"
+                android:hint="Họ tên"
+                android:drawableLeft="@drawable/ic_person"
+                android:drawablePadding="10dp"
+                android:background="@color/white"/>
+
+            <TextView
+                android:id="@+id/tv_create_order_sender_phone"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_create_order_sender_name"
+                android:textColor="#9F5A7B"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Điện thoại" />
+
+            <EditText
+                android:id="@+id/et_sender_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_below="@id/tv_create_order_sender_name"
+                android:layout_toEndOf="@id/tv_create_order_sender_phone"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingVertical="10dp"
+                android:textSize="16sp"
+                android:inputType="phone"
+                android:hint="Số điện thoại"
+                android:drawableLeft="@drawable/ic_phone"
+                android:drawablePadding="10dp"
+                android:background="@color/white"/>
+
+            <TextView
+                android:id="@+id/tv_create_order_sender_address"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_create_order_sender_phone"
+                android:textColor="#9F5A7B"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Địa chỉ" />
+
+            <EditText
+                android:id="@+id/et_sender_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_below="@id/tv_create_order_sender_phone"
+                android:layout_toEndOf="@id/tv_create_order_sender_address"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingVertical="10dp"
+                android:textSize="16sp"
+                android:inputType="textPostalAddress"
+                android:hint="Địa chỉ nhà/cơ quan"
+                android:drawableLeft="@drawable/ic_location"
+                android:drawableTint="#B8B8B8"
+                android:drawablePadding="10dp"
+                android:background="@color/white"/>
+            <CheckBox
+                android:id="@+id/checkBox1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_create_order_sender_address"
+                android:layout_marginStart="10dp"
+                android:text="Gửi tại bưu cục" />
+
+
+            <TextView
+                android:id="@+id/tv_create_order_receiver_name"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/checkBox1"
+                android:textColor="#9F5A7B"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Người nhận" />
+
+            <EditText
+                android:id="@+id/et_receiver_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_below="@id/checkBox1"
+                android:layout_toEndOf="@id/tv_create_order_receiver_name"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingVertical="10dp"
+                android:textSize="16sp"
+                android:inputType="textPersonName"
+                android:hint="Họ tên"
+                android:drawableLeft="@drawable/ic_person"
+                android:drawablePadding="10dp"
+                android:background="@color/white"/>
+
+            <TextView
+                android:id="@+id/tv_create_order_receiver_phone"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_create_order_receiver_name"
+                android:textColor="#9F5A7B"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Điện thoại" />
+
+            <EditText
+                android:id="@+id/et_receiver_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_below="@id/tv_create_order_receiver_name"
+                android:layout_toEndOf="@id/tv_create_order_receiver_phone"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingVertical="10dp"
+                android:textSize="16sp"
+                android:inputType="phone"
+                android:hint="Số điện thoại"
+                android:drawableLeft="@drawable/ic_phone"
+                android:drawablePadding="10dp"
+                android:background="@color/white"/>
+
+            <TextView
+                android:id="@+id/tv_create_order_receiver_address"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_create_order_receiver_phone"
+                android:textColor="#9F5A7B"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Địa chỉ" />
+
+            <EditText
+                android:id="@+id/et_receiver_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_below="@id/tv_create_order_receiver_phone"
+                android:layout_toEndOf="@id/tv_create_order_receiver_address"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingVertical="10dp"
+                android:textSize="16sp"
+                android:inputType="textPostalAddress"
+                android:hint="Địa chỉ nhà/cơ quan"
+                android:drawableLeft="@drawable/ic_location"
+                android:drawableTint="#B8B8B8"
+                android:drawablePadding="10dp"
+                android:background="@color/white"/>
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_create_order_receiver_address"
+                android:layout_marginStart="10dp"
+                android:text="Nhận tại bưu cục" />
+
+            <TextView
+                android:id="@+id/tv_create_order_goods_service"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="HÀNG HOÁ - DỊCH VỤ"
+                android:layout_below="@id/checkBox2"
+                android:padding="10dp"
+                android:background="#E0E1E3"/>
+
+            <TextView
+                android:id="@+id/tv_goods"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_create_order_goods_service"
+                android:textColor="#9F5A7B"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Hàng hoá" />
+
+            <Button
+                android:id="@+id/b_goods"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="?android:selectableItemBackground"
+                android:layout_below="@id/tv_create_order_goods_service"
+                android:text="Xem thêm quy định"
+                android:textSize="15sp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/teal_700"
+                android:textAllCaps="false"/>
+            <EditText
+                android:id="@+id/goods_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:padding="10dp"
+                android:hint="Mô tả hàng hoá"
+                android:paddingStart="20dp"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:drawableTint="#B8B8B8"
+                android:layout_below="@id/tv_goods"
+                android:background="@color/white"/>
+
+            <EditText
+                android:id="@+id/goods_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/goods_name"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/ic_money2"
+                android:drawablePadding="10dp"
+                android:drawableTint="#B8B8B8"
+                android:hint="Giá trị hàng"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/goods_weight"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:padding="10dp"
+                android:hint="Trọng lượng"
+                android:inputType="number"
+                android:textSize="16sp"
+                android:drawableTint="#B8B8B8"
+                android:drawableLeft="@drawable/ic_weight"
+                android:drawablePadding="10dp"
+                android:layout_below="@id/goods_value"
+                android:background="@color/white"/>
+            <EditText
+                android:id="@+id/goods_quantity"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:padding="10dp"
+                android:text="Số lượng: "
+                android:inputType="number"
+                android:textSize="16sp"
+                android:drawableTint="#B8B8B8"
+                android:drawableLeft="@drawable/ic_box"
+                android:drawablePadding="10dp"
+                android:layout_below="@id/goods_value"
+                android:layout_toEndOf="@id/goods_weight"
+                android:background="@color/white"/>
+
+            <Button
+                android:id="@+id/add_goods"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thêm hàng hoá"
+                android:textColor="#9F5A7B"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:layout_below="@id/goods_weight"
+                android:drawableLeft="@drawable/ic_add"
+                android:drawableTint="#9F5A7B"
+                android:layout_centerInParent="true"
+                android:background="?android:selectableItemBackground"
+                android:textScaleX="0.92"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/acb_goods_size"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/add_goods"
+                android:text="Nhập kích thước hàng hoá"
+                android:textColor="@color/teal_700"
+                android:textAllCaps="false"
+                android:drawablePadding="10dp"
+                android:textAlignment="textStart"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:drawableEnd="@drawable/ic_right_arrow"
+                android:background="?attr/selectableItemBackground"/>
+
+
+            <CheckBox
+                android:id="@+id/checkBox3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/acb_goods_size"
+                android:layout_marginStart="10dp"
+                android:text="Thu hộ bằng tiền hàng" />
+
+
+            <Button
+                android:id="@+id/b_cod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quy định thanh toán COD"
+                android:textColor="#9F5A7B"
+                android:textAllCaps="false"
+                android:layout_below="@id/acb_goods_size"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@drawable/ic_info"
+                android:drawableTint="#9F5A7B"
+                android:background="?android:selectableItemBackground"/>
+
+            <EditText
+                android:id="@+id/et_thu_ho"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/b_cod"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/ic_money2"
+                android:drawablePadding="10dp"
+                android:drawableTint="#B8B8B8"
+                android:hint="Tiền thu hộ"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_service"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_thu_ho"
+                android:textColor="#9F5A7B"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Dịch vụ" />
+
+            <Button
+                android:id="@+id/b_service_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="?android:selectableItemBackground"
+                android:layout_below="@id/et_thu_ho"
+                android:text="Chọn dịch vụ"
+                android:textSize="15sp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/teal_700"
+                android:textAllCaps="false"/>
+
+            <TextView
+                android:id="@+id/tv_photo"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_service"
+                android:textColor="#9F5A7B"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Ảnh hàng hoá" />
+
+            <Button
+                android:id="@+id/b_photo_delete_all"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="?android:selectableItemBackground"
+                android:layout_below="@id/tv_service"
+                android:text="Xoá tất cả"
+                android:textSize="15sp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/teal_700"
+                android:textAllCaps="false"/>
+
+            <EditText
+                android:id="@+id/et_coupon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_photo"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/ic_coupon"
+                android:drawablePadding="10dp"
+                android:drawableTint="#B8B8B8"
+                android:hint="Mã khuyến mại"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_goods_id_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_coupon"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/ic_goods_id_number"
+                android:drawablePadding="10dp"
+                android:drawableTint="#B8B8B8"
+                android:hint="Mã đơn hàng"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_general_info"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="THÔNG TIN CHUNG"
+                android:layout_below="@id/et_goods_id_number"
+                android:padding="10dp"
+                android:background="#E0E1E3"/>
+
+
+            <TextView
+                android:id="@+id/tv_freight_payer"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_general_info"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Người trả tiền cước" />
+            <TextView
+                android:id="@+id/tv_freight_payer_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_general_info"
+                android:layout_toLeftOf="@id/b_freight_payer_change"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:paddingVertical="10dp"
+                android:text="Người gửi" />
+
+            <Button
+                android:id="@+id/b_freight_payer_change"
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/tv_general_info"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="0dp"
+                android:background="?android:selectableItemBackground"
+                android:text="Sửa"
+                android:textAllCaps="false"
+                android:textColor="@color/teal_700"
+                android:textScaleX="0.88"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_delivery_time"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_freight_payer"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Thời gian gửi hàng" />
+            <TextView
+                android:id="@+id/tv_delivery_time_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_freight_payer"
+                android:layout_toLeftOf="@id/b_delivery_time_change"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:paddingVertical="10dp"
+                android:text="01-01-2021" />
+
+            <Button
+                android:id="@+id/b_delivery_time_change"
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/tv_freight_payer"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="0dp"
+                android:background="?android:selectableItemBackground"
+                android:text="Sửa"
+                android:textAllCaps="false"
+                android:textColor="@color/teal_700"
+                android:textScaleX="0.88"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_note"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_delivery_time"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Ghi chú" />
+            <TextView
+                android:id="@+id/tv_note_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_delivery_time"
+                android:layout_toLeftOf="@id/b_note_change"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:paddingVertical="10dp"
+                android:text="Cho khách xem hàng" />
+
+            <Button
+                android:id="@+id/b_note_change"
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/tv_delivery_time"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="0dp"
+                android:background="?android:selectableItemBackground"
+                android:text="Sửa"
+                android:textAllCaps="false"
+                android:textColor="@color/teal_700"
+                android:textScaleX="0.88"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_postage"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_note"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Cước phí" />
+            <TextView
+                android:id="@+id/tv_postage2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_note"
+                android:layout_toLeftOf="@id/tv_postage3"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:text="0" />
+            <TextView
+                android:id="@+id/tv_postage3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_note"
+                android:textSize="15sp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:paddingVertical="10dp"
+                android:paddingEnd="10dp"
+                android:text="đ" />
+
+            <TextView
+                android:id="@+id/tv_total_postage"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_postage"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Tổng cước" />
+            <TextView
+                android:id="@+id/tv_total_postage2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_postage"
+                android:layout_toLeftOf="@id/tv_total_postage3"
+                android:textSize="15sp"
+                android:textColor="#CC0000"
+                android:padding="10dp"
+                android:text="0" />
+            <TextView
+                android:id="@+id/tv_total_postage3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_postage"
+                android:textSize="15sp"
+                android:layout_alignParentRight="true"
+                android:textColor="#CC0000"
+                android:paddingVertical="10dp"
+                android:paddingEnd="10dp"
+                android:text="đ" />
+
+            <CheckBox
+                android:id="@+id/checkBox4"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Tôi đã đọc và đồng ý với Điều khoản và quy định"
+                android:layout_below="@id/tv_total_postage"
+                android:padding="10dp"
+                android:background="#E0E1E3"/>
+
+            <Button
+                android:id="@+id/b_draft"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkBox4"
+                android:layout_margin="10dp"
+                android:text="lưu nháp"
+                android:backgroundTint="#B3D3EA"/>
+
+            <Button
+                android:id="@+id/b_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkBox4"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@id/b_draft"
+                android:layout_alignParentRight="true"
+                android:text="tạo đơn"
+                android:backgroundTint="#9f5a7b"
+                />
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+
+</RelativeLayout>
