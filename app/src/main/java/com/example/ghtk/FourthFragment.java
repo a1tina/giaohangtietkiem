@@ -25,6 +25,7 @@ public class FourthFragment extends Fragment {
     public TextView profileEmail;
     public ImageView profileImage;
     private AppCompatButton logoutBtn;
+    AppCompatButton acbTeamOfUse;
     private FirebaseAuth firebaseAuth;
 
 
@@ -70,9 +71,17 @@ public class FourthFragment extends Fragment {
         profileEmail = (TextView) view.findViewById((R.id.tv_email));
         profileImage = (ImageView) view.findViewById(R.id.iv_avatar);
         logoutBtn = (AppCompatButton) view.findViewById(R.id.acb_logout);
+        acbTeamOfUse = view.findViewById(R.id.acb_term_of_use);
 
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
+
+        acbTeamOfUse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), RegulationActivity.class));
+            }
+        });
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

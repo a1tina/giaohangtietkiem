@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".CreateOrderActivity">
 
     <TextView
@@ -431,6 +432,29 @@
                 android:padding="10dp"
                 android:text="Ảnh hàng hoá" />
 
+            <ImageButton
+                android:id="@+id/ib_photo_choose"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="20dp"
+                android:layout_below="@id/tv_photo"
+                android:src="@drawable/ic_camera2"/>
+
+            <HorizontalScrollView
+                android:id="@+id/scrollViewPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_below="@id/tv_photo"
+                android:layout_toEndOf="@id/ib_photo_choose">
+                <LinearLayout
+                    android:id="@+id/linearlayout_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
             <TextView
                 android:id="@+id/b_photo_delete_all"
                 android:layout_width="wrap_content"
@@ -448,7 +472,7 @@
                 android:id="@+id/et_coupon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_photo"
+                android:layout_below="@id/ib_photo_choose"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="1dp"
                 android:background="@color/white"
