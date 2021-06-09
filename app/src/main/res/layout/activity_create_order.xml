@@ -250,17 +250,19 @@
                 android:padding="10dp"
                 android:text="Hàng hoá" />
 
-            <Button
+            <TextView
                 android:id="@+id/b_goods"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:background="?android:selectableItemBackground"
                 android:layout_below="@id/tv_create_order_goods_service"
-                android:text="Xem thêm quy định"
-                android:textSize="15sp"
                 android:layout_alignParentRight="true"
+                android:background="?android:selectableItemBackground"
+                android:fontFamily="sans-serif"
+                android:text="Xem thêm quy định"
+                android:textAllCaps="false"
                 android:textColor="@color/teal_700"
-                android:textAllCaps="false"/>
+                android:textSize="15sp"
+                android:padding="10dp" />
             <EditText
                 android:id="@+id/goods_name"
                 android:layout_width="match_parent"
@@ -321,20 +323,21 @@
                 android:layout_toEndOf="@id/goods_weight"
                 android:background="@color/white"/>
 
-            <Button
+            <TextView
                 android:id="@+id/add_goods"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thêm hàng hoá"
+                android:padding="10dp"
                 android:textColor="#9F5A7B"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:layout_below="@id/goods_weight"
                 android:drawableLeft="@drawable/ic_add"
                 android:drawableTint="#9F5A7B"
+                android:drawablePadding="5dp"
                 android:layout_centerInParent="true"
-                android:background="?android:selectableItemBackground"
-                android:textScaleX="0.92"/>
+                android:background="?android:selectableItemBackground"/>
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -362,10 +365,11 @@
                 android:text="Thu hộ bằng tiền hàng" />
 
 
-            <Button
+            <TextView
                 android:id="@+id/b_cod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="15dp"
                 android:text="Quy định thanh toán COD"
                 android:textColor="#9F5A7B"
                 android:textAllCaps="false"
@@ -373,6 +377,7 @@
                 android:layout_alignParentRight="true"
                 android:drawableLeft="@drawable/ic_info"
                 android:drawableTint="#9F5A7B"
+                android:drawablePadding="10dp"
                 android:background="?android:selectableItemBackground"/>
 
             <EditText
@@ -402,10 +407,11 @@
                 android:padding="10dp"
                 android:text="Dịch vụ" />
 
-            <Button
+            <TextView
                 android:id="@+id/b_service_choose"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:padding="10dp"
                 android:background="?android:selectableItemBackground"
                 android:layout_below="@id/et_thu_ho"
                 android:text="Chọn dịch vụ"
@@ -425,10 +431,11 @@
                 android:padding="10dp"
                 android:text="Ảnh hàng hoá" />
 
-            <Button
+            <TextView
                 android:id="@+id/b_photo_delete_all"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:padding="10dp"
                 android:background="?android:selectableItemBackground"
                 android:layout_below="@id/tv_service"
                 android:text="Xoá tất cả"
