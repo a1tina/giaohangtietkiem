@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InstructionActivity">
+
+    <TextView
+        android:id="@+id/tv_instruction_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="45dp"
+        android:background="#9F5A7B"
+        android:text="Hướng dẫn sử dụng"
+        android:paddingTop="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textAlignment="center"/>
+    <ImageButton
+        android:id="@+id/ibBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="?android:selectableItemBackground"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_back" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardview_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_instruction_title">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_cardview_instruction_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:padding="4dp"
+                android:layout_marginTop="10dp"
+                android:text="Cập nhật phiên bản mới"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tv_cardview_instruction_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_cardview_instruction_title"
+                android:layout_marginHorizontal="5dp"
+                android:text="@string/instruction_content"
+                android:padding="5dp"
+                android:drawablePadding="10dp"
+                app:drawableStartCompat="@drawable/ic_home"
+                app:drawableEndCompat="@drawable/ic_forward" />
+
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>
