@@ -53,16 +53,15 @@ public class CreateOrderActivity extends AppCompatActivity {
         bAddGoods = findViewById(R.id.add_goods);
         iBPhotoChoose = findViewById(R.id.ib_photo_choose);
         linearLayoutPhoto = findViewById(R.id.linearlayout_photo);
+        iBBack = findViewById(R.id.ibBack);
 
+        iBBack.setOnClickListener(v -> finish());
 
         //Tạo đơn
-        bCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CreateOrderActivity.this, MainActivity.class));
-                Toast.makeText(getBaseContext(), "Tạo đơn thành công" , Toast.LENGTH_SHORT ).show();
-                finish();
-            }
+        bCreate.setOnClickListener(v -> {
+            startActivity(new Intent(CreateOrderActivity.this, MainActivity.class));
+            Toast.makeText(getBaseContext(), "Tạo đơn thành công" , Toast.LENGTH_SHORT ).show();
+            finish();
         });
 
 

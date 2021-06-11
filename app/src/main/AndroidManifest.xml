@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ghtk"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RegulationActivity"></activity>
+        <activity android:name=".InstructionActivity"></activity>
+        <activity android:name=".InfoAccountActivity" />
+        <activity android:name=".RegulationActivity" />
         <activity android:name=".WarehouseActivity" />
         <activity android:name=".ContactActivity" />
         <activity android:name=".CreateOrderActivity" />

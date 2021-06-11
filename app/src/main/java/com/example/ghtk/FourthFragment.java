@@ -24,7 +24,7 @@ public class FourthFragment extends Fragment {
     public static TextView profileName;
     public TextView profileEmail;
     public ImageView profileImage;
-    private AppCompatButton logoutBtn;
+    private AppCompatButton logoutBtn, acbProfileInfo, acbInstruction;
     AppCompatButton acbTeamOfUse;
     private FirebaseAuth firebaseAuth;
 
@@ -72,23 +72,19 @@ public class FourthFragment extends Fragment {
         profileImage = (ImageView) view.findViewById(R.id.iv_avatar);
         logoutBtn = (AppCompatButton) view.findViewById(R.id.acb_logout);
         acbTeamOfUse = view.findViewById(R.id.acb_term_of_use);
+        acbProfileInfo = view.findViewById(R.id.acb_profile_in4);
+        acbInstruction = view.findViewById(R.id.acb_instruction);
 
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
 
-        acbTeamOfUse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), RegulationActivity.class));
-            }
-        });
+        acbTeamOfUse.setOnClickListener(v -> startActivity(new Intent(getActivity(), RegulationActivity.class)));
+        acbProfileInfo.setOnClickListener(v -> startActivity(new Intent(getActivity(), InfoAccountActivity.class)));
+        acbInstruction.setOnClickListener(v -> startActivity(new Intent(getActivity(), InstructionActivity.class)));
 
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                firebaseAuth.signOut();
-                checkUser();
-            }
+        logoutBtn.setOnClickListener(v -> {
+            firebaseAuth.signOut();
+            checkUser();
         });
         return view;
     }
