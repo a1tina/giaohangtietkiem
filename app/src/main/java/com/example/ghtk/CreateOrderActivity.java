@@ -183,17 +183,14 @@ public class CreateOrderActivity extends AppCompatActivity {
         bAddGoods.setMovementMethod(LinkMovementMethod.getInstance());
 
         //Thêm hình ảnh
-        iBPhotoChoose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Title"), SELECT_IMAGE_CODE);
-                ImageView imageView = new ImageView((CreateOrderActivity.this));
-                imageView.setImageURI(uri);
-                addView(imageView, 200, 200);
-            }
+        iBPhotoChoose.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Title"), SELECT_IMAGE_CODE);
+            ImageView imageView = new ImageView((CreateOrderActivity.this));
+            imageView.setImageURI(uri);
+            addView(imageView, 200, 200);
         });
     }
 
