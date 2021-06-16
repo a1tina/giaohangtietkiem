@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.Spanned;
+import android.widget.ImageButton;
 
 import org.sufficientlysecure.htmltextview.HtmlFormatter;
 import org.sufficientlysecure.htmltextview.HtmlFormatterBuilder;
@@ -12,6 +13,7 @@ import org.sufficientlysecure.htmltextview.HtmlTextView;
 public class ContactActivity extends AppCompatActivity {
 
     HtmlTextView htmlTextView;
+    ImageButton ibBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +22,7 @@ public class ContactActivity extends AppCompatActivity {
 
 
         htmlTextView = findViewById(R.id.htmltv);
+        ibBack = findViewById(R.id.ibBack);
 
         Spanned spanned = HtmlFormatter.formatHtml(new HtmlFormatterBuilder()
                 .setHtml("<p> Liên hệ với dịch vụ của chúng tôi chưa bao giờ dễ dàng và đơn giản đến như vậy <br>" + "<br>" +
@@ -32,6 +35,8 @@ public class ContactActivity extends AppCompatActivity {
                         "        Địa chỉ: Khu phố 6, phường Linh Trung, quận Thủ Đức, Thành phố Hồ Chí Minh.</p>")
         );
         htmlTextView.setText(spanned);
+
+        ibBack.setOnClickListener(v -> finish());
 
     }
 

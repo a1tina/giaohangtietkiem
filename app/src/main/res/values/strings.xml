@@ -17,7 +17,7 @@
     <string name="tai_khoan">Tài khoản</string>
     <string name="sign_in_multi">Sign in with Google, Facebook or Twitter</string>
     <string name="sign_in_w_google">Sign in with Google</string>
-    <string name="about">18520944 - App Logistic</string>
+    <string name="about">Nhóm 12 - App Logistic</string>
 
     <string name="giamgia50_lientinh">Giảm giá 50% khi giao hàng liên tỉnh</string>
     <string name="uudai77">Ưu đãi đặc biệt nhân dịp 7/7</string>
@@ -66,6 +66,8 @@
     <string name="question3">Hàng hoá cấm vận chuyển bay sẽ được vận chuyển như thế nào?</string>
     <string name="question4">Tại sao cần được đóng gói theo quy chuẩn?</string>
 
+
+    <string name="instruction_content">Phiên bản mới GHTK ra mắt chức năng chụp ảnh hàng hoá giá trị cao, cùng với rất nhiều cải tiến mới mẻ đem đến cho khách hàng những trải nghiệm thú vị.</string>
 
 
 </resources>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/img_bg_login2"
     tools:context=".LoginActivity">
 
 
@@ -46,28 +47,13 @@
         tools:layout_editor_absoluteX="114dp"
         tools:layout_editor_absoluteY="474dp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/b_SignInWithGoogle"
-        android:drawableStart="@drawable/ic_google_24"
-        android:paddingStart="10dp"
-        android:paddingEnd="1dp"
-        android:background="@drawable/button_radius"
-        android:layout_width="250dp"
-        android:foreground="?attr/selectableItemBackground"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_in_w_google"
-        android:textColor="@color/white"
-        android:layout_marginTop="80dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_SignIn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="123dp"
-        tools:layout_editor_absoluteY="378dp" />
+\
     <com.google.android.gms.common.SignInButton
         android:id="@+id/bGoogleSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/b_SignInWithGoogle"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_SignInInfo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -82,7 +68,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/b_SignInWithGoogle"
+        app:layout_constraintTop_toBottomOf="@id/bGoogleSignIn"
         app:srcCompat="@drawable/facebook" />
 
     <ImageButton
@@ -92,10 +78,10 @@
         android:adjustViewBounds="true"
         android:layout_marginStart="100dp"
         android:layout_marginTop="100dp"
-        android:background="@drawable/round_button"
+        android:background="?android:selectableItemBackground"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/b_SignInWithGoogle"
+        app:layout_constraintTop_toBottomOf="@id/bGoogleSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/twitter"
         tools:layout_editor_absoluteX="172dp"
@@ -108,7 +94,7 @@
         android:text="@string/about"
         android:textColor="@color/black"
         android:layout_marginTop="200dp"
-        app:layout_constraintTop_toBottomOf="@id/b_SignInWithGoogle"
+        app:layout_constraintTop_toBottomOf="@id/bGoogleSignIn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="153dp"

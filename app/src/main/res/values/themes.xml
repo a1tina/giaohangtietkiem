@@ -30,4 +30,5 @@
     <style name="Theme.Ghtk.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Ghtk.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

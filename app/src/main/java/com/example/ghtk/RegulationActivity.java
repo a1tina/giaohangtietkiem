@@ -7,6 +7,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import org.sufficientlysecure.htmltextview.HtmlFormatter;
@@ -16,6 +17,8 @@ import org.sufficientlysecure.htmltextview.HtmlTextView;
 public class RegulationActivity extends AppCompatActivity {
     HtmlTextView htmlTextView1, htmlTextView2, htmlTextView3, htmlTextView4;
     Button button1, button2, button3, button4;
+    ImageButton ibBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,7 @@ public class RegulationActivity extends AppCompatActivity {
         button2 = findViewById(R.id.b_question2);
         button3 = findViewById(R.id.b_question3);
         button4 = findViewById(R.id.b_question4);
+        ibBack = findViewById(R.id.ibBack);
 
         Spanned spanned1 = HtmlFormatter.formatHtml(new HtmlFormatterBuilder()
                 .setHtml("<p>Theo quy định của Nhà nước, các loại hàng hoá sau bị cấm gửi:<br>" +
@@ -60,32 +64,27 @@ public class RegulationActivity extends AppCompatActivity {
         htmlTextView2.setText(spanned2);
         htmlTextView2.setVisibility(HtmlTextView.GONE);
 
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(htmlTextView1.getTag() != "noclick") {
-                    htmlTextView1.setVisibility(HtmlTextView.VISIBLE);
-                    htmlTextView1.setTag("noclick");
-                }
-                else {
-                        htmlTextView1.setVisibility(HtmlTextView.GONE);
-                        htmlTextView1.setTag("clicked");
-                }
-            }
+        ibBack.setOnClickListener(v -> finish());
 
+        button1.setOnClickListener(v -> {
+            if(htmlTextView1.getTag() != "noclick") {
+                htmlTextView1.setVisibility(HtmlTextView.VISIBLE);
+                htmlTextView1.setTag("noclick");
+            }
+            else {
+                    htmlTextView1.setVisibility(HtmlTextView.GONE);
+                    htmlTextView1.setTag("clicked");
+            }
         });
 
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(htmlTextView2.getTag() != "noclick") {
-                    htmlTextView2.setVisibility(HtmlTextView.VISIBLE);
-                    htmlTextView2.setTag("noclick");
-                }
-                else {
-                    htmlTextView2.setVisibility(HtmlTextView.GONE);
-                    htmlTextView2.setTag("clicked");
-                }
+        button2.setOnClickListener(v -> {
+            if(htmlTextView2.getTag() != "noclick") {
+                htmlTextView2.setVisibility(HtmlTextView.VISIBLE);
+                htmlTextView2.setTag("noclick");
+            }
+            else {
+                htmlTextView2.setVisibility(HtmlTextView.GONE);
+                htmlTextView2.setTag("clicked");
             }
         });
 
