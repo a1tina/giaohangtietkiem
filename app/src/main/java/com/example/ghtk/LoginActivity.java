@@ -11,11 +11,18 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.ghtk.databinding.ActivityLoginBinding;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -54,8 +61,6 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
-
-
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
@@ -68,12 +73,10 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "onClick: begin Google Sign In");
                 Intent intent = googleSignInClient.getSignInIntent();
                 startActivityForResult(intent, RC_SIGN_IN);
+                Log.d(TAG, "test");
             }
         });
     }
-
-
-
 
     private void checkUser() {
         //if user is already signed in then go MainActivity
@@ -97,7 +100,8 @@ public class LoginActivity extends AppCompatActivity {
                 firebaseAuthWithGoogleAccount(account);
             }
             catch (Exception e){
-                Log.d(TAG, "onActivityResult: "+e.getMessage());
+                //Log.d(TAG, "onActivityResult: "+e.printStackTrace());
+                e.printStackTrace();
             }
 
         }
