@@ -3,48 +3,40 @@ package com.example.ghtk;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 
-public class RegulationActivity extends AppCompatActivity {
-    Button button1, button2, button3, button4;
+public class CODActivity extends AppCompatActivity {
+    Button button1, button2, button3;
     ImageButton ibBack;
+    WebView wv1, wv2, wv3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_regulation);
+        setContentView(R.layout.activity_cod);
 
-        WebView wv1 = (WebView) findViewById(R.id.wv_1);
-        WebView wv4 = (WebView) findViewById(R.id.wv_4);
-        WebView wv3 = (WebView) findViewById(R.id.wv_3);
-        WebView wv2 = (WebView) findViewById(R.id.wv_2);
         button1 = findViewById(R.id.b_question1);
         button2 = findViewById(R.id.b_question2);
         button3 = findViewById(R.id.b_question3);
-        button4 = findViewById(R.id.b_question4);
         ibBack = findViewById(R.id.ibBack);
+        wv1 = findViewById(R.id.wv_1);
+        wv2 = findViewById(R.id.wv_2);
+        wv3 = findViewById(R.id.wv_3);
 
         wv1.getSettings().setJavaScriptEnabled(true);
-        wv1.loadUrl("file:///android_asset/question1.html");
+        wv1.loadUrl("file:///android_asset/cod_q1.html");
         wv1.setVisibility(WebView.GONE);
 
         wv2.getSettings().setJavaScriptEnabled(true);
-        wv2.loadUrl("file:///android_asset/question2.html");
+        wv2.loadUrl("file:///android_asset/cod_q2.html");
         wv2.setVisibility(WebView.GONE);
 
         wv3.getSettings().setJavaScriptEnabled(true);
-        wv3.loadUrl("file:///android_asset/question3.html");
+        wv3.loadUrl("file:///android_asset/cod_q3.html");
         wv3.setVisibility(WebView.GONE);
-
-        wv4.getSettings().setJavaScriptEnabled(true);
-        wv4.loadUrl("file:///android_asset/question4.html");
-        wv4.setVisibility(WebView.GONE);
 
         ibBack.setOnClickListener(v -> finish());
 
@@ -54,8 +46,8 @@ public class RegulationActivity extends AppCompatActivity {
                 wv1.setTag("noclick");
             }
             else {
-                    wv1.setVisibility(WebView.GONE);
-                    wv1.setTag("clicked");
+                wv1.setVisibility(WebView.GONE);
+                wv1.setTag("clicked");
             }
         });
 
@@ -78,17 +70,6 @@ public class RegulationActivity extends AppCompatActivity {
             else {
                 wv3.setVisibility(WebView.GONE);
                 wv3.setTag("clicked");
-            }
-        });
-
-        button4.setOnClickListener(v -> {
-            if(wv4.getTag() != "noclick") {
-                wv4.setVisibility(WebView.VISIBLE);
-                wv4.setTag("noclick");
-            }
-            else {
-                wv4.setVisibility(WebView.GONE);
-                wv4.setTag("clicked");
             }
         });
 

@@ -1,11 +1,14 @@
 package com.example.ghtk;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.loader.content.CursorLoader;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
@@ -17,24 +20,31 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.card.MaterialCardView;
+
 public class CreateOrderActivity extends AppCompatActivity {
+
+    private static final String TAG = "IN_CREATE_ORDER_ACTIVITY_TAG";
 
     private String selectedImagePath;
     int SELECT_IMAGE_CODE = 1;
 
     Uri uri;
 
-    LinearLayout linearLayoutPhoto;
-    ImageButton iBBack, iBPhotoChoose;
+    LinearLayout linearLayoutPhoto, linearLayoutAddGoods, p;
+    ImageButton iBBack, iBPhotoChoose, iBDeleteGoods;
     CheckBox checkBox4;
     Button bCreate;
     TextView bGoods, bCOD, bServiceChoose, bPhotoDelAll, bAddGoods;
@@ -53,6 +63,8 @@ public class CreateOrderActivity extends AppCompatActivity {
         bAddGoods = findViewById(R.id.add_goods);
         iBPhotoChoose = findViewById(R.id.ib_photo_choose);
         linearLayoutPhoto = findViewById(R.id.linearlayout_photo);
+        linearLayoutAddGoods = findViewById(R.id.linearlayout_add_goods);
+        p = findViewById(R.id.p);
         iBBack = findViewById(R.id.ibBack);
 
         iBBack.setOnClickListener(v -> finish());
@@ -114,7 +126,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         ClickableSpan clickableSpan3 = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                startActivity(new Intent(CreateOrderActivity.this, RegulationActivity.class));
+                startActivity(new Intent(CreateOrderActivity.this, CODActivity.class));
             }
 
             @Override
@@ -168,7 +180,9 @@ public class CreateOrderActivity extends AppCompatActivity {
         ClickableSpan clickableSpan6 = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                startActivity(new Intent(CreateOrderActivity.this, RegulationActivity.class));
+                LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = inflater.inflate(R.layout.mcvaddgoods, null);
+                p.addView(view);
             }
 
             @Override
@@ -182,15 +196,25 @@ public class CreateOrderActivity extends AppCompatActivity {
         bAddGoods.setText(ss);
         bAddGoods.setMovementMethod(LinkMovementMethod.getInstance());
 
+
+        if(findViewById(R.id.mcvaddgoods) != null){
+            Log.d(TAG, "There is a delete goods button!");
+            iBDeleteGoods = findViewById(R.id.b_delete_goods);
+            iBDeleteGoods.setOnClickListener(v -> {
+                startActivity(new Intent(CreateOrderActivity.this, ContactActivity.class));
+            });
+        }
+
+
         //Thêm hình ảnh
         iBPhotoChoose.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent, "Title"), SELECT_IMAGE_CODE);
-            ImageView imageView = new ImageView((CreateOrderActivity.this));
+            ImageView imageView = new ImageView(CreateOrderActivity.this);
             imageView.setImageURI(uri);
-            addView(imageView, 200, 200);
+            addView(imageView, 300, LinearLayout.LayoutParams.MATCH_PARENT);
         });
     }
 
@@ -206,9 +230,10 @@ public class CreateOrderActivity extends AppCompatActivity {
 
     public void addView(ImageView imageView, int width, int height){
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
-        layoutParams.setMargins(10, 10, 10, 10);
 
         imageView.setLayoutParams(layoutParams);
         linearLayoutPhoto.addView(imageView);
     }
+
+
 }
