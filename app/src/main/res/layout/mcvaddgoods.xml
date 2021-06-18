@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/mcvaddgoods">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#E0E1E3"/>
+    <EditText
+        android:id="@+id/goods_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:background="@color/white"
+        android:layout_below="@id/view"
+        android:drawableTint="#B8B8B8"
+        android:hint="Mô tả hàng hoá"
+        android:inputType="text"
+        android:padding="10dp"
+        android:paddingStart="20dp"
+        android:textSize="16sp" />
+    <ImageButton
+        android:id="@+id/b_delete_goods"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_delete"
+        android:layout_below="@id/view"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-20dp"
+        android:layout_marginEnd="10dp"
+        android:background="?android:selectableItemBackground"/>
+
+    <EditText
+        android:id="@+id/goods_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goods_name"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_money2"
+        android:drawablePadding="10dp"
+        android:drawableTint="#B8B8B8"
+        android:hint="Giá trị hàng"
+        android:inputType="number"
+        android:padding="10dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/goods_weight"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goods_value"
+        android:layout_marginStart="10dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_weight"
+        android:drawablePadding="10dp"
+        android:drawableTint="#B8B8B8"
+        android:hint="Trọng lượng"
+        android:inputType="number"
+        android:padding="10dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/goods_quantity"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goods_value"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@id/goods_weight"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_box"
+        android:drawablePadding="10dp"
+        android:drawableTint="#B8B8B8"
+        android:inputType="number"
+        android:padding="10dp"
+        android:text="Số lượng: "
+        android:textSize="16sp" />
+
+
+</RelativeLayout>

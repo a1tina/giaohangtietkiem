@@ -37,8 +37,8 @@
         app:lottie_fileName="Anim1.json"
         />
 
-    <org.sufficientlysecure.htmltextview.HtmlTextView
-        android:id="@+id/htmltv"
+    <WebView
+        android:id="@+id/wv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/LottieImage"

@@ -264,65 +264,101 @@
                 android:textColor="@color/teal_700"
                 android:textSize="15sp"
                 android:padding="10dp" />
-            <EditText
-                android:id="@+id/goods_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:padding="10dp"
-                android:hint="Mô tả hàng hoá"
-                android:paddingStart="20dp"
-                android:inputType="text"
-                android:textSize="16sp"
-                android:drawableTint="#B8B8B8"
+
+            <LinearLayout
                 android:layout_below="@id/tv_goods"
-                android:background="@color/white"/>
-
-            <EditText
-                android:id="@+id/goods_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/goods_name"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/ic_money2"
-                android:drawablePadding="10dp"
-                android:drawableTint="#B8B8B8"
-                android:hint="Giá trị hàng"
-                android:inputType="number"
-                android:padding="10dp"
-                android:textSize="16sp" />
+                android:orientation="vertical"
+                android:id="@+id/p">
 
-            <EditText
-                android:id="@+id/goods_weight"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:padding="10dp"
-                android:hint="Trọng lượng"
-                android:inputType="number"
-                android:textSize="16sp"
-                android:drawableTint="#B8B8B8"
-                android:drawableLeft="@drawable/ic_weight"
-                android:drawablePadding="10dp"
-                android:layout_below="@id/goods_value"
-                android:background="@color/white"/>
-            <EditText
-                android:id="@+id/goods_quantity"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:padding="10dp"
-                android:text="Số lượng: "
-                android:inputType="number"
-                android:textSize="16sp"
-                android:drawableTint="#B8B8B8"
-                android:drawableLeft="@drawable/ic_box"
-                android:drawablePadding="10dp"
-                android:layout_below="@id/goods_value"
-                android:layout_toEndOf="@id/goods_weight"
-                android:background="@color/white"/>
+                <LinearLayout
+                    android:id="@+id/linearlayout_add_goods"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@id/tv_goods">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mcv_add_goods"
+                        android:layout_below="@+id/tv_goods"
+                        android:layout_marginHorizontal="10dp">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <EditText
+                                android:id="@+id/goods_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="10dp"
+                                android:padding="10dp"
+                                android:hint="Mô tả hàng hoá"
+                                android:paddingStart="20dp"
+                                android:inputType="text"
+                                android:textSize="16sp"
+                                android:drawableTint="#B8B8B8"
+                                android:background="@color/white"/>
+
+                            <EditText
+                                android:id="@+id/goods_value"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/goods_name"
+                                android:layout_marginHorizontal="10dp"
+                                android:layout_marginTop="1dp"
+                                android:background="@color/white"
+                                android:drawableLeft="@drawable/ic_money2"
+                                android:drawablePadding="10dp"
+                                android:drawableTint="#B8B8B8"
+                                android:hint="Giá trị hàng"
+                                android:inputType="number"
+                                android:padding="10dp"
+                                android:textSize="16sp" />
+
+                            <EditText
+                                android:id="@+id/goods_weight"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:padding="10dp"
+                                android:hint="Trọng lượng"
+                                android:inputType="number"
+                                android:textSize="16sp"
+                                android:drawableTint="#B8B8B8"
+                                android:drawableLeft="@drawable/ic_weight"
+                                android:drawablePadding="10dp"
+                                android:layout_below="@id/goods_value"
+                                android:background="@color/white"/>
+                            <EditText
+                                android:id="@+id/goods_quantity"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:padding="10dp"
+                                android:text="Số lượng: "
+                                android:inputType="number"
+                                android:textSize="16sp"
+                                android:drawableTint="#B8B8B8"
+                                android:drawableLeft="@drawable/ic_box"
+                                android:drawablePadding="10dp"
+                                android:layout_below="@id/goods_value"
+                                android:layout_toEndOf="@id/goods_weight"
+                                android:background="@color/white"/>
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+
 
             <TextView
                 android:id="@+id/add_goods"
@@ -333,7 +369,7 @@
                 android:textColor="#9F5A7B"
                 android:textAllCaps="false"
                 android:textSize="16sp"
-                android:layout_below="@id/goods_weight"
+                android:layout_below="@id/p"
                 android:drawableLeft="@drawable/ic_add"
                 android:drawableTint="#9F5A7B"
                 android:drawablePadding="5dp"
@@ -448,8 +484,8 @@
                 android:layout_toEndOf="@id/ib_photo_choose">
                 <LinearLayout
                     android:id="@+id/linearlayout_photo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="80dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                 </LinearLayout>
