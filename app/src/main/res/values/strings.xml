@@ -11,11 +11,17 @@
     <string name="kho_hang">Kho hàng</string>
     <string name="hoa_hong">Hoa hồng</string>
     <string name="lien_he">Liên hệ</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="dang_ky">Chưa có tài khoản? Đăng ký tại đây</string>
+    <string name="dang_nhap">Đã có tài khoản? Đăng nhập tại đây</string>
+    <string name="fullname">Họ tên đầy đủ</string>
+    <string name="email">Email</string>
 
 
     <string name="diem_thuong">Điểm thưởng</string>
     <string name="tai_khoan">Tài khoản</string>
-    <string name="sign_in_multi">Sign in with Google, Facebook or Twitter</string>
+    <string name="sign_in_multi">Đăng nhập với Google, Facebook hoặc email.</string>
     <string name="sign_in_w_google">Sign in with Google</string>
     <string name="about">Nhóm 12 - App Logistic</string>
 

@@ -3,9 +3,16 @@ package com.example.ghtk;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -44,6 +51,30 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        String text = "Chưa có tài khoản? Đăng ký tại đây";
+
+        SpannableString ss = new SpannableString(text);
+        ClickableSpan clickableSpan1 = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+            }
+
+            @Override
+            public void updateDrawState(@NonNull TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(Color.BLUE);
+                ds.setUnderlineText(true);
+            }
+        };
+        ss.setSpan(clickableSpan1, 26,34, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        binding.tvSignup.setText(ss);
+        binding.tvSignup.setMovementMethod(LinkMovementMethod.getInstance());
+        binding.tvSignup.setHighlightColor(ContextCompat.getColor(this, R.color.color9F5A7B));
+
+
+
 
 
 

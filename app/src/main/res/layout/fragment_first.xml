@@ -418,6 +418,7 @@
                 android:layout_marginTop="210dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="0dp"
+                android:fontFamily="@font/open_sans"
                 android:text="@string/giamgia50_lientinh" />
 
             <ImageButton
@@ -450,6 +451,7 @@
                 android:layout_marginTop="210dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="0dp"
+                android:fontFamily="@font/open_sans"
                 android:text="@string/uudai77" />
 
             <ImageButton
@@ -482,6 +484,7 @@
                 android:layout_marginTop="210dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="0dp"
+                android:fontFamily="@font/open_sans"
                 android:text="@string/mienphi_khmoi" />
 
             <ImageButton
@@ -514,6 +517,7 @@
                 android:layout_marginTop="210dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="0dp"
+                android:fontFamily="@font/open_sans"
                 android:text="@string/freeship_99k" />
 
 

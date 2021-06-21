@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ghtk"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CODActivity"></activity>
+        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".CODActivity" />
         <activity android:name=".InstructionActivity" />
         <activity android:name=".InfoAccountActivity" />
         <activity android:name=".RegulationActivity" />
