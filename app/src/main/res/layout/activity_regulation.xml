@@ -35,25 +35,30 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <Button
                 android:id="@+id/b_question1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:selectableItemBackground"
-                android:text="@string/question1"
                 android:layout_marginTop="10dp"
-                android:textSize="15sp"
+                android:background="?android:selectableItemBackground"
                 android:drawableLeft="@drawable/ic_1"
-                android:paddingStart="10dp"
                 android:drawableTint="@color/color9F5A7B"
+                android:paddingStart="10dp"
+                android:fontFamily="@font/open_sans"
+                android:letterSpacing="0"
+                android:text="@string/question1"
                 android:textAlignment="textStart"
+                android:textAllCaps="false"
                 android:textColor="@color/black"
-                android:textAllCaps="false"/>
+                android:textSize="15sp" />
             <Button
                 android:id="@+id/b_question2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:selectableItemBackground"
+                android:fontFamily="@font/open_sans"
+                android:letterSpacing="0"
                 android:text="@string/question2"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/wv_1"
@@ -69,6 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:selectableItemBackground"
+                android:fontFamily="@font/open_sans"
+                android:letterSpacing="0"
                 android:text="@string/question3"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/wv_2"
@@ -84,6 +91,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:selectableItemBackground"
+                android:fontFamily="@font/open_sans"
+                android:letterSpacing="0"
                 android:text="@string/question4"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/wv_3"

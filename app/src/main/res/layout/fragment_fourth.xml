@@ -46,8 +46,8 @@
         android:layout_marginStart="10sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/avatar"
-        android:src="@drawable/avatar"
+        app:srcCompat="@drawable/ic_person"
+        android:src="@drawable/ic_person"
         android:adjustViewBounds="true"
         android:padding="5dp"
         android:scaleType="fitCenter"/>
