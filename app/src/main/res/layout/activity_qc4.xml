@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QC4Activity">
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/color9F5A7B"/>
+
+    <ImageView
+        android:layout_marginLeft="50dp"
+        android:id="@+id/iv_title"
+        android:layout_width="230dp"
+        android:layout_height="300dp"
+        android:background="@drawable/img_freeship99k" />
+    <ImageButton
+        android:id="@+id/ibBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="?android:selectableItemBackground"
+        android:src="@drawable/ic_back"/>
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_title"
+        android:layout_marginTop="20dp"
+        android:text="@string/freeship_99k"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/open_sans"
+        android:textStyle="bold"
+        android:gravity="center"
+        />
+    <ScrollView
+        android:layout_below="@id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_above="@id/b_create_order"
+        android:layout_marginBottom="40dp">
+        <WebView
+            android:id="@+id/wv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="30dp" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/b_create_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:backgroundTint="@color/red"
+        android:text="Tạo đơn"
+        android:textAllCaps="false"
+        android:fontFamily="@font/open_sans"
+        android:letterSpacing="0"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>

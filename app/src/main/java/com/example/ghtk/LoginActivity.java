@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -15,6 +18,8 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.ghtk.databinding.ActivityLoginBinding;
@@ -26,11 +31,13 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -43,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
+    String value;
+
     private static final String TAG = "GOOGLE_SIGN_IN_TAG";
 
 
@@ -51,6 +60,53 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+        binding.bLogin.setOnClickListener(v -> {
+
+            String fullname, email, username, password;
+            email = String.valueOf(binding.tietEmail.getText());
+            password = String.valueOf(binding.tietPassword.getText());
+
+
+            if (!email.equals("") && !password.equals("")) {
+                binding.progressbar.setVisibility(View.VISIBLE);
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        String[] field = new String[2];
+                        field[0] = "email";
+                        field[1] = "password";
+
+                        String[] data = new String[2];
+                        data[0] = email;
+                        data[1] = password;
+                        PutData putData = new PutData("http://172.20.1.173/LoginGHTK/login.php", "POST", field, data);
+                        if (putData.startPut()) {
+                            if (putData.onComplete()) {
+                                binding.progressbar.setVisibility(View.GONE);
+                                String result = putData.getResult();
+                                if (result.equals("Login Success")) {
+                                    value = "OK";
+                                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.putExtra("hasLoggedIn", value);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Hãy điền vào tất cả các trường", Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
         String text = "Chưa có tài khoản? Đăng ký tại đây";
 
@@ -74,10 +130,6 @@ public class LoginActivity extends AppCompatActivity {
         binding.tvSignup.setHighlightColor(ContextCompat.getColor(this, R.color.color9F5A7B));
 
 
-
-
-
-
         //Configure the Google SignIn
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -92,14 +144,11 @@ public class LoginActivity extends AppCompatActivity {
         checkUser();
 
         //Google SignInButton: Click to begin Google Sign In
-        binding.bGoogleSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //begin Google Sign In
-                Log.d(TAG, "onClick: begin Google Sign In");
-                Intent intent = googleSignInClient.getSignInIntent();
-                startActivityForResult(intent, RC_SIGN_IN);
-            }
+        binding.bGoogleSignIn.setOnClickListener(v -> {
+            //begin Google Sign In
+            Log.d(TAG, "onClick: begin Google Sign In");
+            Intent intent = googleSignInClient.getSignInIntent();
+            startActivityForResult(intent, RC_SIGN_IN);
         });
     }
 

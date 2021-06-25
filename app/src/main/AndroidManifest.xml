@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ghtk"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".QC4Activity"></activity>
+        <activity android:name=".QC3Activity" />
+        <activity android:name=".QC2Activity" />
+        <activity android:name=".QC1Activity" />
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".CODActivity" />
         <activity android:name=".InstructionActivity" />
         <activity android:name=".InfoAccountActivity" />

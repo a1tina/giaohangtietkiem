@@ -18,39 +18,105 @@
         app:lottie_fileName="anim_login.json"
         app:lottie_loop="true" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutUsername"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_login"
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="20dp"
-        android:hint="@string/username"
-        app:boxBackgroundColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/LottieImage">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_username"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đăng nhập"
+                android:fontFamily="@font/open_sans"
+                android:paddingTop="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:hint="Email"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/LottieImage">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/username_right"
+                    android:fontFamily="@font/open_sans"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutPassword"
-        android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#25D0DB"
+                android:id="@+id/textInputLayoutPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:hint="Mật khẩu"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:fontFamily="@font/open_sans"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_forgetpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quên mật khẩu"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:textColor="#3F51B5"
+                android:gravity="end"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <CheckBox
+        android:layout_marginTop="20dp"
+        android:id="@+id/checkbox_remember"
+        app:layout_constraintTop_toBottomOf="@id/progressbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:hint="@string/password"
-        app:boxBackgroundColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutUsername">
+        android:layout_marginStart="20dp"
+        android:text="Ghi nhớ tôi"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"/>
-    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cardview_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:layout_marginTop="20dp" />
+
+
 
     <Button
         android:id="@+id/b_login"
@@ -59,11 +125,12 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/black"
         android:text="Đăng nhập"
+        android:layout_marginEnd="30dp"
         android:fontFamily="@font/open_sans"
         android:letterSpacing="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+
+        app:layout_constraintTop_toBottomOf="@id/progressbar" />
 
     <TextView
         android:id="@+id/tv_signup"
@@ -124,7 +191,7 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:text="@string/about"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
