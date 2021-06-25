@@ -3,7 +3,7 @@
     package="com.example.ghtk">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,17 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ghtk"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CODActivity"></activity>
+        <activity android:name=".BillActivity"></activity>
+        <activity android:name=".CODActivity" />
         <activity android:name=".InstructionActivity" />
         <activity android:name=".InfoAccountActivity" />
         <activity android:name=".RegulationActivity" />
         <activity android:name=".WarehouseActivity" />
         <activity android:name=".ContactActivity" />
         <activity android:name=".CreateOrderActivity" />
-        <activity android:name=".LoginActivity">
-
-        </activity>
-        <activity android:name=".MainActivity" >
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
+import com.example.ghtk.tools.NoLimitScreen;
+
 public class RegulationActivity extends AppCompatActivity {
     Button button1, button2, button3, button4;
     ImageButton ibBack;
@@ -19,7 +21,7 @@ public class RegulationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regulation);
-
+        NoLimitScreen.apply(this);
         WebView wv1 = (WebView) findViewById(R.id.wv_1);
         WebView wv4 = (WebView) findViewById(R.id.wv_4);
         WebView wv3 = (WebView) findViewById(R.id.wv_3);

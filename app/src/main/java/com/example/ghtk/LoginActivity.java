@@ -11,18 +11,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.ghtk.databinding.ActivityLoginBinding;
-import com.google.android.gms.auth.api.Auth;
+import com.example.ghtk.fragment.FourthFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -98,6 +92,8 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 GoogleSignInAccount account = accountTask.getResult(ApiException.class);
                 firebaseAuthWithGoogleAccount(account);
+                Log.d("Account",String.format("Display name: %s \n Email: %s \n IdToken: %s \n UrlPhoto: %s", account.getDisplayName(),account.getEmail(),
+                        account.getIdToken(), account.getPhotoUrl().toString()));
             }
             catch (Exception e){
                 //Log.d(TAG, "onActivityResult: "+e.printStackTrace());

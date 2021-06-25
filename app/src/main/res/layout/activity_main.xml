@@ -29,6 +29,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:labelVisibilityMode="labeled"
             android:background="@android:color/transparent"
+            app:itemTextColor="@drawable/bnv_tab_item_foreground"
+            app:itemIconTint="@drawable/bnv_tab_item_foreground"
             app:menu="@menu/bottom_menu"/>
 
     </com.google.android.material.bottomappbar.BottomAppBar>

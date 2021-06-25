@@ -7,6 +7,8 @@ import android.text.Spanned;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 
+import com.example.ghtk.tools.NoLimitScreen;
+
 import org.sufficientlysecure.htmltextview.HtmlFormatter;
 import org.sufficientlysecure.htmltextview.HtmlFormatterBuilder;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
@@ -19,7 +21,7 @@ public class ContactActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
-
+        NoLimitScreen.apply(this);
 
         WebView webView = (WebView) findViewById(R.id.wv);
         ibBack = findViewById(R.id.ibBack);

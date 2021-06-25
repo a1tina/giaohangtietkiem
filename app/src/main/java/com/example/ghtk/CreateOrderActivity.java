@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.SpannableString;
@@ -23,6 +24,7 @@ import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -32,6 +34,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ghtk.tools.NoLimitScreen;
 import com.google.android.material.card.MaterialCardView;
 
 public class CreateOrderActivity extends AppCompatActivity {
@@ -53,7 +56,7 @@ public class CreateOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_order);
-
+        NoLimitScreen.apply(this);
         checkBox4 = findViewById(R.id.checkBox4);
         bCreate = findViewById(R.id.b_create);
         bGoods = findViewById(R.id.b_goods);
@@ -75,8 +78,7 @@ public class CreateOrderActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "Tạo đơn thành công" , Toast.LENGTH_SHORT ).show();
             finish();
         });
-
-
+        
         //Tạo clickable cho TextView
         String text = "Tôi đã đọc và đồng ý với Điều khoản và quy định";
         String text2 = "Xem thêm quy định";
