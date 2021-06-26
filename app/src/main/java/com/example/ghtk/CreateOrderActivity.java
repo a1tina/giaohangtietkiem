@@ -41,13 +41,15 @@ public class CreateOrderActivity extends AppCompatActivity {
 
     private static final String TAG = "IN_CREATE_ORDER_ACTIVITY_TAG";
 
+    RelativeLayout rlSenderEdit, rlMainLayout, rlGrayBg;
+
     private String selectedImagePath;
     int SELECT_IMAGE_CODE = 1;
 
     Uri uri;
 
     LinearLayout linearLayoutPhoto, linearLayoutAddGoods, p;
-    ImageButton iBBack, iBPhotoChoose, iBDeleteGoods;
+    ImageButton iBBack, iBPhotoChoose, iBDeleteGoods, iBEdit;
     CheckBox checkBox4;
     Button bCreate;
     TextView bGoods, bCOD, bServiceChoose, bPhotoDelAll, bAddGoods;
@@ -57,8 +59,12 @@ public class CreateOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_order);
         NoLimitScreen.apply(this);
+        rlSenderEdit = findViewById(R.id.rl_sender_edit);
+        rlMainLayout = findViewById(R.id.rl_mainCreateOrderLayout);
+        rlGrayBg = findViewById(R.id.rl_graybg);
         checkBox4 = findViewById(R.id.checkBox4);
         bCreate = findViewById(R.id.b_create);
+        iBEdit = findViewById(R.id.ib_edit);
         bGoods = findViewById(R.id.b_goods);
         bCOD = findViewById(R.id.b_cod);
         bServiceChoose = findViewById(R.id.b_service_choose);
@@ -70,6 +76,9 @@ public class CreateOrderActivity extends AppCompatActivity {
         p = findViewById(R.id.p);
         iBBack = findViewById(R.id.ibBack);
 
+        rlSenderEdit.setVisibility(RelativeLayout.GONE);
+        rlGrayBg.setVisibility(RelativeLayout.GONE);
+
         iBBack.setOnClickListener(v -> finish());
 
         //Tạo đơn
@@ -78,7 +87,17 @@ public class CreateOrderActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "Tạo đơn thành công" , Toast.LENGTH_SHORT ).show();
             finish();
         });
-        
+
+        iBEdit.setOnClickListener(v -> {
+            rlSenderEdit.setVisibility(RelativeLayout.VISIBLE);
+            rlGrayBg.setVisibility(RelativeLayout.VISIBLE);
+        });
+
+        rlGrayBg.setOnClickListener(v -> {
+            rlSenderEdit.setVisibility(RelativeLayout.GONE);
+            rlGrayBg.setVisibility(RelativeLayout.GONE);
+        });
+
         //Tạo clickable cho TextView
         String text = "Tôi đã đọc và đồng ý với Điều khoản và quy định";
         String text2 = "Xem thêm quy định";
@@ -232,7 +251,6 @@ public class CreateOrderActivity extends AppCompatActivity {
 
     public void addView(ImageView imageView, int width, int height){
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
-
         imageView.setLayoutParams(layoutParams);
         linearLayoutPhoto.addView(imageView);
     }

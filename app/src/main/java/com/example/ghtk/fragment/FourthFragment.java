@@ -20,6 +20,8 @@ import com.example.ghtk.R;
 import com.example.ghtk.RegulationActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.vishnusivadas.advanced_httpurlconnection.FetchData;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 
 public class FourthFragment extends Fragment {
@@ -30,7 +32,6 @@ public class FourthFragment extends Fragment {
     private AppCompatButton logoutBtn, acbProfileInfo, acbInstruction;
     AppCompatButton acbTeamOfUse;
     private FirebaseAuth firebaseAuth;
-
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -69,7 +70,7 @@ public class FourthFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_fourth, container, false);
+        View view = inflater.inflate(R.layout.fragment_fourth, container, false);
         profileName = (TextView) view.findViewById(R.id.tv_profilename);
         profileEmail = (TextView) view.findViewById((R.id.tv_email));
         profileImage = (ImageView) view.findViewById(R.id.iv_avatar);
@@ -86,7 +87,18 @@ public class FourthFragment extends Fragment {
         acbInstruction.setOnClickListener(v -> startActivity(new Intent(getActivity(), InstructionActivity.class)));
 
         logoutBtn.setOnClickListener(v -> {
-            firebaseAuth.signOut();
+            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+            if (firebaseUser != null) {
+                String value = null;
+                getActivity().getIntent().putExtra("hasLoggedIn", value);
+                firebaseAuth.signOut();
+                getActivity().finish();
+            } else {
+                String value = null;
+                getActivity().getIntent().putExtra("hasLoggedIn", value);
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                getActivity().finish();
+            }
             checkUser();
         });
         return view;
@@ -103,8 +115,12 @@ public class FourthFragment extends Fragment {
             Glide.with(getActivity()).load(imgurl).into(profileImage);
             profileName.setText(name);
             profileEmail.setText(email);
-        }
-        else{
+        } else if (getActivity().getIntent().getStringExtra("hasLoggedIn") != null) {
+            String name = "ABC";
+            String email = "ABC";
+            profileName.setText(name);
+            profileEmail.setText(email);
+        } else {
             startActivity(new Intent(getActivity(), LoginActivity.class));
         }
 

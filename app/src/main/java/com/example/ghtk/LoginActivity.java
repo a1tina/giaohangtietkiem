@@ -1,15 +1,22 @@
 package com.example.ghtk;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import com.example.ghtk.databinding.ActivityLoginBinding;
 import com.example.ghtk.fragment.FourthFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -25,6 +32,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -37,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
+    String value;
+
     private static final String TAG = "GOOGLE_SIGN_IN_TAG";
 
 
@@ -46,6 +56,73 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+        binding.bLogin.setOnClickListener(v -> {
+
+            String fullname, email, username, password;
+            email = String.valueOf(binding.tietEmail.getText());
+            password = String.valueOf(binding.tietPassword.getText());
+
+
+            if (!email.equals("") && !password.equals("")) {
+                binding.progressbar.setVisibility(View.VISIBLE);
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        String[] field = new String[2];
+                        field[0] = "email";
+                        field[1] = "password";
+
+                        String[] data = new String[2];
+                        data[0] = email;
+                        data[1] = password;
+                        PutData putData = new PutData("http://172.20.1.173/LoginGHTK/login.php", "POST", field, data);
+                        if (putData.startPut()) {
+                            if (putData.onComplete()) {
+                                binding.progressbar.setVisibility(View.GONE);
+                                String result = putData.getResult();
+                                if (result.equals("Login Success")) {
+                                    value = "OK";
+                                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.putExtra("hasLoggedIn", value);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Hãy điền vào tất cả các trường", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        String text = "Chưa có tài khoản? Đăng ký tại đây";
+
+        SpannableString ss = new SpannableString(text);
+        ClickableSpan clickableSpan1 = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+            }
+
+            @Override
+            public void updateDrawState(@NonNull TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(Color.BLUE);
+                ds.setUnderlineText(true);
+            }
+        };
+        ss.setSpan(clickableSpan1, 26,34, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        binding.tvSignup.setText(ss);
+        binding.tvSignup.setMovementMethod(LinkMovementMethod.getInstance());
+        binding.tvSignup.setHighlightColor(ContextCompat.getColor(this, R.color.color9F5A7B));
 
 
         //Configure the Google SignIn
@@ -60,6 +137,7 @@ public class LoginActivity extends AppCompatActivity {
         checkUser();
 
         //Google SignInButton: Click to begin Google Sign In
+
         binding.bGoogleSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,9 +148,15 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "test");
             }
         });
+        binding.bGoogleSignIn.setOnClickListener( v -> {
+            //begin Google Sign In
+            Log.d(TAG, "onClick: begin Google Sign In");
+            Intent intent = googleSignInClient.getSignInIntent();
+            startActivityForResult(intent, RC_SIGN_IN);
+        });
     }
 
-    private void checkUser() {
+    private void checkUser(){
         //if user is already signed in then go MainActivity
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if(firebaseUser != null){
@@ -138,6 +222,5 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d(TAG, "onFailure: Login Failed "+e.getMessage());
                     }
                 });
-
     }
 }

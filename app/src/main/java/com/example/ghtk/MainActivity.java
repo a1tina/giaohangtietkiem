@@ -6,7 +6,11 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
+<<<<<<< HEAD
 import android.os.Build;
+=======
+import android.content.SharedPreferences;
+>>>>>>> master
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -45,12 +49,14 @@ public class MainActivity extends AppCompatActivity {
     private void checkUser() {
         //get current user
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        if (firebaseUser == null) {
+        if (firebaseUser == null && getIntent().getStringExtra("hasLoggedIn") == null) {
             //user not logged in
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         } else {
             //user logged in
+            String value = "OK";
+            getIntent().putExtra("hasLoggedIn", value);
         }
     }
 

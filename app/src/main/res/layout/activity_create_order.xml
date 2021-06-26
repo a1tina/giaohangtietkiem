@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:id="@+id/rl_mainCreateOrderLayout"
     tools:context=".CreateOrderActivity">
 
     <TextView
@@ -56,93 +57,38 @@
                 android:padding="10dp"
                 android:text="Người gửi" />
 
-            <EditText
-                android:id="@+id/et_sender_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_below="@id/tv_create_order_sender_receiver"
-                android:layout_toEndOf="@id/tv_create_order_sender_name"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:paddingVertical="10dp"
-                android:textSize="16sp"
-                android:inputType="textPersonName"
-                android:hint="Họ tên"
-                android:drawableLeft="@drawable/ic_person"
-                android:drawablePadding="10dp"
-                android:background="@color/white"/>
-
-            <TextView
-                android:id="@+id/tv_create_order_sender_phone"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_create_order_sender_name"
-                android:textColor="#9F5A7B"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:text="Điện thoại" />
-
-            <EditText
-                android:id="@+id/et_sender_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_below="@id/tv_create_order_sender_name"
-                android:layout_toEndOf="@id/tv_create_order_sender_phone"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:paddingVertical="10dp"
-                android:textSize="16sp"
-                android:inputType="phone"
-                android:hint="Số điện thoại"
-                android:drawableLeft="@drawable/ic_phone"
-                android:drawablePadding="10dp"
-                android:background="@color/white"/>
-
-            <TextView
-                android:id="@+id/tv_create_order_sender_address"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_create_order_sender_phone"
-                android:textColor="#9F5A7B"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:text="Địa chỉ" />
-
-            <EditText
-                android:id="@+id/et_sender_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_below="@id/tv_create_order_sender_phone"
-                android:layout_toEndOf="@id/tv_create_order_sender_address"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:paddingVertical="10dp"
-                android:textSize="16sp"
-                android:inputType="textPostalAddress"
-                android:hint="Địa chỉ nhà/cơ quan"
-                android:drawableLeft="@drawable/ic_location"
-                android:drawableTint="#B8B8B8"
-                android:drawablePadding="10dp"
-                android:background="@color/white"/>
             <CheckBox
                 android:id="@+id/checkBox1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_create_order_sender_address"
-                android:layout_marginStart="10dp"
+                android:layout_below="@id/tv_create_order_sender_receiver"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="10dp"
                 android:text="Gửi tại bưu cục" />
 
+            <TextView
+                android:id="@+id/tv_sender_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_create_order_sender_name"
+                android:text="ABC"
+                android:textSize="15sp"
+                android:padding="10dp" />
+            <ImageButton
+                android:id="@+id/ib_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/checkBox1"
+                android:layout_marginEnd="10dp"
+                android:background="?android:selectableItemBackground"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_edit"/>
 
             <TextView
                 android:id="@+id/tv_create_order_receiver_name"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/checkBox1"
+                android:layout_below="@id/tv_sender_info"
                 android:textColor="#9F5A7B"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -154,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:layout_below="@id/checkBox1"
+                android:layout_below="@id/tv_sender_info"
                 android:layout_toEndOf="@id/tv_create_order_receiver_name"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
@@ -576,6 +522,7 @@
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="0dp"
                 android:background="?android:selectableItemBackground"
+                android:letterSpacing="0"
                 android:text="Sửa"
                 android:textAllCaps="false"
                 android:textColor="@color/teal_700"
@@ -612,6 +559,7 @@
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="0dp"
                 android:background="?android:selectableItemBackground"
+                android:letterSpacing="0"
                 android:text="Sửa"
                 android:textAllCaps="false"
                 android:textColor="@color/teal_700"
@@ -648,6 +596,7 @@
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="0dp"
                 android:background="?android:selectableItemBackground"
+                android:letterSpacing="0"
                 android:text="Sửa"
                 android:textAllCaps="false"
                 android:textColor="@color/teal_700"
@@ -733,6 +682,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/checkBox4"
                 android:layout_margin="10dp"
+                android:letterSpacing="0"
                 android:text="lưu nháp"
                 android:backgroundTint="#B3D3EA"/>
 
@@ -744,6 +694,7 @@
                 android:layout_margin="10dp"
                 android:layout_toEndOf="@id/b_draft"
                 android:layout_alignParentRight="true"
+                android:letterSpacing="0"
                 android:text="tạo đơn"
                 android:backgroundTint="#9f5a7b"
                 />
@@ -752,6 +703,63 @@
 
         </RelativeLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rl_graybg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CC000000">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_sender_edit"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/sender_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn kho hàng"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:padding="10dp"/>
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/sender_title"
+            android:iconifiedByDefault="false"
+            android:queryHint="Nhập họ tên, số điện thoại, địa chỉ"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_below="@id/searchView"
+            android:layout_marginTop="20dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/b_add_warehouse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="thêm kho mới"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/red"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
 
 
 
