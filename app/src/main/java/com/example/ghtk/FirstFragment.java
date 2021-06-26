@@ -2,16 +2,16 @@ package com.example.ghtk;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.bumptech.glide.load.model.ImageVideoWrapper;
+import androidx.fragment.app.Fragment;
+
+import com.example.ghtk.QCModel.QC1Activity;
+import com.example.ghtk.QCModel.QC2Activity;
 
 /**
  * A simple {@link Fragment} subclass.

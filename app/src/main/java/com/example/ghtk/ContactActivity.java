@@ -1,15 +1,10 @@
 package com.example.ghtk;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.text.Spanned;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 
-import org.sufficientlysecure.htmltextview.HtmlFormatter;
-import org.sufficientlysecure.htmltextview.HtmlFormatterBuilder;
-import org.sufficientlysecure.htmltextview.HtmlTextView;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ContactActivity extends AppCompatActivity {
 

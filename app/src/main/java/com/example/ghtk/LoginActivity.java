@@ -1,16 +1,8 @@
 package com.example.ghtk;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -18,9 +10,12 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.ghtk.databinding.ActivityLoginBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -31,13 +26,11 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -68,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             email = String.valueOf(binding.tietEmail.getText());
             password = String.valueOf(binding.tietPassword.getText());
 
-
+            /*
             if (!email.equals("") && !password.equals("")) {
                 binding.progressbar.setVisibility(View.VISIBLE);
                 Handler handler = new Handler(Looper.getMainLooper());
@@ -105,6 +98,9 @@ public class LoginActivity extends AppCompatActivity {
             else {
                 Toast.makeText(getApplicationContext(), "Hãy điền vào tất cả các trường", Toast.LENGTH_SHORT).show();
             }
+
+             */
+
 
         });
 

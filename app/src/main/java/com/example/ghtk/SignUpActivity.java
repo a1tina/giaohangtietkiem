@@ -1,11 +1,6 @@
 package com.example.ghtk;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,11 +16,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -33,6 +28,7 @@ public class SignUpActivity extends AppCompatActivity {
     TextInputEditText textInputEditTextFullname, textInputEditTextEmail, textInputEditTextPassword;
     Button bSignUp;
     ProgressBar progressBar;
+    private static final String URL = "http://localhost:9999/auth/register";
 
 
     @Override
@@ -72,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         bSignUp.setOnClickListener(v -> {
 
-            String fullname, email, username, password;
+            String fullname, email, password;
             fullname = String.valueOf(textInputEditTextFullname.getText());
             password = String.valueOf(textInputEditTextPassword.getText());
             email = String.valueOf(textInputEditTextEmail.getText());
@@ -110,9 +106,13 @@ public class SignUpActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Hãy điền vào tất cả các trường", Toast.LENGTH_SHORT).show();
             }
 
+
+
+
         });
 
 
     }
+
 
 }
