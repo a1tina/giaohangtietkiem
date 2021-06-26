@@ -1,20 +1,12 @@
 package com.example.ghtk;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
-
-import android.content.Intent;
-<<<<<<< HEAD
-import android.os.Build;
-=======
-import android.content.SharedPreferences;
->>>>>>> master
-import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
-
 
 import com.example.ghtk.databinding.ActivityMainBinding;
 import com.example.ghtk.fragment.FourthFragment;

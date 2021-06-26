@@ -2,18 +2,19 @@ package com.example.ghtk.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.ghtk.BillActivity;
 import com.example.ghtk.ContactActivity;
 import com.example.ghtk.CreateOrderActivity;
+import com.example.ghtk.QC1Activity;
+import com.example.ghtk.QC2Activity;
 import com.example.ghtk.R;
 import com.example.ghtk.WarehouseActivity;
 
@@ -48,7 +49,7 @@ public class FirstFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_first, container, false);
-<<<<<<< HEAD:app/src/main/java/com/example/ghtk/fragment/FirstFragment.java
+
         ImageButton iBTaoDon = (ImageButton) view.findViewById(R.id.imageButton);
         ImageButton iBLienHe = (ImageButton) view.findViewById((R.id.imageButton7));
         ImageButton iBKhoHang = (ImageButton) view.findViewById(R.id.imageButton5);
@@ -81,10 +82,7 @@ public class FirstFragment extends Fragment {
                 startActivity(new Intent(getActivity(), BillActivity.class));
             }
         });
-=======
-        ImageButton iBTaoDon = view.findViewById(R.id.imageButton);
-        ImageButton iBLienHe = view.findViewById((R.id.imageButton7));
-        ImageButton iBKhoHang = view.findViewById(R.id.imageButton5);
+
         ImageButton ibQC1 = view.findViewById(R.id.imageButton8);
         TextView tvQC1 = view.findViewById(R.id.textView9);
         ImageButton ibQC2 = view.findViewById(R.id.imageButton9);
@@ -101,7 +99,7 @@ public class FirstFragment extends Fragment {
         iBKhoHang.setOnClickListener(v -> startActivity(new Intent(getActivity(), WarehouseActivity.class)));
 
         iBLienHe.setOnClickListener(v -> startActivity(new Intent(getActivity(), ContactActivity.class)));
->>>>>>> master:app/src/main/java/com/example/ghtk/FirstFragment.java
+
         return view;
 
 
