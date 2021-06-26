@@ -1,10 +1,21 @@
 package com.example.ghtk;
 
+import androidx.annotation.LongDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.loader.content.CursorLoader;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -13,6 +24,7 @@ import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -22,10 +34,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import com.example.ghtk.tools.NoLimitScreen;
+import com.google.android.material.card.MaterialCardView;
 
 public class CreateOrderActivity extends AppCompatActivity {
 
@@ -48,11 +58,10 @@ public class CreateOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_order);
-
+        NoLimitScreen.apply(this);
         rlSenderEdit = findViewById(R.id.rl_sender_edit);
         rlMainLayout = findViewById(R.id.rl_mainCreateOrderLayout);
         rlGrayBg = findViewById(R.id.rl_graybg);
-
         checkBox4 = findViewById(R.id.checkBox4);
         bCreate = findViewById(R.id.b_create);
         iBEdit = findViewById(R.id.ib_edit);
@@ -88,7 +97,6 @@ public class CreateOrderActivity extends AppCompatActivity {
             rlSenderEdit.setVisibility(RelativeLayout.GONE);
             rlGrayBg.setVisibility(RelativeLayout.GONE);
         });
-
 
         //Tạo clickable cho TextView
         String text = "Tôi đã đọc và đồng ý với Điều khoản và quy định";

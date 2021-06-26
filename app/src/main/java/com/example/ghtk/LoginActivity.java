@@ -3,6 +3,8 @@ package com.example.ghtk;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -11,13 +13,12 @@ import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
 import com.example.ghtk.databinding.ActivityLoginBinding;
+import com.example.ghtk.fragment.FourthFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -31,6 +32,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -61,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             email = String.valueOf(binding.tietEmail.getText());
             password = String.valueOf(binding.tietPassword.getText());
 
-            /*
+
             if (!email.equals("") && !password.equals("")) {
                 binding.progressbar.setVisibility(View.VISIBLE);
                 Handler handler = new Handler(Looper.getMainLooper());
@@ -99,9 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Hãy điền vào tất cả các trường", Toast.LENGTH_SHORT).show();
             }
 
-             */
-
-
         });
 
         String text = "Chưa có tài khoản? Đăng ký tại đây";
@@ -133,14 +132,23 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
-
-
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
 
         //Google SignInButton: Click to begin Google Sign In
-        binding.bGoogleSignIn.setOnClickListener(v -> {
+
+        binding.bGoogleSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //begin Google Sign In
+                Log.d(TAG, "onClick: begin Google Sign In");
+                Intent intent = googleSignInClient.getSignInIntent();
+                startActivityForResult(intent, RC_SIGN_IN);
+                Log.d(TAG, "test");
+            }
+        });
+        binding.bGoogleSignIn.setOnClickListener( v -> {
             //begin Google Sign In
             Log.d(TAG, "onClick: begin Google Sign In");
             Intent intent = googleSignInClient.getSignInIntent();
@@ -148,10 +156,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-    private void checkUser() {
+    private void checkUser(){
         //if user is already signed in then go MainActivity
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if(firebaseUser != null){
@@ -171,9 +176,12 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 GoogleSignInAccount account = accountTask.getResult(ApiException.class);
                 firebaseAuthWithGoogleAccount(account);
+                Log.d("Account",String.format("Display name: %s \n Email: %s \n IdToken: %s \n UrlPhoto: %s", account.getDisplayName(),account.getEmail(),
+                        account.getIdToken(), account.getPhotoUrl().toString()));
             }
             catch (Exception e){
-                Log.d(TAG, "onActivityResult: "+e.getMessage());
+                //Log.d(TAG, "onActivityResult: "+e.printStackTrace());
+                e.printStackTrace();
             }
 
         }
@@ -214,6 +222,5 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d(TAG, "onFailure: Login Failed "+e.getMessage());
                     }
                 });
-
     }
 }

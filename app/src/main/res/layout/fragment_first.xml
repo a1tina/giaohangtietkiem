@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".FirstFragment">
-
-
+    tools:context=".fragment.FirstFragment"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,7 +21,7 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="461dp"
+                android:layout_width="match_parent"
                 android:layout_height="277dp"
                 android:src="@drawable/img_delivery_mobile_app"
                 app:layout_constraintVertical_bias="0.0" />

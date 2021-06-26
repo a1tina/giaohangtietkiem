@@ -1,11 +1,13 @@
 package com.example.ghtk;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.ghtk.tools.NoLimitScreen;
 
 public class CODActivity extends AppCompatActivity {
     Button button1, button2, button3;
@@ -17,7 +19,7 @@ public class CODActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cod);
-
+        NoLimitScreen.apply(this);
         button1 = findViewById(R.id.b_question1);
         button2 = findViewById(R.id.b_question2);
         button3 = findViewById(R.id.b_question3);

@@ -29,6 +29,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:labelVisibilityMode="labeled"
             android:background="@android:color/transparent"
+            app:itemTextColor="@drawable/bnv_tab_item_foreground"
+            app:itemIconTint="@drawable/bnv_tab_item_foreground"
             app:menu="@menu/bottom_menu"/>
 
     </com.google.android.material.bottomappbar.BottomAppBar>
@@ -38,6 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
+        app:maxImageSize="40dp"
+        app:tint="#fff"
         >
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 

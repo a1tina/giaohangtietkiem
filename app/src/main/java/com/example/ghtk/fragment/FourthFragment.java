@@ -1,19 +1,27 @@
-package com.example.ghtk;
+package com.example.ghtk.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.fragment.app.Fragment;
-
 import com.bumptech.glide.Glide;
+import com.example.ghtk.InfoAccountActivity;
+import com.example.ghtk.InstructionActivity;
+import com.example.ghtk.LoginActivity;
+import com.example.ghtk.R;
+import com.example.ghtk.RegulationActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.vishnusivadas.advanced_httpurlconnection.FetchData;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 
 public class FourthFragment extends Fragment {

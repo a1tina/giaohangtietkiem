@@ -3,17 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CODActivity">
+    tools:context=".CODActivity"
+    android:fitsSystemWindows="true">
 
     <TextView
         android:id="@+id/tv_cod_title"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="45dp"
+        android:layout_height="wrap_content"
         android:background="#9F5A7B"
         android:text="Đối soát - Chuyển tiền thu hộ"
-        android:paddingTop="10dp"
-        android:textSize="18sp"
+        android:paddingTop="50dp"
+        android:paddingBottom="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:textAlignment="center"/>

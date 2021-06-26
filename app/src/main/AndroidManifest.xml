@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ghtk"
         android:usesCleartextTraffic="true">
-        <activity android:name=".QCModel.QC4Activity"></activity>
-        <activity android:name=".QCModel.QC3Activity" />
-        <activity android:name=".QCModel.QC2Activity" />
-        <activity android:name=".QCModel.QC1Activity" />
+
+        <activity android:name=".BillActivity"></activity>
+
+        <activity android:name=".QC4Activity"></activity>
+        <activity android:name=".QC3Activity" />
+        <activity android:name=".QC2Activity" />
+        <activity android:name=".QC1Activity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".CODActivity" />
         <activity android:name=".InstructionActivity" />
@@ -24,14 +27,14 @@
         <activity android:name=".WarehouseActivity" />
         <activity android:name=".ContactActivity" />
         <activity android:name=".CreateOrderActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

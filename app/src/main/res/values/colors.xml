@@ -9,5 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="color9F5A7B">#9F5A7B</color>
     <color name="red">#CC0000</color>
+    <color name="cream">#F8F5F1</color>
+    <color name="yellow">#ffeb7f</color>
     <color name="blur">#CC000000</color>
 </resources>
