@@ -148,8 +148,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivityForResult(intent, RC_SIGN_IN);
                 Log.d(TAG, "test");
             }
-
-        binding.bGoogleSignIn.setOnClickListener(v -> {
+        });
+        binding.bGoogleSignIn.setOnClickListener( v -> {
             //begin Google Sign In
             Log.d(TAG, "onClick: begin Google Sign In");
             Intent intent = googleSignInClient.getSignInIntent();
@@ -157,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void checkUser() {
+    private void checkUser(){
         //if user is already signed in then go MainActivity
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if(firebaseUser != null){
@@ -221,6 +221,5 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d(TAG, "onFailure: Login Failed "+e.getMessage());
                     }
                 });
-
     }
 }
