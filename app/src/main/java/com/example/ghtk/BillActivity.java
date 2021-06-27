@@ -28,8 +28,14 @@ public class BillActivity extends AppCompatActivity {
         setAdapter();
     }
     private void setAdapter(){
-        ViewPageAdapter_Bill adapter = new ViewPageAdapter_Bill(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        ViewPageAdapter_Bill adapter = new ViewPageAdapter_Bill(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, binding);
         binding.viewpagerBill.setAdapter(adapter);
         binding.tablayoutBill.setupWithViewPager(binding.viewpagerBill);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
     }
 }

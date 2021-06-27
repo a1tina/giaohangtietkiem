@@ -1,6 +1,11 @@
 package com.example.ghtk.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
@@ -8,21 +13,13 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
 import com.example.ghtk.R;
 import com.example.ghtk.adapter.OrderRecyclerAdapter;
 import com.example.ghtk.constant.OrderState;
+import com.example.ghtk.databinding.ActivityBillBinding;
 import com.example.ghtk.models.OrderItem;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 
 public class BillActivityFragment_1 extends Fragment {
@@ -41,9 +38,11 @@ public class BillActivityFragment_1 extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ActivityBillBinding activityBillBinding;
 
-    public BillActivityFragment_1() {
+    public BillActivityFragment_1(ActivityBillBinding binding) {
         // Required empty public constructor
+        activityBillBinding = binding;
     }
 
     @Override
@@ -62,8 +61,10 @@ public class BillActivityFragment_1 extends Fragment {
         view = inflater.inflate(R.layout.fragment_bill_activity_1, container, false);
         LinearLayout linear = (LinearLayout) view.findViewById(R.id.linearlayout_sender);
         cbx = view.findViewById(R.id.cbx_number_order);
+        //Set color for button all
         view.findViewById(R.id.btn_all).setBackgroundResource(R.drawable.button_activated);
         ((AppCompatButton)view.findViewById(R.id.btn_all)).setTextColor(getResources().getColor(android.R.color.white));
+        //Initial recyclerview
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         initData();
@@ -88,7 +89,7 @@ public class BillActivityFragment_1 extends Fragment {
         cbx.setText(String.format("%d đơn hàng", selectedArrayList.size()));
     }
     private void setAdapter(){
-        orderRecyclerAdapter = new OrderRecyclerAdapter(selectedArrayList, getContext());
+        orderRecyclerAdapter = new OrderRecyclerAdapter(selectedArrayList, getContext(), activityBillBinding, view);
         recyclerView.setAdapter(orderRecyclerAdapter);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
@@ -140,14 +141,12 @@ public class BillActivityFragment_1 extends Fragment {
 
     private void checkNumberOrder(View v){
         if(selectedArrayList.size() > 0){
-            view.findViewById(R.id.img_nothing).setVisibility(View.INVISIBLE);
-            view.findViewById(R.id.txt_nothing).setVisibility(View.INVISIBLE);
+            view.findViewById(R.id.nodata_layout).setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }
         else{
-            recyclerView.setVisibility(View.INVISIBLE);
-            view.findViewById(R.id.img_nothing).setVisibility(View.VISIBLE);
-            view.findViewById(R.id.txt_nothing).setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+            view.findViewById(R.id.nodata_layout).setVisibility(View.VISIBLE);
         }
     }
 }
