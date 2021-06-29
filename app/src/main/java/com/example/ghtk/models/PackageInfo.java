@@ -2,12 +2,18 @@ package com.example.ghtk.models;
 
 public class PackageInfo {
     private String tensp, urlImage;
-    private Float cannang;
+    private float cannang;
     private int soluong;
 
-    public PackageInfo(String tensp, String urlImage, Float cannang, int soluong) {
+    public PackageInfo(String tensp, String urlImage, float cannang, int soluong) {
         this.tensp = tensp;
         this.urlImage = urlImage;
+        this.cannang = cannang;
+        this.soluong = soluong;
+    }
+
+    public PackageInfo(String tensp, float cannang, int soluong) {
+        this.tensp = tensp;
         this.cannang = cannang;
         this.soluong = soluong;
     }

@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,7 +30,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.ghtk.models.PackageInfo;
 import com.example.ghtk.tools.NoLimitScreen;
+
+import org.xmlpull.v1.XmlPullParser;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.List;
 
 public class CreateOrderActivity extends AppCompatActivity {
 
@@ -40,8 +49,8 @@ public class CreateOrderActivity extends AppCompatActivity {
     private String selectedImagePath;
     int SELECT_IMAGE_CODE = 1;
 
-    Uri uri;
-
+    private Bitmap imageBitmap;
+    private List<PackageInfo> packageInfoList;
     LinearLayout linearLayoutPhoto, linearLayoutAddGoods, p;
     ImageButton iBBack, iBPhotoChoose, iBDeleteGoods, iBEdit;
     CheckBox checkBox4;
@@ -77,9 +86,7 @@ public class CreateOrderActivity extends AppCompatActivity {
 
         //Tạo đơn
         bCreate.setOnClickListener(v -> {
-            startActivity(new Intent(CreateOrderActivity.this, MainActivity.class));
-            Toast.makeText(getBaseContext(), "Tạo đơn thành công" , Toast.LENGTH_SHORT ).show();
-            finish();
+            callApi();
         });
 
         iBEdit.setOnClickListener(v -> {
@@ -197,6 +204,13 @@ public class CreateOrderActivity extends AppCompatActivity {
             public void onClick(@NonNull View widget) {
                 LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View view = inflater.inflate(R.layout.mcvaddgoods, null);
+                ImageButton b = view.findViewById(R.id.b_delete_goods);
+                b.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        p.removeView(view);
+                    }
+                });
                 p.addView(view);
             }
 
@@ -230,6 +244,41 @@ public class CreateOrderActivity extends AppCompatActivity {
         });
     }
 
+    private void callApi() {
+//        if(imageBitmap == null){
+//            Toast.makeText(CreateOrderActivity.this, "Bạn chưa chụp ảnh", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+        File file = savebitmap(imageBitmap);
+        getDataDSHH();
+        Toast.makeText(CreateOrderActivity.this, packageInfoList.get(0).getTensp(), Toast.LENGTH_SHORT).show();
+//        String diachinhan = ((EditText)findViewById(R.id.et_receiver_address)).getText().toString().trim();
+//        String diachigui = ((TextView)findViewById(R.id.tv_sender_info)).getText().toString().trim();
+//        String chiphi = ((TextView)findViewById(R.id.tv_total_postage2)).getText().toString().trim();
+////        RequestBody requestBodyDSHH = RequestBody.create(MediaType.parse("multipart/form-data"), );
+////        RequestBody requestBodyKHN = RequestBody.create(MediaType.parse("multipart/form-data"), );
+//        RequestBody requestBodyDCN = RequestBody.create(MediaType.parse("multipart/form-data"), diachinhan);
+//        RequestBody requestBodyCP = RequestBody.create(MediaType.parse("multipart/form-data"), chiphi);
+//        RequestBody requestBodyDCG = RequestBody.create(MediaType.parse("multipart/form-data"), diachigui);
+//        RequestBody requestBodyImage = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//        MultipartBody.Part multipartImage = MultipartBody.Part.createFormData("image", file.getName(), requestBodyImage);
+//        IServiceApi.apiService.PostCreateOrder();
+    }
+
+    private void getDataDSHH() {
+        for(int i = 0; i < p.getChildCount(); i++){
+            View v = getLayoutInflater().inflate((XmlPullParser) p.getChildAt(i), null);
+            EditText vname = v.findViewById(R.id.goods_name);
+            EditText vweight = v.findViewById(R.id.goods_weight);
+            EditText vquantity = v.findViewById(R.id.goods_quantity);
+            String name = vname.getText().toString().trim();
+            String weight = vweight.getText().toString().trim();
+            String quantity = vquantity.getText().toString().trim();
+            PackageInfo packageInfo = new PackageInfo(name, Float.parseFloat(weight), Integer.parseInt(quantity));
+            packageInfoList.add(packageInfo);
+        }
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -238,7 +287,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         if(requestCode == SELECT_IMAGE_CODE && resultCode == RESULT_OK){
             //uri = data.getData();
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageBitmap = (Bitmap) extras.get("data");
             ((ImageView)findViewById(R.id.iv_image_package)).setImageBitmap(imageBitmap);
         }
     }
@@ -249,5 +298,28 @@ public class CreateOrderActivity extends AppCompatActivity {
         linearLayoutPhoto.addView(imageView);
     }
 
+    private File savebitmap(Bitmap bmp) {
+        String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+        OutputStream outStream = null;
+        // String temp = null;
+        File file = new File(extStorageDirectory, "temp.png");
+        if (file.exists()) {
+            file.delete();
+            file = new File(extStorageDirectory, "temp.png");
+
+        }
+
+        try {
+            outStream = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+            outStream.flush();
+            outStream.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return file;
+    }
 
 }
