@@ -17,6 +17,7 @@
     <string name="dang_nhap">Đã có tài khoản? Đăng nhập tại đây</string>
     <string name="fullname">Họ tên đầy đủ</string>
     <string name="email">Email</string>
+    <string name="address">127/16 Hải Thượng Lãn Ông, Quận 3, Thành phố Hồ Chí Minh</string>
 
 
     <string name="diem_thuong">Điểm thưởng</string>
@@ -79,5 +80,10 @@
 
     <string name="instruction_content">Phiên bản mới GHTK ra mắt chức năng chụp ảnh hàng hoá giá trị cao, cùng với rất nhiều cải tiến mới mẻ đem đến cho khách hàng những trải nghiệm thú vị.</string>
 
+    <string-array name="payment_method">
+        <item>Tiền mặt</item>
+        <item>Thẻ ATM nội địa</item>
+        <item>Thẻ VISA</item>
+    </string-array>
 
 </resources>

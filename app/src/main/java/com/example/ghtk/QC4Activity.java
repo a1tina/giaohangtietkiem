@@ -1,4 +1,4 @@
-package com.example.ghtk.QCModel;
+package com.example.ghtk;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +7,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.ghtk.CreateOrderActivity;
-import com.example.ghtk.R;
 
 public class QC4Activity extends AppCompatActivity {
     WebView webViewContent;

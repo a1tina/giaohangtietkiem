@@ -55,53 +55,75 @@
                 android:padding="10dp"
                 android:drawablePadding="8dp"
                 app:drawableEndCompat="@drawable/ic_forward" />
-            <TextView
-                android:id="@+id/tv_personal_name"
+
+            <LinearLayout
+                android:id="@+id/linearlayout_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:padding="10dp"
-                android:text="Nguyễn Văn A"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:drawablePadding="10dp"
                 android:layout_below="@id/tv_personal_info"
-                android:background="@drawable/border_rectangle"
-                app:drawableLeftCompat="@drawable/ic_person" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_personal_phone_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_personal_name"
-                android:layout_marginHorizontal="10dp"
-                android:background="@drawable/border_rectangle"
-                android:drawablePadding="10dp"
-                android:text="0123456789"
-                android:textColor="@color/black"
-                android:padding="10dp"
-                android:textSize="14sp"
-                app:drawableLeftCompat="@drawable/ic_phone" />
+                <TextView
+                    android:id="@+id/tv_personal_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:padding="10dp"
+                    android:text="Nguyễn Văn A"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:drawablePadding="10dp"
+                    android:background="@drawable/border_rectangle"
+                    app:drawableLeftCompat="@drawable/ic_person" />
 
-            <TextView
-                android:id="@+id/tv_personal_mail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:padding="10dp"
-                android:text="12345678@gm.uit.edu.vn"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:drawableTint="#B8B8B8"
-                android:drawableStart="@drawable/ic_mail"
-                android:drawablePadding="10dp"
-                android:layout_below="@id/tv_personal_phone_number"
-                android:background="@drawable/border_rectangle"/>
+                <TextView
+                    android:id="@+id/tv_personal_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/border_rectangle"
+                    android:drawablePadding="10dp"
+                    android:text="0123456789"
+                    android:textColor="@color/black"
+                    android:padding="10dp"
+                    android:textSize="14sp"
+                    app:drawableLeftCompat="@drawable/ic_phone" />
+
+                <TextView
+                    android:id="@+id/tv_personal_mail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:padding="10dp"
+                    android:text="12345678@gm.uit.edu.vn"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:drawablePadding="10dp"
+                    android:background="@drawable/border_rectangle"
+                    app:drawableStartCompat="@drawable/ic_mail"
+                    app:drawableTint="#B8B8B8" />
+
+                <TextView
+                    android:id="@+id/tv_personal_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:padding="10dp"
+                    android:text="@string/address"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:drawablePadding="10dp"
+                    android:background="@drawable/border_rectangle"
+                    app:drawableStartCompat="@drawable/ic_home"
+                    app:drawableTint="#B8B8B8" />
+
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_below="@id/tv_personal_mail"
+                android:layout_below="@id/linearlayout_info"
                 android:padding="10dp"
                 android:background="#E0E1E3">
 
@@ -112,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_below="@id/tv_personal_mail"
+                android:layout_below="@id/linearlayout_info"
                 android:textColor="#21710F"
                 android:textSize="15sp"
                 android:padding="10dp"
@@ -123,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_below="@id/tv_personal_mail"
+                android:layout_below="@id/linearlayout_info"
                 android:layout_alignParentRight="true"
                 android:text="Tất cả"
                 android:textColor="@color/teal_700"

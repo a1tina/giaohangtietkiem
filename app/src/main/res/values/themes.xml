@@ -34,5 +34,8 @@
         <item name="textAllCaps">false</item>
         <item name="android:textSize">18sp</item>
     </style>
+    <style name="BottomNavigationTheme" parent="Widget.Design.BottomNavigationView">
+        <item name="android:letterSpacing">0</item>
+    </style>
 
 </resources>

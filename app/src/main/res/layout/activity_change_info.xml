@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChangeInfoActivity">
+
+    <TextView
+        android:id="@+id/tv_change_info_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9F5A7B"
+        android:paddingTop="50dp"
+        android:paddingBottom="20dp"
+        android:text="Thay đổi thông tin"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/ibBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="50dp"
+        android:background="?android:selectableItemBackground"
+        android:src="@drawable/ic_back" />
+
+    <ScrollView
+        android:id="@+id/scrollView_change_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_change_info_title">
+        <LinearLayout
+            android:id="@+id/linearlayout_change_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_change_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Họ và tên khách hàng"
+                android:textColor="#21710F"
+                android:textSize="14sp"
+                android:padding="10dp"
+                />
+            <EditText
+                android:id="@+id/et_change_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/border_rectangle"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:text="Nguyễn Văn A"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:drawableTint="#B8B8B8"
+                app:drawableLeftCompat="@drawable/ic_person"
+                app:drawableRightCompat="@drawable/ic_edit"/>
+            <TextView
+                android:id="@+id/tv_change_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Số điện thoại"
+                android:textColor="#21710F"
+                android:textSize="14sp"
+                android:padding="10dp"
+                />
+
+            <EditText
+                android:id="@+id/et_change_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/border_rectangle"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:text="0123456789"
+                android:drawableTint="#B8B8B8"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:drawableLeftCompat="@drawable/ic_phone"
+                app:drawableRightCompat="@drawable/ic_edit"/>
+            <TextView
+                android:id="@+id/tv_change_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="#21710F"
+                android:textSize="14sp"
+                android:padding="10dp"
+                />
+
+            <EditText
+                android:id="@+id/et_change_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/border_rectangle"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:text="12345678@gm.uit.edu.vn"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:drawableLeftCompat="@drawable/ic_mail"
+                app:drawableTint="#B8B8B8"
+                app:drawableRightCompat="@drawable/ic_edit"/>
+            <TextView
+                android:id="@+id/tv_change_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Địa chỉ liên lạc"
+                android:textColor="#21710F"
+                android:textSize="14sp"
+                android:padding="10dp"
+                />
+
+            <EditText
+                android:id="@+id/et_change_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/border_rectangle"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:text="@string/address"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:drawableLeftCompat="@drawable/ic_home"
+                app:drawableRightCompat="@drawable/ic_edit"
+                app:drawableTint="#B8B8B8" />
+
+            <TextView
+                android:id="@+id/tv_change_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mật khẩu"
+                android:textColor="#21710F"
+                android:textSize="14sp"
+                android:padding="10dp"
+                />
+
+            <EditText
+                android:id="@+id/et_change_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/border_rectangle"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:text="12345678"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:drawableLeftCompat="@drawable/ic_lock"
+                app:drawableRightCompat="@drawable/ic_edit"
+                app:drawableTint="#B8B8B8" />
+
+
+            <TextView
+                android:id="@+id/tv_change_payment_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phương thức thanh toán"
+                android:textColor="#21710F"
+                android:textSize="14sp"
+                android:padding="10dp"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                android:id="@+id/til_change_payment_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white">
+                <AutoCompleteTextView
+                    android:id="@+id/actv_change_payment_method"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:paddingVertical="10dp"
+                    android:text="Tiền mặt"
+                    android:backgroundTint="@color/white"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/linearlayout_cardform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginHorizontal="5dp">
+                <com.braintreepayments.cardform.view.CardForm
+                    android:id="@+id/cardform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/b_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginVertical="15dp"
+                android:layout_marginEnd="15dp"
+                android:text="Lưu"
+                android:letterSpacing="0"
+                android:backgroundTint="#025711"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+</RelativeLayout>

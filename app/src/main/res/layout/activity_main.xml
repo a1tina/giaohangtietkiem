@@ -16,6 +16,7 @@
         android:layout_gravity="bottom"
         app:contentInsetStart="0dp"
         app:contentInsetLeft="0dp"
+        android:theme="@style/BottomNavigationTheme"
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="20dp"
         app:fabCradleVerticalOffset="8dp">
@@ -23,6 +24,7 @@
             android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:theme="@style/BottomNavigationTheme"
             app:elevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

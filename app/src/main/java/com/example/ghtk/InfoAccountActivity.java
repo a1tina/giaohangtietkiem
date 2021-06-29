@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class InfoAccountActivity extends AppCompatActivity {
-    private TextView tvProfileName, tvProfilePhoneNumber, tvProfileMail;
+    private TextView tvProfileName, tvProfilePhoneNumber, tvProfileMail, bChangeInfo;
     private FirebaseAuth firebaseAuth;
     ImageButton ibBack;
 
@@ -26,6 +26,11 @@ public class InfoAccountActivity extends AppCompatActivity {
         tvProfilePhoneNumber = findViewById(R.id.tv_personal_phone_number);
         tvProfileMail = findViewById(R.id.tv_personal_mail);
         ibBack = findViewById(R.id.ibBack);
+        bChangeInfo = findViewById(R.id.b_personal_info_change);
+
+        bChangeInfo.setOnClickListener(v -> {
+            startActivity(new Intent(this, ChangeInfoActivity.class));
+        });
 
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
