@@ -38,6 +38,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_email"
+        app:errorEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -54,6 +55,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        app:passwordToggleEnabled="true"
+        app:errorEnabled="true"
         android:id="@+id/til_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,14 +67,15 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiet_password"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/ic_person2"
             android:fontFamily="@font/open_sans" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
+        app:passwordToggleEnabled="true"
         android:id="@+id/til_password_again"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,10 +85,10 @@
         app:boxBackgroundColor="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:inputType="textPassword"
             android:id="@+id/tiet_password_again"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/ic_lock"
             android:fontFamily="@font/open_sans" />
     </com.google.android.material.textfield.TextInputLayout>
 

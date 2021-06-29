@@ -8,14 +8,22 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.ghtk.api.ApiClient;
+import com.example.ghtk.storage.SharedPrefManager;
 import com.example.ghtk.tools.NoLimitScreen;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class InfoAccountActivity extends AppCompatActivity {
-    private TextView tvProfileName, tvProfilePhoneNumber, tvProfileMail, bChangeInfo;
+    private TextView tvProfileName, tvProfilePhoneNumber, tvProfileMail, tvPersonalAddress, bChangeInfo;
     private FirebaseAuth firebaseAuth;
     ImageButton ibBack;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +33,7 @@ public class InfoAccountActivity extends AppCompatActivity {
         tvProfileName = findViewById(R.id.tv_personal_name);
         tvProfilePhoneNumber = findViewById(R.id.tv_personal_phone_number);
         tvProfileMail = findViewById(R.id.tv_personal_mail);
+        tvPersonalAddress = findViewById(R.id.tv_personal_address);
         ibBack = findViewById(R.id.ibBack);
         bChangeInfo = findViewById(R.id.b_personal_info_change);
 
@@ -32,12 +41,44 @@ public class InfoAccountActivity extends AppCompatActivity {
             startActivity(new Intent(this, ChangeInfoActivity.class));
         });
 
+
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
+
 
         ibBack.setOnClickListener(v -> finish());
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if(firebaseUser == null) {
+            LoginResult loginResult = SharedPrefManager.getInstance(this).getUser();
+            String accessToken = loginResult.getAccessToken();
+            Call<Customer> call = ApiClient
+                    .getInstance().getApi().getProfile(accessToken);
+            call.enqueue(new Callback<Customer>() {
+                @Override
+                public void onResponse(Call<Customer> call, Response<Customer> response) {
+                    Customer customer = response.body();
+                    SharedPrefManager.getInstance(InfoAccountActivity.this)
+                            .saveProfile(customer.getProfile());
+                    customer = SharedPrefManager.getInstance(InfoAccountActivity.this).getProfile();
+                    tvProfileName.setText(customer.getTenKH());
+                    tvProfileMail.setText(customer.getUsername());
+                    tvProfilePhoneNumber.setText(customer.getSDT());
+                    tvPersonalAddress.setText(customer.getDiaChi());
+                }
+
+                @Override
+                public void onFailure(Call<Customer> call, Throwable t) {
+
+                }
+            });
+        }
     }
 
     private void checkUser() {
@@ -50,6 +91,11 @@ public class InfoAccountActivity extends AppCompatActivity {
             tvProfileName.setText(name);
             tvProfilePhoneNumber.setText(phone);
             tvProfileMail.setText(email);
+        }
+        else if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+            LoginResult loginResult = SharedPrefManager.getInstance(this).getUser();
+            tvProfileName.setText(loginResult.getCustomerName());
+            tvProfileMail.setText(loginResult.getUsername());
         }
         else{
             startActivity(new Intent(this, LoginActivity.class));

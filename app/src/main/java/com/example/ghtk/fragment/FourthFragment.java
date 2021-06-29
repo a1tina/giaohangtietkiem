@@ -16,8 +16,11 @@ import com.bumptech.glide.Glide;
 import com.example.ghtk.InfoAccountActivity;
 import com.example.ghtk.InstructionActivity;
 import com.example.ghtk.LoginActivity;
+import com.example.ghtk.LoginResult;
+import com.example.ghtk.MainActivity;
 import com.example.ghtk.R;
 import com.example.ghtk.RegulationActivity;
+import com.example.ghtk.storage.SharedPrefManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
@@ -79,6 +82,9 @@ public class FourthFragment extends Fragment {
         acbProfileInfo = view.findViewById(R.id.acb_profile_in4);
         acbInstruction = view.findViewById(R.id.acb_instruction);
 
+
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
 
@@ -87,19 +93,11 @@ public class FourthFragment extends Fragment {
         acbInstruction.setOnClickListener(v -> startActivity(new Intent(getActivity(), InstructionActivity.class)));
 
         logoutBtn.setOnClickListener(v -> {
-            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-            if (firebaseUser != null) {
-                String value = null;
-                getActivity().getIntent().putExtra("hasLoggedIn", value);
-                firebaseAuth.signOut();
-                getActivity().finish();
-            } else {
-                String value = null;
-                getActivity().getIntent().putExtra("hasLoggedIn", value);
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-                getActivity().finish();
-            }
-            checkUser();
+            firebaseAuth.signOut();
+            SharedPrefManager.getInstance(getActivity()).clear();
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
         return view;
     }
@@ -115,13 +113,15 @@ public class FourthFragment extends Fragment {
             Glide.with(getActivity()).load(imgurl).into(profileImage);
             profileName.setText(name);
             profileEmail.setText(email);
-        } else if (getActivity().getIntent().getStringExtra("hasLoggedIn") != null) {
-            String name = "ABC";
-            String email = "ABC";
-            profileName.setText(name);
-            profileEmail.setText(email);
+        } else if (SharedPrefManager.getInstance(getActivity()).isLoggedIn()) {
+            LoginResult loginResult = SharedPrefManager.getInstance(getActivity()).getUser();
+            profileName.setText(loginResult.getCustomerName());
+            profileEmail.setText(loginResult.getUsername());
         } else {
-            startActivity(new Intent(getActivity(), LoginActivity.class));
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            getActivity().finish();
         }
 
     }

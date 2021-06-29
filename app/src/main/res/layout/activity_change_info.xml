@@ -80,7 +80,7 @@
                 android:background="@drawable/border_rectangle"
                 android:drawablePadding="10dp"
                 android:padding="10dp"
-                android:text="0123456789"
+                android:hint="Nhập SĐT liên lạc"
                 android:drawableTint="#B8B8B8"
                 android:textColor="@color/black"
                 android:textSize="14sp"
@@ -96,15 +96,14 @@
                 android:padding="10dp"
                 />
 
-            <EditText
-                android:id="@+id/et_change_mail"
+            <TextView
+                android:id="@+id/tv_change_mail2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:background="@drawable/border_rectangle"
                 android:drawablePadding="10dp"
                 android:padding="10dp"
-                android:text="12345678@gm.uit.edu.vn"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:drawableLeftCompat="@drawable/ic_mail"
@@ -128,7 +127,7 @@
                 android:background="@drawable/border_rectangle"
                 android:drawablePadding="10dp"
                 android:padding="10dp"
-                android:text="@string/address"
+                android:hint="Nhập địa chỉ"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:drawableLeftCompat="@drawable/ic_home"
@@ -145,22 +144,30 @@
                 android:padding="10dp"
                 />
 
-            <EditText
-                android:id="@+id/et_change_password"
+            <com.google.android.material.textfield.TextInputLayout
+                app:passwordToggleEnabled="true"
+                android:id="@+id/til_change_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:background="@drawable/border_rectangle"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
-                android:text="12345678"
-                android:inputType="textPassword"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:drawableLeftCompat="@drawable/ic_lock"
-                app:drawableRightCompat="@drawable/ic_edit"
-                app:drawableTint="#B8B8B8" />
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_change_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="12345678"
+                    android:textSize="14sp"
+                    android:padding="10dp"
+                    android:drawableStart="@drawable/ic_lock"
+                    android:drawableTint="#B8B8B8"
+                    android:drawablePadding="10dp"
+                    android:inputType="textPassword"
+                    android:fontFamily="@font/open_sans"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/tv_change_payment_method"

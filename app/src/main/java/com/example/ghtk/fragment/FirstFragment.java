@@ -94,6 +94,8 @@ public class FirstFragment extends Fragment {
         ImageButton ibQC4 = view.findViewById(R.id.imageButton11);
         TextView tvQC4 = view.findViewById(R.id.textView12);
 
+        TextView tv2 = view.findViewById(R.id.textView2);
+
         ibQC1.setOnClickListener(v -> startActivity(new Intent(getActivity(), QC1Activity.class)));
         tvQC1.setOnClickListener(v -> startActivity(new Intent(getActivity(), QC1Activity.class)));
 
@@ -111,6 +113,10 @@ public class FirstFragment extends Fragment {
         iBKhoHang.setOnClickListener(v -> startActivity(new Intent(getActivity(), WarehouseActivity.class)));
 
         iBLienHe.setOnClickListener(v -> startActivity(new Intent(getActivity(), ContactActivity.class)));
+
+
+
+
 
         return view;
 
