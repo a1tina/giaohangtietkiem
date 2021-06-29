@@ -132,7 +132,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cbx_number_order"
-            android:text="1 đơn hàng"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:textSize="18sp"
@@ -147,6 +146,7 @@
             android:layout_alignParentEnd="true"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:drawableLeft="@drawable/ic_baseline_filter_alt_24"
+            android:drawableTint="#ffd638"
             />
     </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView

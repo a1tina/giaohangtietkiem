@@ -11,7 +11,7 @@
         android:id="@+id/tv_info_account_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#9F5A7B"
+        android:background="@color/light_red"
         android:text="Thông tin tài khoản"
         android:paddingTop="50dp"
         android:paddingBottom="20dp"

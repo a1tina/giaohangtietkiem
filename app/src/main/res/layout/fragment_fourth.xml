@@ -11,7 +11,7 @@
         android:id="@+id/v_profile_bg"
         android:layout_width="wrap_content"
         android:layout_height="140dp"
-        android:background="@color/teal_700"
+        android:background="@color/light_red"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

@@ -18,7 +18,7 @@
             android:orientation="horizontal"
             android:padding="20dp">
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_all"
+                android:id="@+id/btn_all_receive"
                 android:minHeight="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                 />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_delivering"
+                android:id="@+id/btn_delivering_receive"
                 android:minHeight="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 android:textAllCaps="false"
                 android:fontFamily="sans-serif"/>
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_success"
+                android:id="@+id/btn_success_receive"
                 android:minHeight="30dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
@@ -58,7 +58,7 @@
                 android:textAllCaps="false"
                 android:fontFamily="sans-serif"/>
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_wait_return"
+                android:id="@+id/btn_wait_return_receive"
                 android:minHeight="30dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
@@ -73,7 +73,7 @@
                 android:fontFamily="sans-serif"
                 />
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_returned"
+                android:id="@+id/btn_returned_receive"
                 android:minHeight="30dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
@@ -99,6 +99,7 @@
         android:layout_marginEnd="15dp"
         />
     <RelativeLayout
+        android:id="@+id/relativelayout_receive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -106,16 +107,16 @@
         android:background="@color/cream"
         android:padding="15dp"
         >
-        <TextView
-            android:id="@+id/txt_number_order"
+        <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 đơn hàng"
+            android:id="@+id/cbx_number_order"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_centerVertical="true"
-            android:paddingStart="5dp"/>
+            android:paddingStart="5dp"
+            />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_filter"
             android:layout_width="wrap_content"
@@ -125,5 +126,35 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:drawableLeft="@drawable/ic_baseline_filter_alt_24"
             />
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_receiver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativelayout_receive"
+        android:paddingHorizontal="15dp"
+        />
+    <RelativeLayout
+        android:id="@+id/nodata_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativelayout_receive"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/img_nothing"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/nothing"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/txt_nothing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img_nothing"
+            android:text="Không có dữ liệu đơn hàng"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:alpha="0.5"/>
     </RelativeLayout>
 </RelativeLayout>

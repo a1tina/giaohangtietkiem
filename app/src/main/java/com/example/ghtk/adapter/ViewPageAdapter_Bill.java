@@ -27,7 +27,7 @@ public class ViewPageAdapter_Bill extends FragmentStatePagerAdapter {
         switch (position){
             case 0: fragment = new BillActivityFragment_1(activityBillBinding);
                 break;
-            case 1: fragment = new BillActivityFragment_2();
+            case 1: fragment = new BillActivityFragment_2(activityBillBinding);
                 break;
         }
         return fragment;

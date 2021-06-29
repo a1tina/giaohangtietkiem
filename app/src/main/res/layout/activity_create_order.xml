@@ -12,7 +12,7 @@
         android:id="@+id/tv_create_order_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#9F5A7B"
+        android:background="@color/light_red"
         android:text="Tạo mới"
         android:paddingTop="50dp"
         android:paddingBottom="20dp"
@@ -43,16 +43,18 @@
                 android:layout_height="40dp"
                 android:text="NGƯỜI GỬI - NGƯỜI NHẬN"
                 android:padding="10dp"
-                android:background="#E0E1E3"/>
+                android:background="#E0E1E3"
+                android:backgroundTint="@color/cream"
+                android:textStyle="bold"/>
 
 
             <TextView
                 android:id="@+id/tv_create_order_sender_name"
-                android:layout_width="100dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_create_order_sender_receiver"
-                android:textColor="#9F5A7B"
-                android:textSize="15sp"
+                android:textColor="@color/light_red"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="10dp"
                 android:text="Người gửi" />
@@ -64,7 +66,8 @@
                 android:layout_below="@id/tv_create_order_sender_receiver"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="10dp"
-                android:text="Gửi tại bưu cục" />
+                android:text="Gửi tại bưu cục"
+                android:textColor="#888"/>
 
             <TextView
                 android:id="@+id/tv_sender_info"
@@ -82,15 +85,16 @@
                 android:layout_marginEnd="10dp"
                 android:background="?android:selectableItemBackground"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/ic_edit"/>
+                android:src="@drawable/ic_edit"
+                app:tint="#888" />
 
             <TextView
                 android:id="@+id/tv_create_order_receiver_name"
-                android:layout_width="100dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_sender_info"
-                android:textColor="#9F5A7B"
-                android:textSize="15sp"
+                android:textColor="@color/light_red"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="10dp"
                 android:text="Người nhận" />
@@ -114,11 +118,11 @@
 
             <TextView
                 android:id="@+id/tv_create_order_receiver_phone"
-                android:layout_width="100dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_create_order_receiver_name"
-                android:textColor="#9F5A7B"
-                android:textSize="15sp"
+                android:textColor="@color/light_red"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="10dp"
                 android:text="Điện thoại" />
@@ -142,11 +146,11 @@
 
             <TextView
                 android:id="@+id/tv_create_order_receiver_address"
-                android:layout_width="100dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_create_order_receiver_phone"
-                android:textColor="#9F5A7B"
-                android:textSize="15sp"
+                android:textColor="@color/light_red"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="10dp"
                 android:text="Địa chỉ" />
@@ -175,7 +179,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_create_order_receiver_address"
                 android:layout_marginStart="10dp"
-                android:text="Nhận tại bưu cục" />
+                android:text="Nhận tại bưu cục"
+                android:textColor="#888"/>
 
             <TextView
                 android:id="@+id/tv_create_order_goods_service"
@@ -184,15 +189,16 @@
                 android:text="HÀNG HOÁ - DỊCH VỤ"
                 android:layout_below="@id/checkBox2"
                 android:padding="10dp"
-                android:background="#E0E1E3"/>
+                android:background="@color/cream"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tv_goods"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_create_order_goods_service"
-                android:textColor="#9F5A7B"
-                android:textSize="15sp"
+                android:textColor="@color/light_red"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="10dp"
                 android:text="Hàng hoá" />
@@ -207,7 +213,7 @@
                 android:fontFamily="sans-serif"
                 android:text="Xem thêm quy định"
                 android:textAllCaps="false"
-                android:textColor="@color/teal_700"
+                android:textColor="#888"
                 android:textSize="15sp"
                 android:padding="10dp" />
 
@@ -240,28 +246,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="10dp"
                                 android:padding="10dp"
-                                android:hint="Mô tả hàng hoá"
-                                android:paddingStart="20dp"
+                                android:hint="Tên hàng hoá"
+                                android:paddingStart="10dp"
                                 android:inputType="text"
                                 android:textSize="16sp"
                                 android:drawableTint="#B8B8B8"
                                 android:background="@color/white"/>
-
-                            <EditText
-                                android:id="@+id/goods_value"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/goods_name"
-                                android:layout_marginHorizontal="10dp"
-                                android:layout_marginTop="1dp"
-                                android:background="@color/white"
-                                android:drawableLeft="@drawable/ic_money2"
-                                android:drawablePadding="10dp"
-                                android:drawableTint="#B8B8B8"
-                                android:hint="Giá trị hàng"
-                                android:inputType="number"
-                                android:padding="10dp"
-                                android:textSize="16sp" />
 
                             <EditText
                                 android:id="@+id/goods_weight"
@@ -275,7 +265,7 @@
                                 android:drawableTint="#B8B8B8"
                                 android:drawableLeft="@drawable/ic_weight"
                                 android:drawablePadding="10dp"
-                                android:layout_below="@id/goods_value"
+                                android:layout_below="@id/goods_name"
                                 android:background="@color/white"/>
                             <EditText
                                 android:id="@+id/goods_quantity"
@@ -283,13 +273,13 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="10dp"
                                 android:padding="10dp"
-                                android:text="Số lượng: "
+                                android:hint="Số lượng: "
                                 android:inputType="number"
                                 android:textSize="16sp"
                                 android:drawableTint="#B8B8B8"
                                 android:drawableLeft="@drawable/ic_box"
                                 android:drawablePadding="10dp"
-                                android:layout_below="@id/goods_value"
+                                android:layout_below="@id/goods_name"
                                 android:layout_toEndOf="@id/goods_weight"
                                 android:background="@color/white"/>
 
@@ -301,26 +291,22 @@
 
             </LinearLayout>
 
-
-
-
-
-
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/add_goods"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thêm hàng hoá"
                 android:padding="10dp"
-                android:textColor="#9F5A7B"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:layout_below="@id/p"
                 android:drawableLeft="@drawable/ic_add"
-                android:drawableTint="#9F5A7B"
+                android:drawableTint="@color/light_red"
                 android:drawablePadding="5dp"
                 android:layout_centerInParent="true"
-                android:background="?android:selectableItemBackground"/>
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:textStyle="bold"
+              />
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -329,15 +315,16 @@
                 android:layout_height="40dp"
                 android:layout_below="@+id/add_goods"
                 android:text="Nhập kích thước hàng hoá"
-                android:textColor="@color/teal_700"
+                android:textColor="@color/light_red"
                 android:textAllCaps="false"
                 android:drawablePadding="10dp"
                 android:textAlignment="textStart"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:drawableEnd="@drawable/ic_right_arrow"
-                android:background="?attr/selectableItemBackground"/>
-
+                android:drawableTint="@color/light_red"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
 
             <CheckBox
                 android:id="@+id/checkBox3"
@@ -345,23 +332,21 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/acb_goods_size"
                 android:layout_marginStart="10dp"
-                android:text="Thu hộ bằng tiền hàng" />
-
-
+                android:text="Thu hộ bằng tiền hàng"
+                android:textColor="#888"/>
             <TextView
                 android:id="@+id/b_cod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
                 android:text="Quy định thanh toán COD"
-                android:textColor="#9F5A7B"
+
                 android:textAllCaps="false"
                 android:layout_below="@id/acb_goods_size"
                 android:layout_alignParentRight="true"
                 android:drawableLeft="@drawable/ic_info"
-                android:drawableTint="#9F5A7B"
-                android:drawablePadding="10dp"
-                android:background="?android:selectableItemBackground"/>
+                android:drawableTint="@color/light_red"
+                android:drawablePadding="10dp" />
 
             <EditText
                 android:id="@+id/et_thu_ho"
@@ -384,8 +369,8 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/et_thu_ho"
-                android:textColor="#9F5A7B"
-                android:textSize="15sp"
+                android:textColor="@color/light_red"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="10dp"
                 android:text="Dịch vụ" />
@@ -400,7 +385,7 @@
                 android:text="Chọn dịch vụ"
                 android:textSize="15sp"
                 android:layout_alignParentRight="true"
-                android:textColor="@color/teal_700"
+                android:textColor="#888"
                 android:textAllCaps="false"/>
 
             <TextView
@@ -408,17 +393,17 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_service"
-                android:textColor="#9F5A7B"
-                android:textSize="15sp"
+                android:textColor="@color/light_red"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="10dp"
                 android:text="Ảnh hàng hoá" />
 
             <ImageButton
                 android:id="@+id/ib_photo_choose"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="20dp"
+                android:layout_width="130dp"
+                android:layout_height="90dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_below="@id/tv_photo"
                 android:src="@drawable/ic_camera2"/>
 
@@ -427,13 +412,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="80dp"
                 android:layout_below="@id/tv_photo"
+                android:layout_marginTop="5dp"
                 android:layout_toEndOf="@id/ib_photo_choose">
                 <LinearLayout
                     android:id="@+id/linearlayout_photo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-
+                    <ImageView
+                        android:id="@+id/iv_image_package"
+                        android:layout_width="130dp"
+                        android:layout_height="90dp"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        />
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -444,50 +436,18 @@
                 android:padding="10dp"
                 android:background="?android:selectableItemBackground"
                 android:layout_below="@id/tv_service"
-                android:text="Xoá tất cả"
+                android:text="Xoá"
                 android:textSize="15sp"
                 android:layout_alignParentRight="true"
-                android:textColor="@color/teal_700"
+                android:textColor="#888"
                 android:textAllCaps="false"/>
-
-            <EditText
-                android:id="@+id/et_coupon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ib_photo_choose"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/ic_coupon"
-                android:drawablePadding="10dp"
-                android:drawableTint="#B8B8B8"
-                android:hint="Mã khuyến mại"
-                android:inputType="number"
-                android:padding="10dp"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/et_goods_id_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/et_coupon"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/ic_goods_id_number"
-                android:drawablePadding="10dp"
-                android:drawableTint="#B8B8B8"
-                android:hint="Mã đơn hàng"
-                android:inputType="number"
-                android:padding="10dp"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_general_info"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="THÔNG TIN CHUNG"
-                android:layout_below="@id/et_goods_id_number"
+                android:layout_below="@id/ib_photo_choose"
                 android:padding="10dp"
                 android:background="#E0E1E3"/>
 
@@ -612,28 +572,18 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:padding="10dp"
-                android:text="Cước phí" />
+                android:text="Phụ phí" />
             <TextView
                 android:id="@+id/tv_postage2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_note"
-                android:layout_toLeftOf="@id/tv_postage3"
+                android:layout_alignParentRight="true"
                 android:textSize="15sp"
                 android:textColor="@color/black"
                 android:padding="10dp"
-                android:text="0" />
-            <TextView
-                android:id="@+id/tv_postage3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_note"
-                android:textSize="15sp"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/black"
-                android:paddingVertical="10dp"
-                android:paddingEnd="10dp"
-                android:text="đ" />
+                android:layout_marginRight="5dp"
+                android:text="0 đ" />
 
             <TextView
                 android:id="@+id/tv_total_postage"
@@ -650,22 +600,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_postage"
-                android:layout_toLeftOf="@id/tv_total_postage3"
-                android:textSize="15sp"
-                android:textColor="#CC0000"
-                android:padding="10dp"
-                android:text="0" />
-            <TextView
-                android:id="@+id/tv_total_postage3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_postage"
-                android:textSize="15sp"
                 android:layout_alignParentRight="true"
-                android:textColor="#CC0000"
-                android:paddingVertical="10dp"
-                android:paddingEnd="10dp"
-                android:text="đ" />
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:layout_marginRight="5dp"
+                android:padding="10dp"
+                android:text="0 đ" />
 
             <CheckBox
                 android:id="@+id/checkBox4"
@@ -676,31 +616,32 @@
                 android:padding="10dp"
                 android:background="#E0E1E3"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/b_draft"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/checkBox4"
                 android:layout_margin="10dp"
                 android:letterSpacing="0"
-                android:text="lưu nháp"
-                android:backgroundTint="#B3D3EA"/>
+                android:text="Tạo đơn"
+                android:textSize="18sp"
+                android:textColor="@color/light_red"
+                android:background="@drawable/button_cancel"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/b_create"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/checkBox4"
                 android:layout_margin="10dp"
                 android:layout_toEndOf="@id/b_draft"
                 android:layout_alignParentRight="true"
                 android:letterSpacing="0"
-                android:text="tạo đơn"
-                android:backgroundTint="#9f5a7b"
-                />
-
-
-
+                android:text="Hủy"
+                android:textSize="18sp"
+                android:background="@drawable/button_cancel"
+                android:backgroundTint="@color/light_red"
+                android:textColor="@color/white"/>
         </RelativeLayout>
     </ScrollView>
 
@@ -708,8 +649,8 @@
         android:id="@+id/rl_graybg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CC000000">
-
+        android:background="#CC000000"
+        android:visibility="gone">
     </RelativeLayout>
 
     <RelativeLayout
@@ -717,7 +658,8 @@
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:background="@color/white"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+       android:visibility="gone">
 
         <TextView
             android:id="@+id/sender_title"
@@ -726,6 +668,7 @@
             android:text="Chọn kho hàng"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/light_red"
             android:padding="10dp"/>
 
         <SearchView
@@ -756,12 +699,9 @@
             android:layout_marginHorizontal="20dp"
             android:text="thêm kho mới"
             android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/red"
+            android:backgroundTint="@color/light_red"
             android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
-
-
-
 
 </RelativeLayout>

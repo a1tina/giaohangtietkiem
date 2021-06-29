@@ -7,9 +7,10 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +18,9 @@ import com.example.ghtk.R;
 import com.example.ghtk.adapter.OrderRecyclerAdapter;
 import com.example.ghtk.constant.OrderState;
 import com.example.ghtk.databinding.ActivityBillBinding;
-import com.example.ghtk.models.OrderItem;
+import com.example.ghtk.models.Order;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -32,13 +35,14 @@ public class BillActivityFragment_1 extends Fragment {
     private RecyclerView recyclerView;
     private CheckBox cbx;
     private OrderRecyclerAdapter orderRecyclerAdapter;
-    private ArrayList<OrderItem> arrayList;
-    private ArrayList<OrderItem> selectedArrayList;
+    private ArrayList<Order> arrayList;
+    private ArrayList<Order> selectedArrayList;
     private View view;
+    private ActivityBillBinding activityBillBinding;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ActivityBillBinding activityBillBinding;
+
 
     public BillActivityFragment_1(ActivityBillBinding binding) {
         // Required empty public constructor
@@ -59,7 +63,7 @@ public class BillActivityFragment_1 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_bill_activity_1, container, false);
-        LinearLayout linear = (LinearLayout) view.findViewById(R.id.linearlayout_sender);
+        LinearLayout linear = view.findViewById(R.id.linearlayout_sender);
         cbx = view.findViewById(R.id.cbx_number_order);
         //Set color for button all
         view.findViewById(R.id.btn_all).setBackgroundResource(R.drawable.button_activated);
@@ -67,9 +71,6 @@ public class BillActivityFragment_1 extends Fragment {
         //Initial recyclerview
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        initData();
-        setAdapter();
-        checkNumberOrder(view);
         listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,20 +80,44 @@ public class BillActivityFragment_1 extends Fragment {
         setListener(linear);
         return view;
     }
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initData();
+    }
+
     private void initData(){
         arrayList = new ArrayList<>();
-        arrayList.add(new OrderItem("1672014177948", "Nguyễn Thị B", "0345678910", "P.Linh Trung - Q.Thủ Đức - TP.HCM", OrderState.WAITING));
-        arrayList.add(new OrderItem("1672014177949", "Nguyễn Quốc C", "0345228350", "P.Lộc Phát - TP.Bảo Lộc - T.Lâm Đồng", OrderState.DELIVERING));
-        arrayList.add(new OrderItem("1672014177950", "Lê Thị D", "0345678252", "TT.Ma Lâm- H.Hàm Thuận Bắc - T.Bình Thuận", OrderState.DELIVERY_SUCCESS));
-        arrayList.add(new OrderItem("1672014177951", "Phạm Văn E", "0345226321", " X.La Nan - H.Đức Cơ - T.Gia Lai", OrderState.TAKEN));
+        selectedArrayList = new ArrayList<>();
+        arrayList.add(new Order("12","bao", "0123","ma lam","liem",OrderState.DELIVERING));
+        arrayList.add(new Order("1672014177949", "Nguyễn Quốc C", "0345228350", "P.Lộc Phát - TP.Bảo Lộc - T.Lâm Đồng", "khoi", OrderState.DELIVERING));
+//        arrayList.add(new Order("1672014177950", "Lê Thị D", "0345678252", "TT.Ma Lâm- H.Hàm Thuận Bắc - T.Bình Thuận", OrderState.DELIVERY_SUCCESS));
+//        arrayList.add(new Order("1672014177951", "Phạm Văn E", "0345226321", " X.La Nan - H.Đức Cơ - T.Gia Lai", OrderState.TAKEN));
         selectedArrayList = new ArrayList<>(arrayList);
-        cbx.setText(String.format("%d đơn hàng", selectedArrayList.size()));
+        setAdapter();
+        checkNumberOrder(view, arrayList);
+//        IServiceApi.apiService.GetOrderByIdSender().enqueue(new Callback<List<Order>>() {
+//            @Override
+//            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+//                List<Order> list = response.body();
+//                if(list != null && response.isSuccessful()) {
+//                    arrayList.addAll(list);
+//                    setAdapter();
+//                    checkNumberOrder(view, arrayList);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Order>> call, Throwable t) {
+//                Toast.makeText(getContext(), "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        cbx.setText(String.format("%d đơn hàng", arrayList.size()));
     }
     private void setAdapter(){
-        orderRecyclerAdapter = new OrderRecyclerAdapter(selectedArrayList, getContext(), activityBillBinding, view);
+        orderRecyclerAdapter = new OrderRecyclerAdapter(arrayList, getContext(), activityBillBinding, view);
         recyclerView.setAdapter(orderRecyclerAdapter);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(itemDecoration);
     }
     private void setListener(LinearLayout linear){
         for(int i = 0; i < linear.getChildCount(); i++){
@@ -109,7 +134,7 @@ public class BillActivityFragment_1 extends Fragment {
         btn.setBackgroundResource(R.drawable.button_activated);
         btn.setTextColor(getResources().getColor(android.R.color.white));
         if(btn.getId() == R.id.btn_all){
-            selectedArrayList = (ArrayList<OrderItem>) arrayList.clone();
+            selectedArrayList = (ArrayList<Order>) arrayList.clone();
         }
         else{
             int flag = 0;
@@ -128,19 +153,19 @@ public class BillActivityFragment_1 extends Fragment {
                 default:
                     break;
             }
-            for(OrderItem item : arrayList){
-                if(item.getState() == flag)
+            for(Order item : arrayList){
+                if(item.getTrangthai() == flag)
                     selectedArrayList.add(item);
             }
         }
         orderRecyclerAdapter.updateList(selectedArrayList);
         orderRecyclerAdapter.notifyDataSetChanged();
-        checkNumberOrder(view);
+        checkNumberOrder(view, selectedArrayList);
         cbx.setText(String.format("%d đơn hàng", selectedArrayList.size()));
     }
 
-    private void checkNumberOrder(View v){
-        if(selectedArrayList.size() > 0){
+    private void checkNumberOrder(View v, ArrayList<Order> list){
+        if(list.size() > 0){
             view.findViewById(R.id.nodata_layout).setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }

@@ -1,6 +1,7 @@
 package com.example.ghtk.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,23 +10,26 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ghtk.DetailsOrderActivity;
 import com.example.ghtk.R;
 import com.example.ghtk.databinding.ActivityBillBinding;
-import com.example.ghtk.models.OrderItem;
+import com.example.ghtk.models.Order;
 import com.example.ghtk.viewmodels.OrderViewModel;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdapter.ViewHolder>{
-    private ArrayList<OrderItem> arrayList;
+    private ArrayList<Order> arrayList;
     private Context context;
     private OrderViewModel orderViewModel;
     private boolean isEnable = false;
@@ -34,14 +38,14 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
     private ActivityBillBinding activityBillBinding;
     private View fragment_view1;
 
-    public OrderRecyclerAdapter(ArrayList<OrderItem> arrayList, Context context, ActivityBillBinding binding, View v) {
+    public OrderRecyclerAdapter(ArrayList<Order> arrayList, Context context, ActivityBillBinding binding, View v) {
         this.arrayList = arrayList;
         this.context = context;
         selectList = new ArrayList<>();
         activityBillBinding = binding;
         fragment_view1 = v;
     }
-    public void updateList(ArrayList<OrderItem> filteredList){
+    public void updateList(ArrayList<Order> filteredList){
         this.arrayList = filteredList;
     }
     @NonNull
@@ -74,12 +78,12 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
     @Override
     public void onBindViewHolder(@NonNull @NotNull OrderRecyclerAdapter.ViewHolder holder, int position) {
 
-        holder.cbx.setText(arrayList.get(position).getOrderId());
-        String name_phone = arrayList.get(position).getName() + " - " + arrayList.get(position).getPhone();
+        holder.cbx.setText(arrayList.get(position).getMadonhang());
+        String name_phone = (arrayList.get(position).getNguoigui() != null ? arrayList.get(position).getNguoigui() : arrayList.get(position).getNguoinhan()) + " - " + arrayList.get(position).getSDT();
         holder.name_phone.setText(name_phone);
-        holder.address.setText(arrayList.get(position).getAddress());
+        holder.address.setText(arrayList.get(position).getDiachinhan());
         String state;
-        switch (arrayList.get(position).getState()){
+        switch (arrayList.get(position).getTrangthai()){
             case 0: state = "Chờ lấy";
                 break;
             case 1:state = "Đã lấy";
@@ -112,31 +116,27 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
         activityBillBinding.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(String s : selectList){
-                    arrayList.removeIf(i -> (i.getOrderId() == s));
-                }
-                if(arrayList.size() == 0)
-                    fragment_view1.findViewById(R.id.nodata_layout).setVisibility(View.VISIBLE);
-                activityBillBinding.imgBtnClose.callOnClick();
-                ((CheckBox)fragment_view1.findViewById(R.id.cbx_number_order)).setText(String.format("%s đơn hàng", arrayList.size()));
-                notifyDataSetChanged();
+                View viewDialog = LayoutInflater.from(context).inflate(R.layout.confirm_botttom_sheet, null);
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+                bottomSheetDialog.setContentView(viewDialog);
+                bottomSheetDialog.show();
+                AppCompatButton btn_delete = viewDialog.findViewById(R.id.btn_confirm);
+                btn_delete.setOnClickListener(e -> {
+                    for(String s : selectList){
+                        arrayList.removeIf(i -> (i.getMadonhang() == s));
+                    }
+                    if(arrayList.size() == 0)
+                        fragment_view1.findViewById(R.id.nodata_layout).setVisibility(View.VISIBLE);
+                    activityBillBinding.imgBtnClose.callOnClick();
+                    ((CheckBox)fragment_view1.findViewById(R.id.cbx_number_order)).setText(String.format("%s đơn hàng", arrayList.size()));
+                    notifyDataSetChanged();
+                    bottomSheetDialog.dismiss();
+            });
             }
         });
         fragment_view1.findViewById(R.id.cbx_number_order).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectList.size() == arrayList.size()){
-                    isSelectAll = false;
-                    selectList.clear();
-                }
-                else{
-                    isSelectAll = true;
-                    selectList.clear();
-                    for(OrderItem item : arrayList){
-                        selectList.add(item.getOrderId());
-                    }
-                }
-                orderViewModel.setText(String.valueOf(selectList.size()));
                 if(!isEnable) {
                     isEnable = true;
                     activityBillBinding.normalLayout.setVisibility(View.GONE);
@@ -148,6 +148,17 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
                         }
                     });
                 }
+                if(isSelectAll){
+                    activityBillBinding.imgBtnClose.callOnClick();
+                }
+                else{
+                    isSelectAll = true;
+                    selectList.clear();
+                    for(Order item : arrayList){
+                        selectList.add(item.getMadonhang());
+                    }
+                }
+                orderViewModel.setText(String.valueOf(selectList.size()));
                 notifyDataSetChanged();
             }
         });
@@ -178,8 +189,8 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
 
     @Override
     public int getItemViewType(int position) {
-        OrderItem orderItem = arrayList.get(position);
-        return orderItem.getState();
+        Order order = arrayList.get(position);
+        return order.getTrangthai();
     }
 
     @Override
@@ -196,18 +207,35 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
             state = itemView.findViewById(R.id.txt_state);
             name_phone = itemView.findViewById(R.id.txt_name);
             address = itemView.findViewById(R.id.txt_address);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, DetailsOrderActivity.class);
+                    Order item = arrayList.get(getAdapterPosition());
+                    intent.putExtra("orderId", item.getMadonhang());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 
     private void clickItem(ViewHolder holder){
-        String s = arrayList.get(holder.getAdapterPosition()).getOrderId();
+        String s = arrayList.get(holder.getAdapterPosition()).getMadonhang();
         if(holder.cbx.isChecked() == false){
             selectList.remove(s);
         }else {
             selectList.add(s);
         }
-        if(selectList.size() == arrayList.size())
-            ((CheckBox)fragment_view1.findViewById(R.id.cbx_number_order)).setChecked(true);
+        if(selectList.size() == arrayList.size()) {
+            ((CheckBox) fragment_view1.findViewById(R.id.cbx_number_order)).setChecked(true);
+            isSelectAll = true;
+        }
+        else if(selectList.size() == 0){
+            activityBillBinding.imgBtnClose.callOnClick();
+        }else{
+            ((CheckBox)fragment_view1.findViewById(R.id.cbx_number_order)).setChecked(false);
+            isSelectAll = false;
+        }
         orderViewModel.setText(String.valueOf(selectList.size()));
     }
 }

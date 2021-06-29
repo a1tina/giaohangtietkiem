@@ -20,7 +20,7 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:textAlignment="center"
-            android:background="@color/teal_700"
+            android:background="#EC4C50"
             android:paddingBottom="20dp"
             android:paddingTop="50dp"/>
         <ImageButton
@@ -46,7 +46,7 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:paddingStart="60dp"
-                android:background="@color/teal_700"
+                android:background="@color/light_red"
                 android:paddingBottom="20dp"
                 android:paddingTop="50dp"/>
             <ImageButton
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_delete"
-                android:background="@color/teal_700"
+                android:background="@color/light_red"
                 app:tint="@color/white"
                 android:layout_alignRight="@id/select_title"
                 android:layout_marginTop="45dp"
@@ -74,8 +74,8 @@
             android:id="@+id/tablayout_bill"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabSelectedTextColor="@color/teal_700"
-            app:tabIndicatorColor="@color/teal_700"
+            app:tabSelectedTextColor="#EC4C50"
+            app:tabIndicatorColor="#EC4C50"
             app:tabTextAppearance="@style/AppTabTextApprance"
         />
     <androidx.viewpager.widget.ViewPager

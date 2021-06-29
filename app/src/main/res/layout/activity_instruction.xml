@@ -11,7 +11,7 @@
         android:id="@+id/tv_instruction_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#9F5A7B"
+        android:background="@color/light_red"
         android:text="Hướng dẫn sử dụng"
         android:paddingTop="50dp"
         android:paddingBottom="20dp"
@@ -55,7 +55,8 @@
                 android:padding="5dp"
                 android:drawablePadding="10dp"
                 app:drawableStartCompat="@drawable/ic_home"
-                app:drawableEndCompat="@drawable/ic_forward" />
+                app:drawableEndCompat="@drawable/ic_forward"
+                android:drawableTint="@color/light_red"/>
 
 
         </RelativeLayout>

@@ -57,7 +57,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/username_right"
-                    android:fontFamily="@font/open_sans"/>
+                    android:fontFamily="@font/open_sans"
+                   />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -77,7 +78,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:fontFamily="@font/open_sans"/>
+                    android:fontFamily="@font/open_sans"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

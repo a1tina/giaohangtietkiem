@@ -14,7 +14,7 @@
         android:layout_marginTop="100dp"
         android:text="Đăng ký tài khoản"
         android:textAlignment="center"
-        android:textColor="@color/color9F5A7B"
+        android:textColor="@color/light_red"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -107,7 +107,7 @@
         android:layout_below="@id/progressbar"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/color9F5A7B"
+        android:backgroundTint="@color/light_red"
         />
 
     <TextView

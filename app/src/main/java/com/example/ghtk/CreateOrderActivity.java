@@ -1,19 +1,10 @@
 package com.example.ghtk;
 
-import androidx.annotation.LongDef;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.loader.content.CursorLoader;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.media.Image;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.SpannableString;
@@ -24,7 +15,6 @@ import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -34,8 +24,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.example.ghtk.tools.NoLimitScreen;
-import com.google.android.material.card.MaterialCardView;
 
 public class CreateOrderActivity extends AppCompatActivity {
 
@@ -103,7 +97,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         String text2 = "Xem thêm quy định";
         String text3 = "Quy định thanh toán COD";
         String text4 = "Chọn dịch vụ";
-        String text5 = "Xoá tất cả";
+        String text5 = "Xoá";
         String text6 = "Thêm hàng hoá";
 
         SpannableString ss = new SpannableString(text);
@@ -153,7 +147,7 @@ public class CreateOrderActivity extends AppCompatActivity {
             @Override
             public void updateDrawState(@NonNull TextPaint ds) {
                 super.updateDrawState(ds);
-                ds.setColor(Color.rgb(159, 90, 123));
+                ds.setColor(getResources().getColor(R.color.light_red));
                 ds.setUnderlineText(false);
             }
         };
@@ -183,7 +177,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         ClickableSpan clickableSpan5 = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                startActivity(new Intent(CreateOrderActivity.this, RegulationActivity.class));
+                ((ImageView)findViewById(R.id.iv_image_package)).setImageBitmap(null);;
             }
 
             @Override
@@ -193,7 +187,7 @@ public class CreateOrderActivity extends AppCompatActivity {
                 ds.setUnderlineText(false);
             }
         };
-        ss.setSpan(clickableSpan5, 0,10, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(clickableSpan5, 0,3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         bPhotoDelAll.setText(ss);
         bPhotoDelAll.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -209,7 +203,7 @@ public class CreateOrderActivity extends AppCompatActivity {
             @Override
             public void updateDrawState(@NonNull TextPaint ds) {
                 super.updateDrawState(ds);
-                ds.setColor(Color.rgb(159, 90, 123));
+                ds.setColor(getResources().getColor(R.color.light_red));
                 ds.setUnderlineText(false);
             }
         };
@@ -229,13 +223,10 @@ public class CreateOrderActivity extends AppCompatActivity {
 
         //Thêm hình ảnh
         iBPhotoChoose.setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Title"), SELECT_IMAGE_CODE);
-            ImageView imageView = new ImageView(CreateOrderActivity.this);
-            imageView.setImageURI(uri);
-            addView(imageView, 300, LinearLayout.LayoutParams.MATCH_PARENT);
+              Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+              if(intent.resolveActivity(getPackageManager()) != null){
+                  startActivityForResult(intent, SELECT_IMAGE_CODE);
+              }
         });
     }
 
@@ -244,8 +235,11 @@ public class CreateOrderActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 1){
-            uri = data.getData();
+        if(requestCode == SELECT_IMAGE_CODE && resultCode == RESULT_OK){
+            //uri = data.getData();
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ((ImageView)findViewById(R.id.iv_image_package)).setImageBitmap(imageBitmap);
         }
     }
 
