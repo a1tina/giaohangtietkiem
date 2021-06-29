@@ -43,6 +43,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,6 +64,16 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     private static final String TAG = "GOOGLE_SIGN_IN_TAG";
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    //"(?=.*[0-9])" +         //at least 1 digit
+                    //"(?=.*[a-z])" +         //at least 1 lower case letter
+                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{8,}" +               //at least 8 characters
+                    "$");
 
 
     @Override
@@ -78,6 +89,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
         binding.bLogin.setOnClickListener(v -> {
+            if(!validateEmail() | !validatePassword()){
+                return;
+            }
             normalLogin();
         });
 
@@ -229,7 +243,39 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
     }
+
+    private boolean validateEmail(){
+        String emailInput = binding.textInputLayoutEmail.getEditText().getText().toString().trim();
+        if(emailInput.isEmpty()){
+            binding.textInputLayoutEmail.setError("Email không được để trống");
+            return false;
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()){
+            binding.textInputLayoutEmail.setError("Vui lòng điền đúng định dạng email");
+            return false;
+        }
+        else {
+            binding.textInputLayoutEmail.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validatePassword(){
+        String passwordInput = binding.textInputLayoutPassword.getEditText().getText().toString().trim();
+        if(passwordInput.isEmpty()){
+            binding.textInputLayoutPassword.setError("Không được để trống mật khẩu!");
+            return false;
+        }else if(!PASSWORD_PATTERN.matcher(passwordInput).matches()){
+            binding.textInputLayoutPassword.setError("Mật khẩu phải có ít nhất 8 kí tự, bao gồm ít nhất 1 kí tự đặc biệt và không có khoảng trắng");
+            return false;
+        }
+        else {
+            binding.textInputLayoutPassword.setError(null);
+            return true;
+        }
+    }
+
 }
 
 
