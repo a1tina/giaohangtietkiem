@@ -57,15 +57,15 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
         Drawable stateDrawable = textView.getBackground();
         stateDrawable = DrawableCompat.wrap(stateDrawable);
         switch (viewType){
-            case 1: DrawableCompat.setTint(stateDrawable, 0xFFCC0000);
+            case 2: DrawableCompat.setTint(stateDrawable, 0xFFCC0000);
                 break;
-            case 2: DrawableCompat.setTint(stateDrawable, 0xFFFFBB7F);
+            case 3: DrawableCompat.setTint(stateDrawable, 0xFFFFBB7F);
                 break;
-            case 3: DrawableCompat.setTint(stateDrawable, 0xFF00ad14);
+            case 4: DrawableCompat.setTint(stateDrawable, 0xFF00ad14);
                 break;
-            case 4: DrawableCompat.setTint(stateDrawable, 0xFFff7b00);
+            case 5: DrawableCompat.setTint(stateDrawable, 0xFFff7b00);
                 break;
-            case 5: DrawableCompat.setTint(stateDrawable, 0xFF4762ff);
+            case 6: DrawableCompat.setTint(stateDrawable, 0xFF4762ff);
                 break;
             default:
                 break;
@@ -84,17 +84,17 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
         holder.address.setText(arrayList.get(position).getDiachinhan());
         String state;
         switch (arrayList.get(position).getTrangthai()){
-            case 0: state = "Chờ lấy";
+            case 1: state = "Chờ lấy";
                 break;
-            case 1:state = "Đã lấy";
+            case 2:state = "Đã lấy";
                 break;
-            case 2:state = "Đang giao";
+            case 3:state = "Đang giao";
                 break;
-            case 3: state = "Giao thành công";
+            case 4: state = "Giao thành công";
                 break;
-            case 4: state = "Đang duyệt hoàn";
+            case 5: state = "Đang duyệt hoàn";
                 break;
-            case 5: state = "Hoàn thành công";
+            case 6: state = "Hoàn thành công";
                 break;
             default: state = "";
                 break;

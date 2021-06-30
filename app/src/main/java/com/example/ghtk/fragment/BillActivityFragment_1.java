@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,13 +17,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ghtk.R;
 import com.example.ghtk.adapter.OrderRecyclerAdapter;
-import com.example.ghtk.constant.OrderState;
+import com.example.ghtk.api.IServiceApi;
 import com.example.ghtk.databinding.ActivityBillBinding;
 import com.example.ghtk.models.Order;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class BillActivityFragment_1 extends Fragment {
@@ -90,29 +96,26 @@ public class BillActivityFragment_1 extends Fragment {
     private void initData(){
         arrayList = new ArrayList<>();
         selectedArrayList = new ArrayList<>();
-        arrayList.add(new Order("12","bao", "0123","ma lam","liem",OrderState.DELIVERING));
-        arrayList.add(new Order("1672014177949", "Nguyễn Quốc C", "0345228350", "P.Lộc Phát - TP.Bảo Lộc - T.Lâm Đồng", "khoi", OrderState.DELIVERING));
+//        arrayList.add(new Order("12","bao", "0123","ma lam","liem",OrderState.DELIVERING));
+ //       arrayList.add(new Order("1672014177949", "Nguyễn Quốc C", "0345228350", "P.Lộc Phát - TP.Bảo Lộc - T.Lâm Đồng", "khoi", OrderState.DELIVERING));
 //        arrayList.add(new Order("1672014177950", "Lê Thị D", "0345678252", "TT.Ma Lâm- H.Hàm Thuận Bắc - T.Bình Thuận", OrderState.DELIVERY_SUCCESS));
 //        arrayList.add(new Order("1672014177951", "Phạm Văn E", "0345226321", " X.La Nan - H.Đức Cơ - T.Gia Lai", OrderState.TAKEN));
-        selectedArrayList = new ArrayList<>(arrayList);
-        setAdapter();
-        checkNumberOrder(view, arrayList);
-//        IServiceApi.apiService.GetOrderByIdSender().enqueue(new Callback<List<Order>>() {
-//            @Override
-//            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-//                List<Order> list = response.body();
-//                if(list != null && response.isSuccessful()) {
-//                    arrayList.addAll(list);
-//                    setAdapter();
-//                    checkNumberOrder(view, arrayList);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Order>> call, Throwable t) {
-//                Toast.makeText(getContext(), "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        IServiceApi.apiService.GetOrderByIdSender().enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                List<Order> list = response.body();
+                if(list != null && response.isSuccessful()) {
+                    arrayList.addAll(list);
+                    setAdapter();
+                    checkNumberOrder(view, arrayList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Toast.makeText(getContext(), "Có lỗi xảy ra" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
         cbx.setText(String.format("%d đơn hàng", arrayList.size()));
     }
     private void setAdapter(){
@@ -137,18 +140,18 @@ public class BillActivityFragment_1 extends Fragment {
             selectedArrayList = (ArrayList<Order>) arrayList.clone();
         }
         else{
-            int flag = 0;
+            int flag = 1;
             selectedArrayList.clear();
             switch (btn.getId()){
-                case R.id.btn_got: flag = 1;
+                case R.id.btn_got: flag = 2;
                     break;
-                case R.id.btn_delivering: flag = 2;
+                case R.id.btn_delivering: flag = 3;
                     break;
-                case R.id.btn_success: flag = 3;
+                case R.id.btn_success: flag = 4;
                     break;
-                case R.id.btn_wait_return: flag = 4;
+                case R.id.btn_wait_return: flag = 5;
                     break;
-                case R.id.btn_returned: flag = 5;
+                case R.id.btn_returned: flag = 6;
                     break;
                 default:
                     break;

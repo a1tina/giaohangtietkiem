@@ -138,14 +138,14 @@ public class BillActivityFragment_2 extends Fragment {
             selectedArrayList = (ArrayList<Order>) arrayList.clone();
         }
         else{
-            int flag = 2;
+            int flag = 3;
             selectedArrayList.clear();
             switch (btn.getId()){
-                case R.id.btn_success: flag = 3;
+                case R.id.btn_success: flag = 4;
                     break;
-                case R.id.btn_wait_return: flag = 4;
+                case R.id.btn_wait_return: flag = 5;
                     break;
-                case R.id.btn_returned: flag = 5;
+                case R.id.btn_returned: flag = 6;
                     break;
                 default:
                     break;

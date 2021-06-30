@@ -578,13 +578,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_note"
-                android:layout_alignParentRight="true"
+                android:layout_toLeftOf="@id/tv_postage4"
                 android:textSize="15sp"
                 android:textColor="@color/black"
                 android:padding="10dp"
-                android:layout_marginRight="5dp"
-                android:text="0 đ" />
-
+                android:layout_marginRight="1dp"
+                android:text="0" />
+            <TextView
+                android:id="@+id/tv_postage4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_note"
+                android:layout_alignParentRight="true"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:paddingVertical="10dp"
+                android:layout_marginRight="15dp"
+                android:text="đ" />
             <TextView
                 android:id="@+id/tv_total_postage"
                 android:layout_width="120dp"
@@ -600,12 +610,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_postage"
+                android:layout_toLeftOf="@id/tv_total_postage5"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:layout_marginRight="1dp"
+                android:padding="10dp"
+                android:text="98000" />
+            <TextView
+                android:id="@+id/tv_total_postage5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_postage"
                 android:layout_alignParentRight="true"
                 android:textSize="15sp"
                 android:textColor="@color/black"
-                android:layout_marginRight="5dp"
-                android:padding="10dp"
-                android:text="98000 đ" />
+                android:paddingVertical="10dp"
+                android:layout_marginRight="15dp"
+                android:text="đ" />
 
             <CheckBox
                 android:id="@+id/checkBox4"

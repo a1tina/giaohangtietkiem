@@ -1,7 +1,9 @@
 package com.example.ghtk;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,21 +30,31 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.ghtk.api.IServiceApi;
+import com.example.ghtk.models.Customer;
 import com.example.ghtk.models.PackageInfo;
 import com.example.ghtk.tools.NoLimitScreen;
-
-import org.xmlpull.v1.XmlPullParser;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.MultipartBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateOrderActivity extends AppCompatActivity {
 
     private static final String TAG = "IN_CREATE_ORDER_ACTIVITY_TAG";
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 2;
 
     RelativeLayout rlSenderEdit, rlMainLayout, rlGrayBg;
 
@@ -82,6 +94,32 @@ public class CreateOrderActivity extends AppCompatActivity {
         rlSenderEdit.setVisibility(RelativeLayout.GONE);
         rlGrayBg.setVisibility(RelativeLayout.GONE);
 
+        //Request permission
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_CONTACTS)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_CONTACTS},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
         iBBack.setOnClickListener(v -> finish());
 
         //Tạo đơn
@@ -245,38 +283,80 @@ public class CreateOrderActivity extends AppCompatActivity {
     }
 
     private void callApi() {
-//        if(imageBitmap == null){
-//            Toast.makeText(CreateOrderActivity.this, "Bạn chưa chụp ảnh", Toast.LENGTH_SHORT).show();
-//            return;
+        if(imageBitmap == null){
+            Toast.makeText(CreateOrderActivity.this, "Bạn chưa chụp ảnh", Toast.LENGTH_SHORT).show();
+            return;
+        }
+//        String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+//        OutputStream outStream = null;
+//        // String temp = null;
+//        File file = new File(extStorageDirectory, "temp.png");
+//        if (file.exists()) {
+//            file.delete();
+//            file = new File(extStorageDirectory, "temp.png");
 //        }
-        File file = savebitmap(imageBitmap);
+//        try {
+//            outStream = new FileOutputStream(file);
+//            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+//            outStream.flush();
+//            outStream.close();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         getDataDSHH();
-        Toast.makeText(CreateOrderActivity.this, packageInfoList.get(0).getTensp(), Toast.LENGTH_SHORT).show();
-//        String diachinhan = ((EditText)findViewById(R.id.et_receiver_address)).getText().toString().trim();
-//        String diachigui = ((TextView)findViewById(R.id.tv_sender_info)).getText().toString().trim();
-//        String chiphi = ((TextView)findViewById(R.id.tv_total_postage2)).getText().toString().trim();
-////        RequestBody requestBodyDSHH = RequestBody.create(MediaType.parse("multipart/form-data"), );
-////        RequestBody requestBodyKHN = RequestBody.create(MediaType.parse("multipart/form-data"), );
+        String diachinhan = ((EditText)findViewById(R.id.et_receiver_address)).getText().toString().trim();
+        String diachigui = ((TextView)findViewById(R.id.tv_sender_info)).getText().toString().trim();
+        String chiphi = ((TextView)findViewById(R.id.tv_total_postage2)).getText().toString().trim();
+        String tennguoinhan = ((EditText)findViewById(R.id.et_receiver_name)).getText().toString().trim();
+        String sdtnhan = ((EditText)findViewById(R.id.et_receiver_phone)).getText().toString().trim();
+        Customer customer = new Customer(tennguoinhan, sdtnhan);
+        Gson gson = new GsonBuilder().setLenient().create();
+        String json_package_list = gson.toJson(packageInfoList);
+        String json_customer = gson.toJson(customer);
+        Log.d("JSON JSON JSON", json_package_list);
+//        RequestBody requestBodyDSHH = RequestBody.create(MediaType.parse("multipart/form-data"), json_package_list);
+//        RequestBody requestBodyKHN = RequestBody.create(MediaType.parse("multipart/form-data"), json_customer);
 //        RequestBody requestBodyDCN = RequestBody.create(MediaType.parse("multipart/form-data"), diachinhan);
 //        RequestBody requestBodyCP = RequestBody.create(MediaType.parse("multipart/form-data"), chiphi);
 //        RequestBody requestBodyDCG = RequestBody.create(MediaType.parse("multipart/form-data"), diachigui);
-//        RequestBody requestBodyImage = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-//        MultipartBody.Part multipartImage = MultipartBody.Part.createFormData("image", file.getName(), requestBodyImage);
-//        IServiceApi.apiService.PostCreateOrder();
+        // requestBodyImage = RequestBody.create(MediaType.parse("multipart/form-data"), (byte[]) null);
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+        builder.addFormDataPart("diachinhan", diachinhan);
+        builder.addFormDataPart("diachidi", diachigui);
+        builder.addFormDataPart("dshanghoa[][tensp]", packageInfoList.get(0).getTensp());
+        builder.addFormDataPart("dshanghoa[][cannang]", packageInfoList.get(0).getCannang().toString());
+        builder.addFormDataPart("dshanghoa[][soluong]", String.valueOf(packageInfoList.get(0).getSoluong()));
+        builder.addFormDataPart("khnhan[name]", tennguoinhan);
+        builder.addFormDataPart("khnhan[sdt]", sdtnhan);
+        MultipartBody mul = builder.build();
+        Toast.makeText(CreateOrderActivity.this, "Đang gửi đi", Toast.LENGTH_SHORT).show();
+        IServiceApi.apiService.PostCreateOrder(mul).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                    Toast.makeText(CreateOrderActivity.this, "Tạo đơn thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateOrderActivity.this, response.body(), Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(CreateOrderActivity.this, "Co loi xay ra" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("LOI LOI LOI", t.getMessage());
+            }
+        });
     }
 
     private void getDataDSHH() {
-        for(int i = 0; i < p.getChildCount(); i++){
-            View v = getLayoutInflater().inflate((XmlPullParser) p.getChildAt(i), null);
-            EditText vname = v.findViewById(R.id.goods_name);
-            EditText vweight = v.findViewById(R.id.goods_weight);
-            EditText vquantity = v.findViewById(R.id.goods_quantity);
+            packageInfoList = new ArrayList<>();
+            EditText vname = (EditText)findViewById(R.id.goods_name);
+            EditText vweight = (EditText)findViewById(R.id.goods_weight);
+            EditText vquantity = (EditText)findViewById(R.id.goods_quantity);
             String name = vname.getText().toString().trim();
             String weight = vweight.getText().toString().trim();
             String quantity = vquantity.getText().toString().trim();
             PackageInfo packageInfo = new PackageInfo(name, Float.parseFloat(weight), Integer.parseInt(quantity));
             packageInfoList.add(packageInfo);
-        }
+
     }
 
 
@@ -321,5 +401,15 @@ public class CreateOrderActivity extends AppCompatActivity {
         }
         return file;
     }
+
+//    private View getEditText(ViewGroup group, int idEditText){
+//        for(int i = 1; i < group.getChildCount(); i++){
+//            if(group.getChildAt(i) instanceof ViewGroup)
+//                getEditText((ViewGroup) group.getChildAt(i), idEditText);
+//            if(group.getChildAt(i).getId() == idEditText)
+//                return group.getChildAt(i);
+//        }
+//
+//    }
 
 }
