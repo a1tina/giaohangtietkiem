@@ -37,7 +37,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("users/update")
-    Call<LoginResult> updateProfile(
+    Call<Customer> updateProfile(
             @Header("x_authorization") String accessToken,
             @Field("name") String name,
             @Field("phone") String phone,

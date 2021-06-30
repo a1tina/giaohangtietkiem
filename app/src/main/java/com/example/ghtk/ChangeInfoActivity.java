@@ -91,9 +91,24 @@ public class ChangeInfoActivity extends AppCompatActivity {
         LoginResult loginResult = SharedPrefManager.getInstance(this).getUser();
         String accessToken = loginResult.getAccessToken();
 
-        Call<LoginResult> call = ApiClient
+        Call<Customer> call = ApiClient
                 .getInstance().getApi().updateProfile(accessToken, name, phone, address);
-        call.enqueue(new Callback<LoginResult>() {
+        call.enqueue(new Callback<Customer>() {
+            @Override
+            public void onResponse(Call<Customer> call, Response<Customer> response) {
+                Customer customer = response.body();
+                SharedPrefManager.getInstance(ChangeInfoActivity.this)
+                        .saveProfile(customer.getProfile());
+            }
+
+            @Override
+            public void onFailure(Call<Customer> call, Throwable t) {
+                Toast.makeText(ChangeInfoActivity.this, "Cập nhật thông tin thất bại", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+                /*(new Callback<LoginResult>() {
             @Override
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                 LoginResult loginResult1 = response.body();
@@ -107,6 +122,8 @@ public class ChangeInfoActivity extends AppCompatActivity {
 
             }
         });
+
+                 */
 
 
 

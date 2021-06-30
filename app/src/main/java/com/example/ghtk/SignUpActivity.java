@@ -130,19 +130,21 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                 LoginResult loginResult = response.body();
-                Call<LoginResult> call2 = ApiClient
+                Call<Customer> call2 = ApiClient
                         .getInstance()
                         .getApi()
-                        .updateProfile(loginResult.getAccessToken(), fullname, "Chưa đăng kí SĐT", "Chưa đăng ký địa chỉ");
-                call2.enqueue(new Callback<LoginResult>() {
+                        .updateProfile(loginResult.getAccessToken(), fullname, "0123456789", "TPHCM");
+                call2.enqueue(new Callback<Customer>() {
                     @Override
-                    public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+                    public void onResponse(Call<Customer> call, Response<Customer> response) {
+                        Customer customer = response.body();
                         SharedPrefManager.getInstance(SignUpActivity.this)
-                                .saveUser(loginResult.getUser());
+                                .saveProfile(customer.getProfile());
                     }
 
                     @Override
-                    public void onFailure(Call<LoginResult> call, Throwable t) {
+                    public void onFailure(Call<Customer> call, Throwable t) {
+
                     }
                 });
 
