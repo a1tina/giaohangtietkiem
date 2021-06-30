@@ -335,8 +335,11 @@ public class CreateOrderActivity extends AppCompatActivity {
         IServiceApi.apiService.PostCreateOrder(mul).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()) {
                     Toast.makeText(CreateOrderActivity.this, "Tạo đơn thành công", Toast.LENGTH_SHORT).show();
                     Toast.makeText(CreateOrderActivity.this, response.body(), Toast.LENGTH_SHORT).show();
+                }
+
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {

@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
-import okhttp3.RequestBody;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -19,16 +19,16 @@ public interface IServiceApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     IServiceApi apiService = new Retrofit.Builder()
-            .baseUrl("http://192.168.1.5:9999")
+            .baseUrl("https://logistic-backend.herokuapp.com")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(IServiceApi.class);
 
-    @Headers("x_authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjoibGllbTFAZ21haWwuY29tIn0sImlhdCI6MTYyNTAyOTgwNSwiZXhwIjoxNjI1MTE2MjA1fQ.BJD2g-M5EnCKZbgGogsyQDqW8waRWCJvnppF6ST0uyI")
+    @Headers("x_authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjoibGllbTFAZ21haWwuY29tIn0sImlhdCI6MTYyNTAzMzQzMCwiZXhwIjoxNjI1MTE5ODMwfQ.Yn7dp5r92g3SLKyGGn_TjJs31KYrpdTVv0z1ArLTerg")
     @GET("/order/send")
     Call<List<Order>> GetOrderByIdSender();
 
-    @Headers("x_authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjoibGllbTFAZ21haWwuY29tIn0sImlhdCI6MTYyNTAyOTgwNSwiZXhwIjoxNjI1MTE2MjA1fQ.BJD2g-M5EnCKZbgGogsyQDqW8waRWCJvnppF6ST0uyI")
+    @Headers("x_authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjoibGllbTFAZ21haWwuY29tIn0sImlhdCI6MTYyNTAzMzQzMCwiZXhwIjoxNjI1MTE5ODMwfQ.Yn7dp5r92g3SLKyGGn_TjJs31KYrpdTVv0z1ArLTerg")
     @GET("/order/receive")
     Call<List<Order>> GetOrderByIdReceiver();
 
@@ -41,7 +41,7 @@ public interface IServiceApi {
 //                                 @Part("chiphi") RequestBody fee,
 //                                 @Part("diachidi") RequestBody send_address);
 
-    @Headers("x_authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjoibGllbTFAZ21haWwuY29tIn0sImlhdCI6MTYyNTAyOTgwNSwiZXhwIjoxNjI1MTE2MjA1fQ.BJD2g-M5EnCKZbgGogsyQDqW8waRWCJvnppF6ST0uyI")
+    @Headers("x_authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjoibGllbTFAZ21haWwuY29tIn0sImlhdCI6MTYyNTAzMzQzMCwiZXhwIjoxNjI1MTE5ODMwfQ.Yn7dp5r92g3SLKyGGn_TjJs31KYrpdTVv0z1ArLTerg")
     @POST("/order/create")
-    Call<String> PostCreateOrder(@Body RequestBody body);
+    Call<String> PostCreateOrder(@Body MultipartBody body);
 }
