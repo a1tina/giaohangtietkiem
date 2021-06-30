@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     android:id="@+id/rl_mainCreateOrderLayout"
     tools:context=".CreateOrderActivity">
@@ -18,6 +18,7 @@
         android:paddingBottom="20dp"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:paddingHorizontal="160dp"
         android:textColor="@color/white"
         android:textAlignment="center"/>
     <ImageButton
@@ -69,14 +70,20 @@
                 android:text="Gửi tại bưu cục"
                 android:textColor="#888"/>
 
-            <TextView
-                android:id="@+id/tv_sender_info"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/et_sender_address"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_create_order_sender_name"
-                android:text="Bình Thuận"
+                android:ems="10"
+                android:hint="Địa chỉ ngưởi gửi"
+                android:inputType="textPostalAddress"
                 android:textSize="15sp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:drawableStart="@drawable/ic_location"
+                android:drawableTint="#B8B8B8"
+                android:drawablePadding="10dp"
+                android:background="@color/white"/>
             <ImageButton
                 android:id="@+id/ib_edit"
                 android:layout_width="wrap_content"
@@ -92,11 +99,11 @@
                 android:id="@+id/tv_create_order_receiver_name"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_sender_info"
                 android:textColor="@color/light_red"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="10dp"
+                android:layout_below="@id/et_sender_address"
                 android:text="Người nhận" />
 
             <EditText
@@ -104,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:layout_below="@id/tv_sender_info"
+                android:layout_below="@id/et_sender_address"
                 android:layout_toEndOf="@id/tv_create_order_receiver_name"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
@@ -168,7 +175,7 @@
                 android:textSize="16sp"
                 android:inputType="textPostalAddress"
                 android:hint="Địa chỉ nhà/cơ quan"
-                android:drawableLeft="@drawable/ic_location"
+                android:drawableStart="@drawable/ic_location"
                 android:drawableTint="#B8B8B8"
                 android:drawablePadding="10dp"
                 android:background="@color/white"/>
@@ -179,8 +186,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_create_order_receiver_address"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="-22dp"
                 android:text="Nhận tại bưu cục"
-                android:textColor="#888"/>
+                android:textColor="#888" />
 
             <TextView
                 android:id="@+id/tv_create_order_goods_service"
@@ -462,16 +470,6 @@
                 android:textStyle="bold"
                 android:padding="10dp"
                 android:text="Người trả tiền cước" />
-            <TextView
-                android:id="@+id/tv_freight_payer_choose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_general_info"
-                android:layout_toLeftOf="@id/b_freight_payer_change"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:paddingVertical="10dp"
-                android:text="Người gửi" />
 
             <Button
                 android:id="@+id/b_freight_payer_change"
@@ -483,6 +481,7 @@
                 android:layout_marginRight="0dp"
                 android:background="?android:selectableItemBackground"
                 android:letterSpacing="0"
+                android:fontFamily="@font/open_sans"
                 android:text="Sửa"
                 android:textAllCaps="false"
                 android:textColor="@color/teal_700"
@@ -515,11 +514,11 @@
                 android:layout_width="60dp"
                 android:layout_height="35dp"
                 android:layout_below="@id/tv_freight_payer"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="1dp"
-                android:layout_marginRight="0dp"
                 android:background="?android:selectableItemBackground"
                 android:letterSpacing="0"
+                android:fontFamily="@font/open_sans"
                 android:text="Sửa"
                 android:textAllCaps="false"
                 android:textColor="@color/teal_700"
@@ -541,7 +540,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_delivery_time"
-                android:layout_toLeftOf="@id/b_note_change"
+                android:layout_toStartOf="@id/b_note_change"
                 android:textSize="15sp"
                 android:textColor="@color/black"
                 android:paddingVertical="10dp"
@@ -552,11 +551,11 @@
                 android:layout_width="60dp"
                 android:layout_height="35dp"
                 android:layout_below="@id/tv_delivery_time"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="1dp"
-                android:layout_marginRight="0dp"
                 android:background="?android:selectableItemBackground"
                 android:letterSpacing="0"
+                android:fontFamily="@font/open_sans"
                 android:text="Sửa"
                 android:textAllCaps="false"
                 android:textColor="@color/teal_700"
@@ -655,6 +654,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/checkBox4"
                 android:layout_margin="10dp"
+
                 android:layout_toEndOf="@id/b_create"
                 android:layout_alignParentRight="true"
                 android:letterSpacing="0"

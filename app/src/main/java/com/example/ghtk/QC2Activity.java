@@ -1,12 +1,12 @@
 package com.example.ghtk;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class QC2Activity extends AppCompatActivity {
     WebView webViewContent;

@@ -10,6 +10,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.ghtk.databinding.ActivityMainBinding;
 import com.example.ghtk.fragment.FourthFragment;
+import com.example.ghtk.storage.SharedPrefManager;
 import com.example.ghtk.tools.NoLimitScreen;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        NoLimitScreen.apply(this);
+
         setContentView(binding.getRoot());
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.getMenu().getItem(2).setEnabled(false);
@@ -35,20 +36,22 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
+
     }
 
 
     private void checkUser() {
         //get current user
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        if (firebaseUser == null && getIntent().getStringExtra("hasLoggedIn") == null) {
+        if (firebaseUser == null && !SharedPrefManager.getInstance(this).isLoggedIn()) {
             //user not logged in
-            startActivity(new Intent(this, LoginActivity.class));
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             finish();
         } else {
             //user logged in
-            String value = "OK";
-            getIntent().putExtra("hasLoggedIn", value);
+            getIntent().putExtra("hasLoggedIn", true);
         }
     }
 

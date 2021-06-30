@@ -1,14 +1,21 @@
 package com.example.ghtk;
 
+
 import android.Manifest;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+
+import android.net.Uri;
+import android.os.Bundle;
+
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -30,6 +37,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -50,6 +58,11 @@ import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import androidx.core.content.ContextCompat;
+
+import com.example.ghtk.tools.NoLimitScreen;
+
 
 public class CreateOrderActivity extends AppCompatActivity {
 
@@ -90,6 +103,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         linearLayoutAddGoods = findViewById(R.id.linearlayout_add_goods);
         p = findViewById(R.id.p);
         iBBack = findViewById(R.id.ibBack);
+
 
         rlSenderEdit.setVisibility(RelativeLayout.GONE);
         rlGrayBg.setVisibility(RelativeLayout.GONE);
@@ -306,7 +320,7 @@ public class CreateOrderActivity extends AppCompatActivity {
 //        }
         getDataDSHH();
         String diachinhan = ((EditText)findViewById(R.id.et_receiver_address)).getText().toString().trim();
-        String diachigui = ((TextView)findViewById(R.id.tv_sender_info)).getText().toString().trim();
+        String diachigui = ((EditText)findViewById(R.id.et_sender_address)).getText().toString().trim();
         String chiphi = ((TextView)findViewById(R.id.tv_total_postage2)).getText().toString().trim();
         String tennguoinhan = ((EditText)findViewById(R.id.et_receiver_name)).getText().toString().trim();
         String sdtnhan = ((EditText)findViewById(R.id.et_receiver_phone)).getText().toString().trim();

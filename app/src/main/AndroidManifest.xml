@@ -17,9 +17,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ghtk"
+<<<<<<< HEAD
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true">
         <activity android:name=".DetailsOrderActivity"></activity>
+=======
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ChangeInfoActivity"></activity>
+>>>>>>> master
         <activity android:name=".BillActivity" />
         <activity android:name=".QC4Activity" />
         <activity android:name=".QC3Activity" />

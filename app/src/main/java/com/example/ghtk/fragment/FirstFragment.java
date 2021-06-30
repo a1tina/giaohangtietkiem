@@ -15,6 +15,8 @@ import com.example.ghtk.ContactActivity;
 import com.example.ghtk.CreateOrderActivity;
 import com.example.ghtk.QC1Activity;
 import com.example.ghtk.QC2Activity;
+import com.example.ghtk.QC3Activity;
+import com.example.ghtk.QC4Activity;
 import com.example.ghtk.R;
 import com.example.ghtk.WarehouseActivity;
 
@@ -87,6 +89,12 @@ public class FirstFragment extends Fragment {
         TextView tvQC1 = view.findViewById(R.id.textView9);
         ImageButton ibQC2 = view.findViewById(R.id.imageButton9);
         TextView tvQC2 = view.findViewById(R.id.textView10);
+        ImageButton ibQC3 = view.findViewById(R.id.imageButton10);
+        TextView tvQC3 = view.findViewById(R.id.textView11);
+        ImageButton ibQC4 = view.findViewById(R.id.imageButton11);
+        TextView tvQC4 = view.findViewById(R.id.textView12);
+
+        TextView tv2 = view.findViewById(R.id.textView2);
 
         ibQC1.setOnClickListener(v -> startActivity(new Intent(getActivity(), QC1Activity.class)));
         tvQC1.setOnClickListener(v -> startActivity(new Intent(getActivity(), QC1Activity.class)));
@@ -94,11 +102,21 @@ public class FirstFragment extends Fragment {
         ibQC2.setOnClickListener(v -> startActivity(new Intent(getActivity(), QC2Activity.class)));
         tvQC2.setOnClickListener(v -> startActivity(new Intent(getActivity(), QC2Activity.class)));
 
+        ibQC3.setOnClickListener(v -> startActivity(new Intent(getActivity(), QC3Activity.class)));
+        tvQC3.setOnClickListener(v -> startActivity(new Intent(getActivity(), QC3Activity.class)));
+
+        ibQC4.setOnClickListener(v -> startActivity(new Intent(getActivity(), QC4Activity.class)));
+        tvQC4.setOnClickListener(v -> startActivity(new Intent(getActivity(), QC4Activity.class)));
+
         iBTaoDon.setOnClickListener(v -> startActivity(new Intent(getActivity(), CreateOrderActivity.class)));
 
         iBKhoHang.setOnClickListener(v -> startActivity(new Intent(getActivity(), WarehouseActivity.class)));
 
         iBLienHe.setOnClickListener(v -> startActivity(new Intent(getActivity(), ContactActivity.class)));
+
+
+
+
 
         return view;
 

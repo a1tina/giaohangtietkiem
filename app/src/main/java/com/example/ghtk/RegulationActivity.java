@@ -1,15 +1,11 @@
 package com.example.ghtk;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ghtk.tools.NoLimitScreen;
 
@@ -56,8 +52,8 @@ public class RegulationActivity extends AppCompatActivity {
                 wv1.setTag("noclick");
             }
             else {
-                    wv1.setVisibility(WebView.GONE);
-                    wv1.setTag("clicked");
+                wv1.setVisibility(WebView.GONE);
+                wv1.setTag("clicked");
             }
         });
 
