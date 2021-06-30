@@ -52,8 +52,8 @@ public class RegulationActivity extends AppCompatActivity {
                 wv1.setTag("noclick");
             }
             else {
-                    wv1.setVisibility(WebView.GONE);
-                    wv1.setTag("clicked");
+                wv1.setVisibility(WebView.GONE);
+                wv1.setTag("clicked");
             }
         });
 

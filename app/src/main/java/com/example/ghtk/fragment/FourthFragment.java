@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.ghtk.Customer;
 import com.example.ghtk.InfoAccountActivity;
 import com.example.ghtk.InstructionActivity;
 import com.example.ghtk.LoginActivity;
@@ -20,11 +21,16 @@ import com.example.ghtk.LoginResult;
 import com.example.ghtk.MainActivity;
 import com.example.ghtk.R;
 import com.example.ghtk.RegulationActivity;
+import com.example.ghtk.api.ApiClient;
 import com.example.ghtk.storage.SharedPrefManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class FourthFragment extends Fragment {
@@ -102,6 +108,55 @@ public class FourthFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            String name = firebaseUser.getDisplayName();
+            String email = firebaseUser.getEmail();
+            String imgurl = firebaseUser.getPhotoUrl().toString();
+            Glide.with(getActivity()).load(imgurl).into(profileImage);
+            profileName.setText(name);
+            profileEmail.setText(email);
+        } else if (SharedPrefManager.getInstance(getActivity()).isLoggedIn()) {
+
+            LoginResult loginResult = SharedPrefManager.getInstance(getActivity()).getUser();
+            String accessToken = loginResult.getAccessToken();
+            Call<Customer> call = ApiClient
+                    .getInstance().getApi().getProfile(accessToken);
+            call.enqueue(new Callback<Customer>() {
+                @Override
+                public void onResponse(Call<Customer> call, Response<Customer> response) {
+                    Customer customer = response.body();
+                    SharedPrefManager.getInstance(getActivity())
+                            .saveProfile(customer.getProfile());
+                    customer = SharedPrefManager.getInstance(getActivity()).getProfile();
+                    profileName.setText(customer.getTenKH());
+                    profileEmail.setText(customer.getUsername());
+
+                }
+
+                @Override
+                public void onFailure(Call<Customer> call, Throwable t) {
+
+                }
+            });
+            /* LoginResult loginResult = SharedPrefManager.getInstance(getActivity()).getUser();
+            Customer customer = SharedPrefManager.getInstance(getActivity()).getProfile();
+            profileName.setText(customer.getTenKH());
+            profileEmail.setText(customer.getUsername());
+
+             */
+        } else {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            getActivity().finish();
+        }
+
+    }
+
 
     private void checkUser() {
         //get current user
@@ -114,9 +169,10 @@ public class FourthFragment extends Fragment {
             profileName.setText(name);
             profileEmail.setText(email);
         } else if (SharedPrefManager.getInstance(getActivity()).isLoggedIn()) {
-            LoginResult loginResult = SharedPrefManager.getInstance(getActivity()).getUser();
-            profileName.setText(loginResult.getCustomerName());
-            profileEmail.setText(loginResult.getUsername());
+            /* LoginResult loginResult = SharedPrefManager.getInstance(getActivity()).getUser();*/
+            Customer customer = SharedPrefManager.getInstance(getActivity()).getProfile();
+            profileName.setText(customer.getTenKH());
+            profileEmail.setText(customer.getUsername());
         } else {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

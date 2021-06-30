@@ -2,11 +2,9 @@ package com.example.ghtk.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.CaptivePortal;
 
 import com.example.ghtk.Customer;
 import com.example.ghtk.LoginResult;
-import com.example.ghtk.User;
 
 public class SharedPrefManager {
     public static  final String SHARED_PREF_NAME = "my_shared_pref";
@@ -25,17 +23,17 @@ public class SharedPrefManager {
     }
 
     public void saveUser(LoginResult user){
-       SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-       SharedPreferences.Editor editor = sharedPreferences.edit();
-       editor.putString("msg", user.getMsg());
-       editor.putString("accessToken", user.getAccessToken());
-       editor.putInt("makh", user.getMakh());
-       editor.putInt("madn", user.getMadn());
-       editor.putString("username", user.getUsername());
-       editor.putString("password", user.getPassword());
-       editor.putString("refreshtoken", user.getRefreshtoken());
-       editor.putString("customerName", user.getCustomerName());
-       editor.apply();
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("msg", user.getMsg());
+        editor.putString("accessToken", user.getAccessToken());
+        editor.putInt("makh", user.getMakh());
+        editor.putInt("madn", user.getMadn());
+        editor.putString("username", user.getUsername());
+        editor.putString("password", user.getPassword());
+        editor.putString("refreshtoken", user.getRefreshtoken());
+        editor.putString("customerName", user.getCustomerName());
+        editor.apply();
     }
 
 

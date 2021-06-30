@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -23,20 +21,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.ghtk.api.ApiClient;
-import com.example.ghtk.api.ApiService;
 import com.example.ghtk.storage.SharedPrefManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
-import java.io.IOException;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -133,7 +123,7 @@ public class SignUpActivity extends AppCompatActivity {
                 Call<Customer> call2 = ApiClient
                         .getInstance()
                         .getApi()
-                        .updateProfile(loginResult.getAccessToken(), fullname, "0123456789", "TPHCM");
+                        .updateProfile(loginResult.getAccessToken(), fullname, "", "");
                 call2.enqueue(new Callback<Customer>() {
                     @Override
                     public void onResponse(Call<Customer> call, Response<Customer> response) {
@@ -194,7 +184,7 @@ public class SignUpActivity extends AppCompatActivity {
             textInputLayoutPassword.setError("Không được để trống mật khẩu!");
             return false;
         }else if(!PASSWORD_PATTERN.matcher(passwordInput).matches()){
-            textInputLayoutPassword.setError("Mật khẩu quá yếu");
+            textInputLayoutPassword.setError("Mật khẩu phải có ít nhất 8 kí tự, bao gồm ít nhất 1 kí tự đặc biệt và không có khoảng trắng");
             return false;
         }
         else {

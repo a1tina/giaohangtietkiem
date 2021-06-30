@@ -1,13 +1,12 @@
 package com.example.ghtk;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.ghtk.api.ApiClient;
 import com.example.ghtk.storage.SharedPrefManager;
 import com.example.ghtk.tools.NoLimitScreen;
@@ -43,7 +42,7 @@ public class InfoAccountActivity extends AppCompatActivity {
 
 
         firebaseAuth = FirebaseAuth.getInstance();
-        checkUser();
+
 
 
         ibBack.setOnClickListener(v -> finish());
@@ -78,6 +77,14 @@ public class InfoAccountActivity extends AppCompatActivity {
 
                 }
             });
+        }
+        else{
+            String name = firebaseUser.getDisplayName();
+            String email = firebaseUser.getEmail();
+            String phone = firebaseUser.getPhoneNumber();
+            tvProfileName.setText(name);
+            tvProfilePhoneNumber.setText(phone);
+            tvProfileMail.setText(email);
         }
     }
 
