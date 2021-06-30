@@ -76,6 +76,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         p = findViewById(R.id.p);
         iBBack = findViewById(R.id.ibBack);
 
+
         rlSenderEdit.setVisibility(RelativeLayout.GONE);
         rlGrayBg.setVisibility(RelativeLayout.GONE);
 

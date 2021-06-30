@@ -240,6 +240,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<LoginResult> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                progressDialog.hide();
             }
         });
 
