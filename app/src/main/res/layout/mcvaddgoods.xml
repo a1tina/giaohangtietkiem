@@ -21,18 +21,17 @@
         android:hint="Tên hàng hoá"
         android:inputType="text"
         android:padding="10dp"
-        android:paddingStart="10dp"
+        android:paddingStart="12dp"
         android:textSize="16sp" />
     <ImageButton
         android:id="@+id/b_delete_goods"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/ic_delete"
+        android:src="@drawable/ic_baseline_close_24"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:background="#E0E1E3"
         android:layout_marginEnd="10dp"
-        app:tint="@color/light_red" />
+        app:tint="@color/teal_700" />
 
     <EditText
         android:id="@+id/goods_weight"

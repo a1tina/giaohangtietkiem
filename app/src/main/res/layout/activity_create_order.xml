@@ -36,8 +36,7 @@
         <RelativeLayout
             android:id="@+id/rl_scrollview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tv_create_order_sender_receiver"
                 android:layout_width="match_parent"
@@ -47,8 +46,6 @@
                 android:background="#E0E1E3"
                 android:backgroundTint="@color/cream"
                 android:textStyle="bold"/>
-
-
             <TextView
                 android:id="@+id/tv_create_order_sender_name"
                 android:layout_width="110dp"
@@ -66,17 +63,17 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_create_order_sender_receiver"
                 android:layout_alignParentRight="true"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="20dp"
                 android:text="Gửi tại bưu cục"
                 android:textColor="#888"/>
 
             <EditText
                 android:id="@+id/et_sender_address"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_create_order_sender_name"
                 android:ems="10"
-                android:hint="Địa chỉ ngưởi gửi"
+                android:hint="Địa chỉ người gửi"
                 android:inputType="textPostalAddress"
                 android:textSize="15sp"
                 android:padding="10dp"
@@ -84,6 +81,16 @@
                 android:drawableTint="#B8B8B8"
                 android:drawablePadding="10dp"
                 android:background="@color/white"/>
+            <TextView
+                android:id="@+id/tv_create_order_receiver_name"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_sender_address"
+                android:textColor="@color/light_red"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Người nhận" />
             <ImageButton
                 android:id="@+id/ib_edit"
                 android:layout_width="wrap_content"
@@ -95,27 +102,14 @@
                 android:src="@drawable/ic_edit"
                 app:tint="#888" />
 
-            <TextView
-                android:id="@+id/tv_create_order_receiver_name"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/light_red"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:layout_below="@id/et_sender_address"
-                android:text="Người nhận" />
-
             <EditText
                 android:id="@+id/et_receiver_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:layout_below="@id/et_sender_address"
-                android:layout_toEndOf="@id/tv_create_order_receiver_name"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:paddingVertical="10dp"
+                android:layout_below="@id/tv_create_order_receiver_name"
+
+                android:padding="10dp"
                 android:textSize="16sp"
                 android:inputType="textPersonName"
                 android:hint="Họ tên"
@@ -123,27 +117,14 @@
                 android:drawablePadding="10dp"
                 android:background="@color/white"/>
 
-            <TextView
-                android:id="@+id/tv_create_order_receiver_phone"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_create_order_receiver_name"
-                android:textColor="@color/light_red"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:text="Điện thoại" />
-
             <EditText
                 android:id="@+id/et_receiver_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:layout_below="@id/tv_create_order_receiver_name"
-                android:layout_toEndOf="@id/tv_create_order_receiver_phone"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:paddingVertical="10dp"
+                android:layout_below="@id/et_receiver_name"
+
+                android:padding="10dp"
                 android:textSize="16sp"
                 android:inputType="phone"
                 android:hint="Số điện thoại"
@@ -151,27 +132,13 @@
                 android:drawablePadding="10dp"
                 android:background="@color/white"/>
 
-            <TextView
-                android:id="@+id/tv_create_order_receiver_address"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_create_order_receiver_phone"
-                android:textColor="@color/light_red"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:text="Địa chỉ" />
-
             <EditText
                 android:id="@+id/et_receiver_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:layout_below="@id/tv_create_order_receiver_phone"
-                android:layout_toEndOf="@id/tv_create_order_receiver_address"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:paddingVertical="10dp"
+                android:layout_below="@id/et_receiver_phone"
+                android:padding="10dp"
                 android:textSize="16sp"
                 android:inputType="textPostalAddress"
                 android:hint="Địa chỉ nhà/cơ quan"
@@ -184,9 +151,9 @@
                 android:id="@+id/checkBox2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_create_order_receiver_address"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="-22dp"
+                android:layout_below="@id/et_sender_address"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
                 android:text="Nhận tại bưu cục"
                 android:textColor="#888" />
 
@@ -195,7 +162,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="HÀNG HOÁ - DỊCH VỤ"
-                android:layout_below="@id/checkBox2"
+                android:layout_below="@id/et_receiver_address"
                 android:padding="10dp"
                 android:background="@color/cream"
                 android:textStyle="bold"/>
@@ -231,72 +198,52 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:id="@+id/p">
-
-                <LinearLayout
-                    android:id="@+id/linearlayout_add_goods"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_below="@id/tv_goods">
-
-                    <com.google.android.material.card.MaterialCardView
+                    android:layout_height="match_parent">
+                    <EditText
+                        android:id="@+id/goods_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/mcv_add_goods"
-                        android:layout_below="@+id/tv_goods"
-                        android:layout_marginHorizontal="10dp">
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <EditText
-                                android:id="@+id/goods_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="10dp"
-                                android:padding="10dp"
-                                android:hint="Tên hàng hoá"
-                                android:paddingStart="10dp"
-                                android:inputType="text"
-                                android:textSize="16sp"
-                                android:drawableTint="#B8B8B8"
-                                android:background="@color/white"/>
+                        android:layout_marginHorizontal="10dp"
+                        android:padding="10dp"
+                        android:hint="Tên hàng hoá"
+                        android:paddingStart="10dp"
+                        android:inputType="text"
+                        android:textSize="16sp"
+                        android:drawableTint="#B8B8B8"
+                        android:background="@color/white"/>
 
-                            <EditText
-                                android:id="@+id/goods_weight"
-                                android:layout_width="200dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:padding="10dp"
-                                android:hint="Trọng lượng"
-                                android:inputType="number"
-                                android:textSize="16sp"
-                                android:drawableTint="#B8B8B8"
-                                android:drawableLeft="@drawable/ic_weight"
-                                android:drawablePadding="10dp"
-                                android:layout_below="@id/goods_name"
-                                android:background="@color/white"/>
-                            <EditText
-                                android:id="@+id/goods_quantity"
-                                android:layout_width="200dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
-                                android:padding="10dp"
-                                android:hint="Số lượng: "
-                                android:inputType="number"
-                                android:textSize="16sp"
-                                android:drawableTint="#B8B8B8"
-                                android:drawableLeft="@drawable/ic_box"
-                                android:drawablePadding="10dp"
-                                android:layout_below="@id/goods_name"
-                                android:layout_toEndOf="@id/goods_weight"
-                                android:background="@color/white"/>
-
-                        </RelativeLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                </LinearLayout>
-
+                    <EditText
+                        android:id="@+id/goods_weight"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:padding="10dp"
+                        android:hint="Trọng lượng"
+                        android:inputType="number"
+                        android:textSize="16sp"
+                        android:drawableTint="#B8B8B8"
+                        android:drawableLeft="@drawable/ic_weight"
+                        android:drawablePadding="10dp"
+                        android:layout_below="@id/goods_name"
+                        android:background="@color/white"/>
+                    <EditText
+                        android:id="@+id/goods_quantity"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:padding="10dp"
+                        android:hint="Số lượng: "
+                        android:inputType="number"
+                        android:textSize="16sp"
+                        android:drawableTint="#B8B8B8"
+                        android:drawableLeft="@drawable/ic_box"
+                        android:drawablePadding="10dp"
+                        android:layout_below="@id/goods_name"
+                        android:layout_toEndOf="@id/goods_weight"
+                        android:background="@color/white"/>
+                </RelativeLayout>
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -310,73 +257,15 @@
                 android:layout_below="@id/p"
                 android:drawableLeft="@drawable/ic_add"
                 android:drawableTint="@color/light_red"
-                android:drawablePadding="5dp"
+                android:drawablePadding="0dp"
                 android:layout_centerInParent="true"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:textStyle="bold"
-              />
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/acb_goods_size"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@+id/add_goods"
-                android:text="Nhập kích thước hàng hoá"
-                android:textColor="@color/light_red"
-                android:textAllCaps="false"
-                android:drawablePadding="10dp"
-                android:textAlignment="textStart"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:drawableEnd="@drawable/ic_right_arrow"
-                android:drawableTint="@color/light_red"
-                android:textStyle="bold"
-                android:textSize="16dp"/>
-
-            <CheckBox
-                android:id="@+id/checkBox3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/acb_goods_size"
-                android:layout_marginStart="10dp"
-                android:text="Thu hộ bằng tiền hàng"
-                android:textColor="#888"/>
-            <TextView
-                android:id="@+id/b_cod"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="Quy định thanh toán COD"
-
-                android:textAllCaps="false"
-                android:layout_below="@id/acb_goods_size"
-                android:layout_alignParentRight="true"
-                android:drawableLeft="@drawable/ic_info"
-                android:drawableTint="@color/light_red"
-                android:drawablePadding="10dp" />
-
-            <EditText
-                android:id="@+id/et_thu_ho"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/b_cod"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/ic_money2"
-                android:drawablePadding="10dp"
-                android:drawableTint="#B8B8B8"
-                android:hint="Tiền thu hộ"
-                android:inputType="number"
-                android:padding="10dp"
-                android:textSize="16sp" />
-
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/tv_service"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/et_thu_ho"
+                android:layout_below="@id/add_goods"
                 android:textColor="@color/light_red"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -389,7 +278,7 @@
                 android:layout_height="40dp"
                 android:padding="10dp"
                 android:background="?android:selectableItemBackground"
-                android:layout_below="@id/et_thu_ho"
+                android:layout_below="@id/add_goods"
                 android:text="Chọn dịch vụ"
                 android:textSize="15sp"
                 android:layout_alignParentRight="true"
@@ -430,9 +319,8 @@
                     <ImageView
                         android:id="@+id/iv_image_package"
                         android:layout_width="130dp"
-                        android:layout_height="90dp"
-                        android:scaleType="centerCrop"
-                        android:adjustViewBounds="true"
+                        android:layout_height="match_parent"
+                       android:scaleType="centerCrop"
                         />
                 </LinearLayout>
             </HorizontalScrollView>
@@ -457,9 +345,8 @@
                 android:text="THÔNG TIN CHUNG"
                 android:layout_below="@id/ib_photo_choose"
                 android:padding="10dp"
-                android:background="#E0E1E3"/>
-
-
+                android:background="#E0E1E3"
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/tv_freight_payer"
                 android:layout_width="200dp"
@@ -705,14 +592,11 @@
             android:layout_marginHorizontal="10dp"
             android:layout_below="@id/searchView"
             android:layout_marginTop="20dp" >
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
             </LinearLayout>
         </ScrollView>
-
         <Button
             android:id="@+id/b_add_warehouse"
             android:layout_width="match_parent"
@@ -722,7 +606,5 @@
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/light_red"
             android:layout_alignParentBottom="true"/>
-
     </RelativeLayout>
-
 </RelativeLayout>

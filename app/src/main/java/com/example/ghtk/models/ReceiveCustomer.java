@@ -1,9 +1,9 @@
 package com.example.ghtk.models;
 
-public class Customer {
+public class ReceiveCustomer {
     private String name, sdt;
 
-    public Customer(String name, String sdt) {
+    public ReceiveCustomer(String name, String sdt) {
         this.name = name;
         this.sdt = sdt;
     }

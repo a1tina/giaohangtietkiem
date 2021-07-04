@@ -3,20 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:padding="10dp"
-    >
-    <ImageView
-        android:id="@+id/iv_package"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:scaleType="centerCrop"
-        android:layout_marginEnd="20dp"
-        />
+    android:padding="10dp">
+
     <TextView
         android:id="@+id/txt_package_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/iv_package"
         android:text="Xe đẩy trẻ em"
         android:textSize="18sp"
         android:textColor="@color/black"/>
@@ -25,17 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/txt_package_name"
-        android:layout_toRightOf="@id/iv_package"
         android:text="20kg x 1"
-        android:textSize="18sp"
-        />
-    <TextView
-        android:id="@+id/txt_package_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt_package_weigh"
-        android:layout_toRightOf="@id/iv_package"
-        android:text="100cm x 30cm x 50cm"
-        android:textSize="18sp"
-        />
+        android:textSize="18sp" />
 </RelativeLayout>

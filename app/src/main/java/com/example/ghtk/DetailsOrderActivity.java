@@ -1,35 +1,58 @@
 package com.example.ghtk;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ghtk.adapter.PackageItemAdapter;
+import com.example.ghtk.api.ApiClient;
+import com.example.ghtk.models.OrderDetail;
 import com.example.ghtk.models.PackageInfo;
+import com.example.ghtk.storage.SharedPrefManager;
 import com.example.ghtk.tools.NoLimitScreen;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DetailsOrderActivity extends AppCompatActivity {
+    private OrderDetail orderDetail;
     private ListView lst_package;
     private ImageButton btn_back;
     private List<PackageInfo> list;
     private String orderId;
+    private TextView txt_name_receiver, txt_phone_receiver, txt_address_receiver, txt_address_sender;
+    private ImageView iv_image_package;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_order);
         NoLimitScreen.apply(this);
-        initData();
-        setListViewAdapter();
         btn_back = findViewById(R.id.imgBtn_back);
+        lst_package = findViewById(R.id.lst_package);
+        txt_name_receiver = findViewById(R.id.txt_name_receiver);
+        txt_phone_receiver = findViewById(R.id.txt_phone_receiver);
+        iv_image_package = findViewById(R.id.iv_image_package);
+        txt_address_receiver = findViewById(R.id.txt_address_receiver);
+        txt_address_sender = findViewById(R.id.txt_address);
+        //Init progress
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Đang tải dữ liệu");
+        progressDialog.setMessage("Vui lòng đợi...");
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +83,12 @@ public class DetailsOrderActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
+
     private void getIntentData() {
         Intent intent = getIntent();
         orderId = intent.getStringExtra("orderId");
@@ -67,10 +96,37 @@ public class DetailsOrderActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        list = new ArrayList<PackageInfo>();
-        list.add(new PackageInfo("Xe đẩy em bé", "https://via.placeholder.com/150", 20F,1));
-        list.add(new PackageInfo("Dầu ăn", "https://via.placeholder.com/150", 5F, 3));
-        list.add(new PackageInfo("Dầu ăn", "https://via.placeholder.com/150", 5F, 3));
+        list = new ArrayList<>();
+        progressDialog.show();
+        //Get accessToken
+        LoginResult loginResult = SharedPrefManager.getInstance(DetailsOrderActivity.this).getUser();
+        String accessToken = loginResult.getAccessToken();
+        ApiClient.getInstance().getOrderApi().GetOrderDetailById(accessToken,Integer.parseInt(orderId)).enqueue(new Callback<OrderDetail>() {
+            @Override
+            public void onResponse(Call<OrderDetail> call, Response<OrderDetail> response) {
+                progressDialog.dismiss();
+                if(response.isSuccessful()){
+                    orderDetail = response.body();
+                    list.addAll(orderDetail.getDshanghoa());
+                    setListViewAdapter();
+                    setContent();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OrderDetail> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(DetailsOrderActivity.this, "Goi api that bai", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setContent() {
+        txt_name_receiver.setText(orderDetail.getKhnhan().getName());
+        txt_phone_receiver.setText(orderDetail.getKhnhan().getSdt());
+        Picasso.get().load(orderDetail.getUrlImage()).placeholder(R.drawable.border_rectangle).into(iv_image_package);
+        txt_address_receiver.setText(orderDetail.getDiachinhan());
+        txt_address_sender.setText(orderDetail.getDiachidi());
     }
 
     private void setListViewAdapter() {

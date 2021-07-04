@@ -143,7 +143,7 @@ public class FourthFragment extends Fragment {
                 }
             });
             /* LoginResult loginResult = SharedPrefManager.getInstance(getActivity()).getUser();
-            Customer customer = SharedPrefManager.getInstance(getActivity()).getProfile();
+            ReceiveCustomer customer = SharedPrefManager.getInstance(getActivity()).getProfile();
             profileName.setText(customer.getTenKH());
             profileEmail.setText(customer.getUsername());
 

@@ -1,5 +1,6 @@
 package com.example.ghtk.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ghtk.LoginResult;
 import com.example.ghtk.R;
 import com.example.ghtk.adapter.OrderRecyclerAdapter;
-import com.example.ghtk.api.IServiceApi;
+import com.example.ghtk.api.ApiClient;
 import com.example.ghtk.databinding.ActivityBillBinding;
 import com.example.ghtk.models.Order;
+import com.example.ghtk.storage.SharedPrefManager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -45,6 +48,7 @@ public class BillActivityFragment_1 extends Fragment {
     private ArrayList<Order> selectedArrayList;
     private View view;
     private ActivityBillBinding activityBillBinding;
+    private ProgressDialog progressDialog;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -77,6 +81,10 @@ public class BillActivityFragment_1 extends Fragment {
         //Initial recyclerview
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //Init ProgressDialog
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Đang tải dữ liệu");
+        progressDialog.setMessage("Vui lòng đợi...");
         listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,31 +100,30 @@ public class BillActivityFragment_1 extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initData();
     }
-
     private void initData(){
         arrayList = new ArrayList<>();
         selectedArrayList = new ArrayList<>();
-//        arrayList.add(new Order("12","bao", "0123","ma lam","liem",OrderState.DELIVERING));
- //       arrayList.add(new Order("1672014177949", "Nguyễn Quốc C", "0345228350", "P.Lộc Phát - TP.Bảo Lộc - T.Lâm Đồng", "khoi", OrderState.DELIVERING));
-//        arrayList.add(new Order("1672014177950", "Lê Thị D", "0345678252", "TT.Ma Lâm- H.Hàm Thuận Bắc - T.Bình Thuận", OrderState.DELIVERY_SUCCESS));
-//        arrayList.add(new Order("1672014177951", "Phạm Văn E", "0345226321", " X.La Nan - H.Đức Cơ - T.Gia Lai", OrderState.TAKEN));
-        IServiceApi.apiService.GetOrderByIdSender().enqueue(new Callback<List<Order>>() {
+        LoginResult loginResult = SharedPrefManager.getInstance(getContext()).getUser();
+        String accessToken = loginResult.getAccessToken();
+        progressDialog.show();
+        ApiClient.getInstance().getOrderApi().GetOrderByIdSender(accessToken).enqueue(new Callback<List<Order>>() {
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                progressDialog.dismiss();
                 List<Order> list = response.body();
                 if(list != null && response.isSuccessful()) {
                     arrayList.addAll(list);
                     setAdapter();
-                    checkNumberOrder(view, arrayList);
                 }
+                checkNumberOrder(view, arrayList);
+                cbx.setText(String.format("%d đơn hàng", arrayList.size()));
             }
-
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
-                Toast.makeText(getContext(), "Có lỗi xảy ra" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+                Toast.makeText(getContext(), "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
             }
         });
-        cbx.setText(String.format("%d đơn hàng", arrayList.size()));
     }
     private void setAdapter(){
         orderRecyclerAdapter = new OrderRecyclerAdapter(arrayList, getContext(), activityBillBinding, view);

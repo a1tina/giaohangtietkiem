@@ -167,7 +167,6 @@
                                 android:id="@+id/txt_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Nguyễn Văn A"
                                 android:layout_marginBottom="7dp"
                                 android:layout_marginLeft="10dp"
                                 android:textSize="16sp"
@@ -179,7 +178,6 @@
                                 android:id="@+id/txt_phone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0123456789"
                                 android:layout_marginBottom="7dp"
                                 android:drawableLeft="@drawable/ic_phone"
                                 android:layout_marginLeft="10dp"
@@ -191,7 +189,6 @@
                                 android:id="@+id/txt_address"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="X.Hàm Chính - H.Hàm Thuận Bắc - T.Bình Thuận"
                                 android:drawableLeft="@drawable/ic_location"
                                 android:drawableTint="@color/light_red"
                                 android:layout_marginLeft="10dp"
@@ -245,7 +242,6 @@
                                 android:id="@+id/txt_name_receiver"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Nguyễn Thị B"
                                 android:layout_marginBottom="7dp"
                                 android:textSize="16sp"
                                 android:drawablePadding="5dp"
@@ -256,7 +252,6 @@
                                 android:id="@+id/txt_phone_receiver"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0345678910"
                                 android:layout_marginBottom="7dp"
                                 android:drawableLeft="@drawable/ic_phone"
                                 android:drawableTint="@color/light_red"
@@ -267,7 +262,6 @@
                                 android:id="@+id/txt_address_receiver"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="P.Linh Trung - Q.Thủ Đức - TP.HCM"
                                 android:drawableLeft="@drawable/ic_location"
                                 android:drawableTint="@color/light_red"
                                 android:drawablePadding="5dp"
@@ -384,6 +378,50 @@
                                 android:padding="10dp"/>
                         </RelativeLayout>
                     </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textview_bill"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="5dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/txt_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hình ảnh sản phẩm"
+                            android:fontFamily="sans-serif"
+                            android:background="@color/light_red"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:padding="5dp"
+                            android:textStyle="bold"
+                            android:drawableLeft="@drawable/ic_baseline_directions_car_24"
+                            android:drawablePadding="10dp"
+                            android:drawableTint="@color/white"/>
+                        <ImageButton
+                            android:id="@+id/ib_expand_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_right_arrow"
+                            android:background="@color/light_red"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="8dp"
+                            app:tint="@color/white" />
+                        <ImageView
+                            android:id="@+id/iv_image_package"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:scaleType="fitCenter"
+                            android:adjustViewBounds="true"
+                            android:layout_below="@id/txt_image"
+                            android:layout_centerHorizontal="true"/>
+                    </RelativeLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"

@@ -1,21 +1,15 @@
-package com.example.ghtk;
+ package com.example.ghtk;
 
 
 import android.Manifest;
-
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-
-import android.net.Uri;
-import android.os.Bundle;
-
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -24,6 +18,7 @@ import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -37,16 +32,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.ghtk.api.IServiceApi;
-import com.example.ghtk.models.Customer;
+import com.example.ghtk.api.ApiClient;
+import com.example.ghtk.models.ReceiveCustomer;
 import com.example.ghtk.models.PackageInfo;
+import com.example.ghtk.storage.SharedPrefManager;
 import com.example.ghtk.tools.NoLimitScreen;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -54,34 +51,29 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import info.androidhive.fontawesome.FontDrawable;
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import androidx.core.content.ContextCompat;
-
-import com.example.ghtk.tools.NoLimitScreen;
 
 
 public class CreateOrderActivity extends AppCompatActivity {
 
     private static final String TAG = "IN_CREATE_ORDER_ACTIVITY_TAG";
-    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 2;
-
-    RelativeLayout rlSenderEdit, rlMainLayout, rlGrayBg;
-
-    private String selectedImagePath;
-    int SELECT_IMAGE_CODE = 1;
-
+    private RelativeLayout rlSenderEdit, rlMainLayout, rlGrayBg;
+    public  static final int REQUEST_PERMISSION_CODE  = 1 ;
+    private int CAPTURE_IMAGE_CODE = 1;
     private Bitmap imageBitmap;
     private List<PackageInfo> packageInfoList;
-    LinearLayout linearLayoutPhoto, linearLayoutAddGoods, p;
-    ImageButton iBBack, iBPhotoChoose, iBDeleteGoods, iBEdit;
-    CheckBox checkBox4;
-    Button bCreate;
-    TextView bGoods, bCOD, bServiceChoose, bPhotoDelAll, bAddGoods;
-
+    private LinearLayout linearLayoutPhoto, linearLayoutAddGoods, p;
+    private ImageButton iBBack, iBPhotoChoose, iBDeleteGoods, iBEdit;
+    private CheckBox checkBox4;
+    private Button bCreate;
+    private TextView bGoods, bServiceChoose, bPhotoDelAll, bAddGoods;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,49 +86,24 @@ public class CreateOrderActivity extends AppCompatActivity {
         bCreate = findViewById(R.id.b_create);
         iBEdit = findViewById(R.id.ib_edit);
         bGoods = findViewById(R.id.b_goods);
-        bCOD = findViewById(R.id.b_cod);
         bServiceChoose = findViewById(R.id.b_service_choose);
         bPhotoDelAll = findViewById(R.id.b_photo_delete_all);
         bAddGoods = findViewById(R.id.add_goods);
         iBPhotoChoose = findViewById(R.id.ib_photo_choose);
         linearLayoutPhoto = findViewById(R.id.linearlayout_photo);
-        linearLayoutAddGoods = findViewById(R.id.linearlayout_add_goods);
         p = findViewById(R.id.p);
         iBBack = findViewById(R.id.ibBack);
-
 
         rlSenderEdit.setVisibility(RelativeLayout.GONE);
         rlGrayBg.setVisibility(RelativeLayout.GONE);
 
-        //Request permission
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_CONTACTS)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_CONTACTS)) {
-
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            } else {
-
-                // No explanation needed, we can request the permission.
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_CONTACTS},
-                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        }
         iBBack.setOnClickListener(v -> finish());
+        //Init progressDialog
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Đang gửi đi");
+        progressDialog.setMessage("Vui lòng đợi...");
 
-        //Tạo đơn
+        //Create order
         bCreate.setOnClickListener(v -> {
             callApi();
         });
@@ -150,7 +117,11 @@ public class CreateOrderActivity extends AppCompatActivity {
             rlSenderEdit.setVisibility(RelativeLayout.GONE);
             rlGrayBg.setVisibility(RelativeLayout.GONE);
         });
-
+        //Set FontDrawable
+        EditText e = findViewById(R.id.goods_name);
+        setPackageImageDrawable(e);
+        //Enable permission
+        EnableRuntimePermissionToAccessCamera();
         //Tạo clickable cho TextView
         String text = "Tôi đã đọc và đồng ý với Điều khoản và quy định";
         String text2 = "Xem thêm quy định";
@@ -196,23 +167,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         bGoods.setText(ss);
         bGoods.setMovementMethod(LinkMovementMethod.getInstance());
 
-        ss = new SpannableString(text3);
-        ClickableSpan clickableSpan3 = new ClickableSpan() {
-            @Override
-            public void onClick(@NonNull View widget) {
-                startActivity(new Intent(CreateOrderActivity.this, CODActivity.class));
-            }
-
-            @Override
-            public void updateDrawState(@NonNull TextPaint ds) {
-                super.updateDrawState(ds);
-                ds.setColor(getResources().getColor(R.color.light_red));
-                ds.setUnderlineText(false);
-            }
-        };
-        ss.setSpan(clickableSpan3, 0,23, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        bCOD.setText(ss);
-        bCOD.setMovementMethod(LinkMovementMethod.getInstance());
+       
 
         ss = new SpannableString(text4);
         ClickableSpan clickableSpan4 = new ClickableSpan() {
@@ -236,7 +191,8 @@ public class CreateOrderActivity extends AppCompatActivity {
         ClickableSpan clickableSpan5 = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                ((ImageView)findViewById(R.id.iv_image_package)).setImageBitmap(null);;
+                ((ImageView)findViewById(R.id.iv_image_package)).setImageBitmap(null);
+                imageBitmap = null;
             }
 
             @Override
@@ -257,12 +213,9 @@ public class CreateOrderActivity extends AppCompatActivity {
                 LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View view = inflater.inflate(R.layout.mcvaddgoods, null);
                 ImageButton b = view.findViewById(R.id.b_delete_goods);
-                b.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        p.removeView(view);
-                    }
-                });
+                EditText e = view.findViewById(R.id.goods_name);
+                setPackageImageDrawable(e);
+                b.setOnClickListener(v -> p.removeView(view));
                 p.addView(view);
             }
 
@@ -291,73 +244,85 @@ public class CreateOrderActivity extends AppCompatActivity {
         iBPhotoChoose.setOnClickListener(v -> {
               Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
               if(intent.resolveActivity(getPackageManager()) != null){
-                  startActivityForResult(intent, SELECT_IMAGE_CODE);
+                  startActivityForResult(intent, CAPTURE_IMAGE_CODE);
               }
         });
     }
 
+    private void setPackageImageDrawable(EditText v) {
+        FontDrawable drawable = new FontDrawable(CreateOrderActivity.this, R.string.fa_cube_solid, true, false);
+        drawable.setTextColor(0xFFB8B8B8);
+        drawable.setTextSize(18);
+        v.setCompoundDrawablesRelativeWithIntrinsicBounds(drawable, null, null, null);
+        v.setCompoundDrawablePadding(25);
+    }
+
+    private void EnableRuntimePermissionToAccessCamera() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(CreateOrderActivity.this, Manifest.permission.CAMERA))
+        {
+            // Printing toast message after enabling runtime permission.
+            Toast.makeText(CreateOrderActivity.this,"Cho phép truy cập camera", Toast.LENGTH_LONG).show();
+
+        } else {
+            ActivityCompat.requestPermissions(CreateOrderActivity.this,new String[]{Manifest.permission.CAMERA}, REQUEST_PERMISSION_CODE);
+        }
+    }
+
     private void callApi() {
+        progressDialog.show();
         if(imageBitmap == null){
             Toast.makeText(CreateOrderActivity.this, "Bạn chưa chụp ảnh", Toast.LENGTH_SHORT).show();
             return;
         }
-//        String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-//        OutputStream outStream = null;
-//        // String temp = null;
-//        File file = new File(extStorageDirectory, "temp.png");
-//        if (file.exists()) {
-//            file.delete();
-//            file = new File(extStorageDirectory, "temp.png");
-//        }
-//        try {
-//            outStream = new FileOutputStream(file);
-//            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-//            outStream.flush();
-//            outStream.close();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        //
         getDataDSHH();
         String diachinhan = ((EditText)findViewById(R.id.et_receiver_address)).getText().toString().trim();
         String diachigui = ((EditText)findViewById(R.id.et_sender_address)).getText().toString().trim();
         String chiphi = ((TextView)findViewById(R.id.tv_total_postage2)).getText().toString().trim();
         String tennguoinhan = ((EditText)findViewById(R.id.et_receiver_name)).getText().toString().trim();
         String sdtnhan = ((EditText)findViewById(R.id.et_receiver_phone)).getText().toString().trim();
-        Customer customer = new Customer(tennguoinhan, sdtnhan);
+        //Convert bitmap to file
+        File filesDir = getFilesDir();
+        File imageFile = new File(filesDir,  packageInfoList.get(0).getTensp() + ".jpg");
+        OutputStream os;
+        try {
+            os = new FileOutputStream(imageFile);
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
+            os.flush();
+            os.close();
+        } catch (Exception e) {
+            Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
+        }
+        //Create multipartBody
+        ReceiveCustomer receiveCustomer = new ReceiveCustomer(tennguoinhan, sdtnhan);
         Gson gson = new GsonBuilder().setLenient().create();
         String json_package_list = gson.toJson(packageInfoList);
-        String json_customer = gson.toJson(customer);
-        Log.d("JSON JSON JSON", json_package_list);
-//        RequestBody requestBodyDSHH = RequestBody.create(MediaType.parse("multipart/form-data"), json_package_list);
-//        RequestBody requestBodyKHN = RequestBody.create(MediaType.parse("multipart/form-data"), json_customer);
-//        RequestBody requestBodyDCN = RequestBody.create(MediaType.parse("multipart/form-data"), diachinhan);
-//        RequestBody requestBodyCP = RequestBody.create(MediaType.parse("multipart/form-data"), chiphi);
-//        RequestBody requestBodyDCG = RequestBody.create(MediaType.parse("multipart/form-data"), diachigui);
-        // requestBodyImage = RequestBody.create(MediaType.parse("multipart/form-data"), (byte[]) null);
-        MultipartBody.Builder builder = new MultipartBody.Builder();
-        builder.setType(MultipartBody.FORM);
-        builder.addFormDataPart("diachinhan", diachinhan);
-        builder.addFormDataPart("diachidi", diachigui);
-        builder.addFormDataPart("dshanghoa[][tensp]", packageInfoList.get(0).getTensp());
-        builder.addFormDataPart("dshanghoa[][cannang]", packageInfoList.get(0).getCannang().toString());
-        builder.addFormDataPart("dshanghoa[][soluong]", String.valueOf(packageInfoList.get(0).getSoluong()));
-        builder.addFormDataPart("khnhan[name]", tennguoinhan);
-        builder.addFormDataPart("khnhan[sdt]", sdtnhan);
-        MultipartBody mul = builder.build();
-        Toast.makeText(CreateOrderActivity.this, "Đang gửi đi", Toast.LENGTH_SHORT).show();
-        IServiceApi.apiService.PostCreateOrder(mul).enqueue(new Callback<String>() {
+        String json_customer = gson.toJson(receiveCustomer);
+        MultipartBody.Part requestBodyDSHH = MultipartBody.Part.createFormData("dshanghoa", json_package_list);
+        MultipartBody.Part requestBodyKHN =MultipartBody.Part.createFormData("khnhan", json_customer);
+        MultipartBody.Part requestBodyDCN = MultipartBody.Part.createFormData("diachinhan", diachinhan);
+        MultipartBody.Part requestBodyCP = MultipartBody.Part.createFormData("chiphi", chiphi);
+        MultipartBody.Part requestBodyDCG = MultipartBody.Part.createFormData("diachidi", diachigui);
+        RequestBody requestBodyImage = RequestBody.create(MediaType.parse("multipart/form-data"), imageFile);
+        MultipartBody.Part image = MultipartBody.Part.createFormData("image", imageFile.getName(), requestBodyImage);
+        //Get accessToken
+        LoginResult loginResult = SharedPrefManager.getInstance(CreateOrderActivity.this).getUser();
+        String accessToken = loginResult.getAccessToken();
+        //Call API
+        ApiClient.getInstance().getOrderApi().PostCreateOrder(accessToken, requestBodyDSHH, requestBodyKHN, requestBodyDCN, requestBodyCP, requestBodyDCG,
+            image).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
+                progressDialog.dismiss();
                 if(response.isSuccessful()) {
                     Toast.makeText(CreateOrderActivity.this, "Tạo đơn thành công", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(CreateOrderActivity.this, response.body(), Toast.LENGTH_SHORT).show();
+                    finish();
                 }
-
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(CreateOrderActivity.this, "Co loi xay ra" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+                Toast.makeText(CreateOrderActivity.this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
                 Log.d("LOI LOI LOI", t.getMessage());
             }
         });
@@ -365,68 +330,48 @@ public class CreateOrderActivity extends AppCompatActivity {
 
     private void getDataDSHH() {
             packageInfoList = new ArrayList<>();
-            EditText vname = (EditText)findViewById(R.id.goods_name);
-            EditText vweight = (EditText)findViewById(R.id.goods_weight);
-            EditText vquantity = (EditText)findViewById(R.id.goods_quantity);
-            String name = vname.getText().toString().trim();
-            String weight = vweight.getText().toString().trim();
-            String quantity = vquantity.getText().toString().trim();
-            PackageInfo packageInfo = new PackageInfo(name, Float.parseFloat(weight), Integer.parseInt(quantity));
-            packageInfoList.add(packageInfo);
-
+            for(int i = 0; i < p.getChildCount(); i++){
+                EditText editName = (EditText) getEditText((ViewGroup) p.getChildAt(i), R.id.goods_name);
+                EditText editWeight = (EditText) getEditText((ViewGroup) p.getChildAt(i), R.id.goods_weight);
+                EditText editQuantity = (EditText) getEditText((ViewGroup) p.getChildAt(i), R.id.goods_quantity);
+                String name = editName.getText().toString().trim();
+                String weight = editWeight.getText().toString().trim();
+                String quantity = editQuantity.getText().toString().trim();
+                PackageInfo packageInfo = new PackageInfo(name, Float.parseFloat(weight), Integer.parseInt(quantity));
+                packageInfoList.add(packageInfo);
+            }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == SELECT_IMAGE_CODE && resultCode == RESULT_OK){
-            //uri = data.getData();
+        if(requestCode == CAPTURE_IMAGE_CODE && resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             imageBitmap = (Bitmap) extras.get("data");
             ((ImageView)findViewById(R.id.iv_image_package)).setImageBitmap(imageBitmap);
         }
     }
 
-    public void addView(ImageView imageView, int width, int height){
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
-        imageView.setLayoutParams(layoutParams);
-        linearLayoutPhoto.addView(imageView);
+    private View getEditText(ViewGroup group, int idEditText){
+        for(int i = 0; i < group.getChildCount(); i++){
+            if(group.getChildAt(i).getId() == idEditText)
+                return group.getChildAt(i);
+        }
+        return null;
     }
 
-    private File savebitmap(Bitmap bmp) {
-        String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-        OutputStream outStream = null;
-        // String temp = null;
-        File file = new File(extStorageDirectory, "temp.png");
-        if (file.exists()) {
-            file.delete();
-            file = new File(extStorageDirectory, "temp.png");
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_PERMISSION_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(CreateOrderActivity.this,"Your application can access CAMERA.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(CreateOrderActivity.this,"Your application cannot access CAMERA.", Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
-
-        try {
-            outStream = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-            outStream.flush();
-            outStream.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        return file;
     }
-
-//    private View getEditText(ViewGroup group, int idEditText){
-//        for(int i = 1; i < group.getChildCount(); i++){
-//            if(group.getChildAt(i) instanceof ViewGroup)
-//                getEditText((ViewGroup) group.getChildAt(i), idEditText);
-//            if(group.getChildAt(i).getId() == idEditText)
-//                return group.getChildAt(i);
-//        }
-//
-//    }
-
 }
