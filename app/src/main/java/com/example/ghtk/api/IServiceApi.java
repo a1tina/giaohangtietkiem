@@ -19,7 +19,7 @@ public interface IServiceApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     IServiceApi apiService = new Retrofit.Builder()
-            .baseUrl("https://logistic-backend.herokuapp.com")
+            .baseUrl("http://192.168.1.5:9999")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(IServiceApi.class);

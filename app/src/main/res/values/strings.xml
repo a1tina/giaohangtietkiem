@@ -79,6 +79,7 @@
 
 
     <string name="instruction_content">Phiên bản mới GHTK ra mắt chức năng chụp ảnh hàng hoá giá trị cao, cùng với rất nhiều cải tiến mới mẻ đem đến cho khách hàng những trải nghiệm thú vị.</string>
+    <string name="google_map_key">AIzaSyCivgJqhme9S40GGKv0WsNY8sfxogWQ2QQ</string>
 
     <string-array name="payment_method">
         <item>Tiền mặt</item>

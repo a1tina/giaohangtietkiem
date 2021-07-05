@@ -12,5 +12,15 @@
         android:text="Tat ca"
         android:textSize="20sp"
         android:textAlignment="center"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/acb_noti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_gradient_style"
+        android:text="noti"
+        android:textColor="#fff"
+        android:letterSpacing="0"
+        android:layout_gravity="center"
+        />
 
 </FrameLayout>

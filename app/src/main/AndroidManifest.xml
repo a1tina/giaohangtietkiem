@@ -4,8 +4,15 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature
         android:name="android.hardware.Camera"
         android:required="true" />
@@ -14,17 +21,25 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ghtk"
-<<<<<<< HEAD
-        android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true">
-        <activity android:name=".DetailsOrderActivity"></activity>
-=======
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChangeInfoActivity"></activity>
->>>>>>> master
+        <activity android:name=".intro.IntroActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCivgJqhme9S40GGKv0WsNY8sfxogWQ2QQ" />
+
+        <activity android:name=".DetailsOrderActivity" />
+        <activity android:name=".ChangeInfoActivity" />
         <activity android:name=".BillActivity" />
         <activity android:name=".QC4Activity" />
         <activity android:name=".QC3Activity" />
@@ -40,12 +55,8 @@
         <activity android:name=".CreateOrderActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+        <receiver android:name="com.example.ghtk.notification.NotificationReceiver"/>
     </application>
 
 </manifest>

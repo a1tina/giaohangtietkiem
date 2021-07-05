@@ -171,7 +171,6 @@ public class LoginActivity extends AppCompatActivity {
                 //Log.d(TAG, "onActivityResult: "+e.printStackTrace());
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -188,6 +187,41 @@ public class LoginActivity extends AppCompatActivity {
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();
+
+                        // Add user from Google to database using API
+                        Call<LoginResult> call = ApiClient.getInstance().getApi().loginwithGoogle(email, firebaseUser.getDisplayName(), firebaseUser.getPhoneNumber(), "TPHCM");
+                        call.enqueue(new Callback<LoginResult>() {
+                            @Override
+                            public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+                                Log.d(TAG, "onSuccess: Ghi du lieu vao db thanh cong: ");
+                                LoginResult loginResult = response.body();
+                                SharedPrefManager.getInstance(LoginActivity.this).saveUser(loginResult.getUser());
+                                Customer customer = SharedPrefManager.getInstance(LoginActivity.this).getProfile();
+                                Call<Customer> call2 = ApiClient
+                                        .getInstance()
+                                        .getApi()
+                                        .updateProfile(loginResult.getAccessToken(), customer.getTenKH(), customer.getSDT(), customer.getDiaChi());
+                                call2.enqueue(new Callback<Customer>() {
+                                    @Override
+                                    public void onResponse(Call<Customer> call, Response<Customer> response) {
+                                        Customer customer = response.body();
+                                        SharedPrefManager.getInstance(LoginActivity.this)
+                                                .saveProfile(customer.getProfile());
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Customer> call, Throwable t) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onFailure(Call<LoginResult> call, Throwable t) {
+
+                            }
+                        });
+                        //End add user to database
 
                         Log.d(TAG, "onSuccess: Email: " + email);
                         Log.d(TAG, "onSuccess: UID: " + uid);
@@ -261,8 +295,6 @@ public class LoginActivity extends AppCompatActivity {
                 progressDialog.hide();
             }
         });
-
-
     }
 
     private boolean validateEmail() {
