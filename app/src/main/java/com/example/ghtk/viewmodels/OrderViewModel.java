@@ -8,11 +8,11 @@ public class OrderViewModel extends ViewModel {
     public OrderViewModel(){
         mutableLiveData = new MutableLiveData<>();
     }
-    public void setText(String s){
+    public void setData(String s){
         mutableLiveData.setValue(s);
     }
 
-    public MutableLiveData<String> getText(){
+    public MutableLiveData<String> getData(){
         return mutableLiveData;
     }
 }

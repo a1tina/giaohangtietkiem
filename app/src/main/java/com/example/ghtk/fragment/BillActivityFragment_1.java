@@ -21,6 +21,7 @@ import com.example.ghtk.R;
 import com.example.ghtk.adapter.OrderRecyclerAdapter;
 import com.example.ghtk.api.ApiClient;
 import com.example.ghtk.databinding.ActivityBillBinding;
+import com.example.ghtk.listener.CustomEventListener;
 import com.example.ghtk.models.Order;
 import com.example.ghtk.storage.SharedPrefManager;
 
@@ -34,7 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class BillActivityFragment_1 extends Fragment {
+public class BillActivityFragment_1 extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,6 +50,7 @@ public class BillActivityFragment_1 extends Fragment {
     private View view;
     private ActivityBillBinding activityBillBinding;
     private ProgressDialog progressDialog;
+    private CustomEventListener customEventListener;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -58,7 +60,6 @@ public class BillActivityFragment_1 extends Fragment {
         // Required empty public constructor
         activityBillBinding = binding;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,10 +86,20 @@ public class BillActivityFragment_1 extends Fragment {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("Đang tải dữ liệu");
         progressDialog.setMessage("Vui lòng đợi...");
-        listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickEventHandler(v, linear);
+        listener = v -> onClickEventHandler(v, linear);
+        //Init custom listener
+        customEventListener = list -> {
+            //Toast.makeText(getContext(), list.get(0), Toast.LENGTH_SHORT).show();
+            String accessToken = SharedPrefManager.getInstance(getContext()).getUser().getAccessToken();
+            for(String s : list){
+                arrayList.removeIf(item -> item.getMadonhang() == s);
+                ApiClient.getInstance().getOrderApi().DeleteOrderDetailById(accessToken, Integer.parseInt(s))
+                        .enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) { }
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) { }
+                        });
             }
         };
         setListener(linear);
@@ -103,6 +114,7 @@ public class BillActivityFragment_1 extends Fragment {
     private void initData(){
         arrayList = new ArrayList<>();
         selectedArrayList = new ArrayList<>();
+        //Get access Token
         LoginResult loginResult = SharedPrefManager.getInstance(getContext()).getUser();
         String accessToken = loginResult.getAccessToken();
         progressDialog.show();
@@ -115,8 +127,8 @@ public class BillActivityFragment_1 extends Fragment {
                     arrayList.addAll(list);
                     setAdapter();
                 }
-                checkNumberOrder(view, arrayList);
                 cbx.setText(String.format("%d đơn hàng", arrayList.size()));
+                checkNumberOrder(view, arrayList);
             }
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
@@ -126,7 +138,7 @@ public class BillActivityFragment_1 extends Fragment {
         });
     }
     private void setAdapter(){
-        orderRecyclerAdapter = new OrderRecyclerAdapter(arrayList, getContext(), activityBillBinding, view);
+        orderRecyclerAdapter = new OrderRecyclerAdapter(arrayList, getContext(), activityBillBinding, view, customEventListener);
         recyclerView.setAdapter(orderRecyclerAdapter);
     }
     private void setListener(LinearLayout linear){
@@ -184,4 +196,6 @@ public class BillActivityFragment_1 extends Fragment {
             view.findViewById(R.id.nodata_layout).setVisibility(View.VISIBLE);
         }
     }
+
+
 }

@@ -34,7 +34,8 @@ public class DetailsOrderActivity extends AppCompatActivity {
     private ImageButton btn_back;
     private List<PackageInfo> list;
     private String orderId;
-    private TextView txt_name_receiver, txt_phone_receiver, txt_address_receiver, txt_address_sender;
+    private TextView txt_name_receiver, txt_phone_receiver, txt_address_receiver, txt_address_sender, txt_name_sender,
+            txt_phone_sender, txt_total_weight_data;
     private ImageView iv_image_package;
     private ProgressDialog progressDialog;
     @Override
@@ -49,6 +50,9 @@ public class DetailsOrderActivity extends AppCompatActivity {
         iv_image_package = findViewById(R.id.iv_image_package);
         txt_address_receiver = findViewById(R.id.txt_address_receiver);
         txt_address_sender = findViewById(R.id.txt_address);
+        txt_name_sender = findViewById(R.id.txt_name);
+        txt_phone_sender = findViewById(R.id.txt_phone);
+        txt_total_weight_data = findViewById(R.id.txt_total_weight_data);
         //Init progress
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Đang tải dữ liệu");
@@ -84,8 +88,8 @@ public class DetailsOrderActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         initData();
     }
 
@@ -116,17 +120,28 @@ public class DetailsOrderActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<OrderDetail> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(DetailsOrderActivity.this, "Goi api that bai", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailsOrderActivity.this, "Co loi xay ra", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void setContent() {
+        //Get user info
+        Customer customer = SharedPrefManager.getInstance(DetailsOrderActivity.this).getProfile();
+        //Assign data to view
+        txt_name_sender.setText(customer.getTenKH());
+        txt_phone_sender.setText(customer.getSDT());
+        txt_address_sender.setText(customer.getSDT());
         txt_name_receiver.setText(orderDetail.getKhnhan().getName());
         txt_phone_receiver.setText(orderDetail.getKhnhan().getSdt());
         Picasso.get().load(orderDetail.getUrlImage()).placeholder(R.drawable.border_rectangle).into(iv_image_package);
         txt_address_receiver.setText(orderDetail.getDiachinhan());
         txt_address_sender.setText(orderDetail.getDiachidi());
+        float totalWeight = 0;
+        for(PackageInfo p : list){
+            totalWeight += p.getCannang() * p.getSoluong();
+        }
+        txt_total_weight_data.setText(String.valueOf(totalWeight) + " kg");
     }
 
     private void setListViewAdapter() {

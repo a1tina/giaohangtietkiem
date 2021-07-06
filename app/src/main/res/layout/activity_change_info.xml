@@ -56,7 +56,6 @@
                 android:background="@drawable/border_rectangle"
                 android:drawablePadding="10dp"
                 android:padding="10dp"
-                android:text="Nguyễn Văn A"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:drawableTint="#B8B8B8"

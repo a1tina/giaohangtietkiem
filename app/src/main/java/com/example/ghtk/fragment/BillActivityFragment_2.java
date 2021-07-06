@@ -21,6 +21,7 @@ import com.example.ghtk.R;
 import com.example.ghtk.adapter.OrderRecyclerAdapter;
 import com.example.ghtk.api.ApiClient;
 import com.example.ghtk.databinding.ActivityBillBinding;
+import com.example.ghtk.listener.CustomEventListener;
 import com.example.ghtk.models.Order;
 import com.example.ghtk.storage.SharedPrefManager;
 
@@ -43,6 +44,7 @@ public class BillActivityFragment_2 extends Fragment {
     private View view;
     private ActivityBillBinding activityBillBinding;
     private ProgressDialog progressDialog;
+    private CustomEventListener customEventListener;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -89,6 +91,21 @@ public class BillActivityFragment_2 extends Fragment {
                 onClickEventHandler(v, linear);
             }
         };
+        customEventListener = list -> Toast.makeText(getContext(), list.get(0), Toast.LENGTH_SHORT).show();
+        customEventListener = list -> {
+            //Toast.makeText(getContext(), list.get(0), Toast.LENGTH_SHORT).show();
+            String accessToken = SharedPrefManager.getInstance(getContext()).getUser().getAccessToken();
+            for(String s : list){
+                arrayList.removeIf(item -> item.getMadonhang() == s);
+                ApiClient.getInstance().getOrderApi().DeleteOrderDetailById(accessToken, Integer.parseInt(s))
+                        .enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) { }
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) { }
+                        });
+            }
+        };
         setListener(linear);
         return view;
     }
@@ -104,6 +121,7 @@ public class BillActivityFragment_2 extends Fragment {
         progressDialog.show();
         arrayList = new ArrayList<>();
         selectedArrayList = new ArrayList<>();
+        //Get access Token
         LoginResult loginResult = SharedPrefManager.getInstance(getContext()).getUser();
         String accessToken = loginResult.getAccessToken();
         ApiClient.getInstance().getOrderApi().GetOrderByIdReceiver(accessToken).enqueue(new Callback<List<Order>>() {
@@ -118,8 +136,8 @@ public class BillActivityFragment_2 extends Fragment {
                     }
                     setAdapter();
                 }
-                checkNumberOrder(view, arrayList);
                 cbx.setText(String.format("%d đơn hàng", arrayList.size()));
+                checkNumberOrder(view, arrayList);
             }
 
             @Override
@@ -131,7 +149,7 @@ public class BillActivityFragment_2 extends Fragment {
 
     }
     private void setAdapter(){
-        orderRecyclerAdapter = new OrderRecyclerAdapter(arrayList, getContext(), activityBillBinding, view);
+        orderRecyclerAdapter = new OrderRecyclerAdapter(arrayList, getContext(), activityBillBinding, view, customEventListener);
         recyclerView.setAdapter(orderRecyclerAdapter);
     }
     private void setListener(LinearLayout linear){

@@ -1,7 +1,6 @@
  package com.example.ghtk;
 
-
-import android.Manifest;
+ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +9,11 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
@@ -32,14 +33,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+ import androidx.appcompat.widget.AppCompatButton;
+ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.ghtk.api.ApiClient;
-import com.example.ghtk.models.ReceiveCustomer;
 import com.example.ghtk.models.PackageInfo;
+import com.example.ghtk.models.ReceiveCustomer;
 import com.example.ghtk.storage.SharedPrefManager;
 import com.example.ghtk.tools.NoLimitScreen;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -59,28 +62,31 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class CreateOrderActivity extends AppCompatActivity {
 
     private static final String TAG = "IN_CREATE_ORDER_ACTIVITY_TAG";
-    private RelativeLayout rlSenderEdit, rlMainLayout, rlGrayBg;
+    private RelativeLayout rlSenderEdit, rlGrayBg;
     public  static final int REQUEST_PERMISSION_CODE  = 1 ;
-    private int CAPTURE_IMAGE_CODE = 1;
+    private static final int CAPTURE_IMAGE_CODE = 1;
     private Bitmap imageBitmap;
     private List<PackageInfo> packageInfoList;
-    private LinearLayout linearLayoutPhoto, linearLayoutAddGoods, p;
+    private LinearLayout p;
     private ImageButton iBBack, iBPhotoChoose, iBDeleteGoods, iBEdit;
     private CheckBox checkBox4;
     private Button bCreate;
-    private TextView bGoods, bServiceChoose, bPhotoDelAll, bAddGoods;
+    private TextView bGoods, bServiceChoose, bPhotoDelAll, bAddGoods, tv_total_postage2;
+    private EditText et_sender_address, editWeightOrigin, editQuantityOrigin;
     private ProgressDialog progressDialog;
+    private BottomSheetDialog bottomSheetDialog;
+    private View dialogView;
+    private float weight = 0;
+    private int quantity = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_order);
         NoLimitScreen.apply(this);
         rlSenderEdit = findViewById(R.id.rl_sender_edit);
-        rlMainLayout = findViewById(R.id.rl_mainCreateOrderLayout);
         rlGrayBg = findViewById(R.id.rl_graybg);
         checkBox4 = findViewById(R.id.checkBox4);
         bCreate = findViewById(R.id.b_create);
@@ -90,20 +96,27 @@ public class CreateOrderActivity extends AppCompatActivity {
         bPhotoDelAll = findViewById(R.id.b_photo_delete_all);
         bAddGoods = findViewById(R.id.add_goods);
         iBPhotoChoose = findViewById(R.id.ib_photo_choose);
-        linearLayoutPhoto = findViewById(R.id.linearlayout_photo);
         p = findViewById(R.id.p);
         iBBack = findViewById(R.id.ibBack);
-
+        et_sender_address = findViewById(R.id.et_sender_address);
         rlSenderEdit.setVisibility(RelativeLayout.GONE);
         rlGrayBg.setVisibility(RelativeLayout.GONE);
+        tv_total_postage2 = findViewById(R.id.tv_total_postage2);
+        editWeightOrigin = findViewById(R.id.goods_weight);
+        editQuantityOrigin = findViewById(R.id.goods_quantity);
 
-        iBBack.setOnClickListener(v -> finish());
         //Init progressDialog
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Đang gửi đi");
         progressDialog.setMessage("Vui lòng đợi...");
+        //Create Update Dialog Bottomsheet
+        createUpdateDialog();
 
-        //Create order
+        //Set address of sender
+
+        //set Event
+        iBBack.setOnClickListener(v -> finish());
+
         bCreate.setOnClickListener(v -> {
             callApi();
         });
@@ -117,11 +130,27 @@ public class CreateOrderActivity extends AppCompatActivity {
             rlSenderEdit.setVisibility(RelativeLayout.GONE);
             rlGrayBg.setVisibility(RelativeLayout.GONE);
         });
+
+        //Set onChange weight and quantity
+        editWeightOrigin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         //Set FontDrawable
         EditText e = findViewById(R.id.goods_name);
         setPackageImageDrawable(e);
+
         //Enable permission
         EnableRuntimePermissionToAccessCamera();
+
         //Tạo clickable cho TextView
         String text = "Tôi đã đọc và đồng ý với Điều khoản và quy định";
         String text2 = "Xem thêm quy định";
@@ -249,6 +278,54 @@ public class CreateOrderActivity extends AppCompatActivity {
         });
     }
 
+    private void createUpdateDialog() {
+        dialogView = LayoutInflater.from(this).inflate(R.layout.update_dialog_bottomsheet, null);
+        bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(dialogView);
+        AppCompatButton updateBtn = dialogView.findViewById(R.id.btn_update_phone);
+        AppCompatButton exitBtn = dialogView.findViewById(R.id.btn_exit);
+        updateBtn.setOnClickListener(v -> {
+            //startActivityForResult(new Intent(this, ChangeInfoActivity.class), 100);
+            startActivity(new Intent(this, ChangeInfoActivity.class));
+        });
+        exitBtn.setOnClickListener(v -> {
+            finish();
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LoginResult loginResult = SharedPrefManager.getInstance(CreateOrderActivity.this).getUser();
+        String accessToken = loginResult.getAccessToken();
+        ApiClient.getInstance().getApi().getProfile(accessToken).enqueue(new Callback<Customer>() {
+            @Override
+            public void onResponse(Call<Customer> call, Response<Customer> response) {
+                Customer customer = response.body();
+                checkUpdatePhone(customer.getSDT(), customer.getDiaChi());
+                et_sender_address.setText(customer.getDiaChi());
+            }
+            @Override
+            public void onFailure(Call<Customer> call, Throwable t) { }
+        });
+    }
+
+    private void checkUpdatePhone(String phone, String address) {
+        String s = "Bạn chưa cập nhật ";
+        if(phone == "" || phone == null){
+            ((TextView)dialogView.findViewById(R.id.notify_update)).setText(s + "số điện thoại");
+            bottomSheetDialog.show();
+            bottomSheetDialog.setCancelable(false);
+        }else if(address == "" || address == null){
+            ((TextView)dialogView.findViewById(R.id.notify_update)).setText(s + "địa chỉ");
+            bottomSheetDialog.show();
+            bottomSheetDialog.setCancelable(false);
+        }
+        else{
+            bottomSheetDialog.dismiss();
+        }
+    }
+
     private void setPackageImageDrawable(EditText v) {
         FontDrawable drawable = new FontDrawable(CreateOrderActivity.this, R.string.fa_cube_solid, true, false);
         drawable.setTextColor(0xFFB8B8B8);
@@ -351,6 +428,7 @@ public class CreateOrderActivity extends AppCompatActivity {
             imageBitmap = (Bitmap) extras.get("data");
             ((ImageView)findViewById(R.id.iv_image_package)).setImageBitmap(imageBitmap);
         }
+
     }
 
     private View getEditText(ViewGroup group, int idEditText){
@@ -367,9 +445,9 @@ public class CreateOrderActivity extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_PERMISSION_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(CreateOrderActivity.this,"Your application can access CAMERA.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(CreateOrderActivity.this,"Ứng dụng có thể truy cập camera", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(CreateOrderActivity.this,"Your application cannot access CAMERA.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(CreateOrderActivity.this,"Ứng dụng không thể truy cập camera", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

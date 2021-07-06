@@ -33,6 +33,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
     Button bSave;
     AutoCompleteTextView actvChangePaymentMethod;
     LinearLayout linearLayoutCardForm;
+    Customer customer;
     @Override
     protected void onResume() {
         super.onResume();
@@ -91,13 +92,22 @@ public class ChangeInfoActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Customer customer = SharedPrefManager.getInstance(this).getProfile();
-        etChangeName.setText(customer.getTenKH());
-        tvChangeMail2.setText(customer.getUsername());
-        tietChangePassword.setText(customer.getPassword());
-        etChangeAddress.setText(customer.getDiaChi());
-        etChangePhoneNumber.setText(customer.getSDT());
-
+        //Customer customer = SharedPrefManager.getInstance(this).getProfile();
+        LoginResult loginResult = SharedPrefManager.getInstance(ChangeInfoActivity.this).getUser();
+        String accessToken = loginResult.getAccessToken();
+        ApiClient.getInstance().getApi().getProfile(accessToken).enqueue(new Callback<Customer>() {
+            @Override
+            public void onResponse(Call<Customer> call, Response<Customer> response) {
+                Customer customer = response.body();
+                etChangeName.setText(customer.getTenKH());
+                tvChangeMail2.setText(customer.getUsername());
+                tietChangePassword.setText(customer.getPassword());
+                etChangeAddress.setText(customer.getDiaChi());
+                etChangePhoneNumber.setText(customer.getSDT());
+            }
+            @Override
+            public void onFailure(Call<Customer> call, Throwable t) { }
+        });
     }
 
     private void saveInfo() {
@@ -114,7 +124,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
         call.enqueue(new Callback<Customer>() {
             @Override
             public void onResponse(Call<Customer> call, Response<Customer> response) {
-                Customer customer = response.body();
+                customer = response.body();
                 SharedPrefManager.getInstance(ChangeInfoActivity.this)
                         .saveProfile(customer.getProfile());
             }

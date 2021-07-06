@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:text="Bạn có chắc muốn hủy đơn hàng ?"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="20sp"/>
     </LinearLayout>
    <androidx.appcompat.widget.AppCompatButton
        android:id="@+id/btn_confirm"
@@ -26,8 +26,11 @@
        android:layout_height="wrap_content"
        android:text="Xác nhận"
        android:textColor="@color/white"
-       android:textSize="18sp"
+       android:textSize="20sp"
        android:layout_marginTop="20dp"
        android:background="@drawable/button_radius"
-       android:backgroundTint="@color/light_red"/>
+       android:backgroundTint="@color/light_red"
+       android:textAllCaps="false"
+       android:layout_marginHorizontal="20dp"
+       android:minHeight="40dp"/>
 </LinearLayout>

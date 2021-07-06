@@ -7,6 +7,7 @@ import java.util.List;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
@@ -36,4 +37,7 @@ public interface OrderApi {
                                  @Part MultipartBody.Part fee,
                                  @Part MultipartBody.Part send_address,
                                  @Part MultipartBody.Part image);
+
+    @DELETE("/order/{id}")
+    Call<String> DeleteOrderDetailById(@Header("x_authorization") String accessToken, @Path("id") int id);
 }

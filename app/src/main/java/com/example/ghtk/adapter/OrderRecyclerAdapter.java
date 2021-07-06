@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ghtk.DetailsOrderActivity;
 import com.example.ghtk.R;
 import com.example.ghtk.databinding.ActivityBillBinding;
+import com.example.ghtk.listener.CustomEventListener;
 import com.example.ghtk.models.Order;
 import com.example.ghtk.viewmodels.OrderViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -37,13 +39,15 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
     private ArrayList<String> selectList;
     private ActivityBillBinding activityBillBinding;
     private View fragment_view1;
-
-    public OrderRecyclerAdapter(ArrayList<Order> arrayList, Context context, ActivityBillBinding binding, View v) {
+    private CustomEventListener customEventListener;
+    public OrderRecyclerAdapter(ArrayList<Order> arrayList, Context context, ActivityBillBinding binding, View v,
+                                CustomEventListener listener) {
         this.arrayList = arrayList;
         this.context = context;
         selectList = new ArrayList<>();
         activityBillBinding = binding;
         fragment_view1 = v;
+        customEventListener = listener;
     }
     public void updateList(ArrayList<Order> filteredList){
         this.arrayList = filteredList;
@@ -122,6 +126,7 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
                 bottomSheetDialog.show();
                 AppCompatButton btn_delete = viewDialog.findViewById(R.id.btn_confirm);
                 btn_delete.setOnClickListener(e -> {
+                    customEventListener.getSelectedOrder(selectList);
                     for(String s : selectList){
                         arrayList.removeIf(i -> (i.getMadonhang() == s));
                     }
@@ -131,17 +136,18 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
                     ((CheckBox)fragment_view1.findViewById(R.id.cbx_number_order)).setText(String.format("%s đơn hàng", arrayList.size()));
                     notifyDataSetChanged();
                     bottomSheetDialog.dismiss();
-            });
+                    Toast.makeText(context,"Xóa thành công", Toast.LENGTH_SHORT).show();
+                });
             }
         });
         fragment_view1.findViewById(R.id.cbx_number_order).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isEnable) {
+                if(!isEnable && arrayList.size() > 0) {
                     isEnable = true;
                     activityBillBinding.normalLayout.setVisibility(View.GONE);
                     activityBillBinding.selectLayout.setVisibility(View.VISIBLE);
-                    orderViewModel.getText().observe((FragmentActivity)context, new Observer<String>() {
+                    orderViewModel.getData().observe((FragmentActivity)context, new Observer<String>() {
                         @Override
                         public void onChanged(String s) {
                             activityBillBinding.selectTitle.setText(String.format("Chọn %s đơn hàng", s));
@@ -158,7 +164,7 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
                         selectList.add(item.getMadonhang());
                     }
                 }
-                orderViewModel.setText(String.valueOf(selectList.size()));
+                orderViewModel.setData(String.valueOf(selectList.size()));
                 notifyDataSetChanged();
             }
         });
@@ -170,7 +176,7 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
                     activityBillBinding.normalLayout.setVisibility(View.GONE);
                     activityBillBinding.selectLayout.setVisibility(View.VISIBLE);
                     clickItem(holder);
-                    orderViewModel.getText().observe((FragmentActivity)context, new Observer<String>() {
+                    orderViewModel.getData().observe((FragmentActivity)context, new Observer<String>() {
                         @Override
                         public void onChanged(String s) {
                             activityBillBinding.selectTitle.setText(String.format("Chọn %s đơn hàng", s));
@@ -236,6 +242,6 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
             ((CheckBox)fragment_view1.findViewById(R.id.cbx_number_order)).setChecked(false);
             isSelectAll = false;
         }
-        orderViewModel.setText(String.valueOf(selectList.size()));
+        orderViewModel.setData(String.valueOf(selectList.size()));
     }
 }
