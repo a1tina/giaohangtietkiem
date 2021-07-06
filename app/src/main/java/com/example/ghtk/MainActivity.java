@@ -78,12 +78,19 @@ public class MainActivity extends AppCompatActivity {
     public void myAlarm() {
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 13);
-        calendar.set(Calendar.MINUTE, 19);
+        calendar.set(Calendar.HOUR_OF_DAY, 12);
+        calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
+
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.set(Calendar.HOUR_OF_DAY, 18);
+        calendar1.set(Calendar.MINUTE, 0);
+        calendar1.set(Calendar.SECOND, 0);
 
         if (calendar.getTime().compareTo(new Date()) < 0)
             calendar.add(Calendar.DAY_OF_MONTH, 1);
+        if (calendar1.getTime().compareTo(new Date()) < 0)
+            calendar1.add(Calendar.DAY_OF_MONTH, 1);
 
         Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -91,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (alarmManager != null) {
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar1.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
         }
     }
 

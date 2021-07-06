@@ -87,4 +87,10 @@
         <item>Thẻ VISA</item>
     </string-array>
 
+    <string name="ads1">⚡Nhận ngay mã ưu đãi vận đơn chưa từng có từ Fast Delivery, đơn vị vận chuyển hàng đầu Việt Nam‼</string>
+    <string name="ads2">Quảng cáo Siêu Hội hái điểm thưởng 8.8 có làm bạn "xiêu lòng"? Có thì click vào ngay thôi</string>
+    <string name="ads3">Đơn hàng có mã vận đơn AZ682H832K827 đang được nhà cung cấp dịch vụ chuẩn bị. Nhấn để xem chi tiết tình trạng đơn hàng</string>
+    <string name="ads4">Fasr Delivery đang tiếp quản đơn hàng AZ6883J948F8U. Nhấn để xem chi tiết tình trạng đơn hàng</string>
+
+
 </resources>

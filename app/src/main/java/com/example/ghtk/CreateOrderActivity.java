@@ -2,20 +2,15 @@ package com.example.ghtk;
 
 
 import android.Manifest;
-
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-
-import android.net.Uri;
-import android.os.Bundle;
-
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -37,7 +32,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -59,10 +53,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import androidx.core.content.ContextCompat;
-
-import com.example.ghtk.tools.NoLimitScreen;
-
 
 public class CreateOrderActivity extends AppCompatActivity {
 
@@ -81,6 +71,7 @@ public class CreateOrderActivity extends AppCompatActivity {
     CheckBox checkBox4;
     Button bCreate;
     TextView bGoods, bCOD, bServiceChoose, bPhotoDelAll, bAddGoods;
+    NotificationManager notificationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +98,10 @@ public class CreateOrderActivity extends AppCompatActivity {
 
         rlSenderEdit.setVisibility(RelativeLayout.GONE);
         rlGrayBg.setVisibility(RelativeLayout.GONE);
+
+        //Delete noti when receive intent from NotificationReceiver
+        notificationManager = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.cancelAll();
 
         //Request permission
         if (ContextCompat.checkSelfPermission(this,
