@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.SecondFragment"
-    >
+    android:id="@+id/fragment_second"
+    tools:context=".fragment.SecondFragment">
 
-    <SearchView
-        android:id="@+id/sv_search"
+    <FrameLayout
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:queryHint="Tìm kiếm ở đây"
-        android:iconifiedByDefault="false"/>
-    
+        android:layout_height="match_parent"/>
+
+
+
+
 </RelativeLayout>

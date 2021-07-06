@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.MapFragment">
+
+    <fragment
+        android:id="@+id/google_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="95dp"/>
+    <Button
+        android:id="@+id/b_find_warehouse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sv_search"
+        android:text="Kho"
+        android:background="?android:selectableItemBackground"
+        android:textColor="@color/black"/>
+    <SearchView
+        android:id="@+id/sv_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Tìm kiếm ở đây" />
+    <ImageButton
+        android:id="@+id/ib_mylocation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rectangle_border_radius"
+        android:layout_below="@id/google_map"
+        android:layout_marginTop="-150dp"
+        android:layout_marginEnd="15dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_my_location"/>
+
+</RelativeLayout>

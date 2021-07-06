@@ -2,23 +2,32 @@ package com.example.ghtk.api;
 
 import com.example.ghtk.Customer;
 import com.example.ghtk.LoginResult;
+import com.example.ghtk.models.Warehouse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import okhttp3.ResponseBody;
+import java.util.List;
+
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface ApiService {
     Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
+
+    @FormUrlEncoded
+    @POST("auth/loginwithgoogle")
+    Call<LoginResult> loginwithGoogle(
+            @Field("email") String email,
+            @Field("name") String name,
+            @Field("SDT") String SDT,
+            @Field("DiaChi") String diaChi
+    );
 
 
     @FormUrlEncoded
@@ -48,5 +57,7 @@ public interface ApiService {
     Call<Customer> getProfile(
             @Header("x_authorization") String accessToken
     );
+    @GET("/warehouse")
+    Call<List<Warehouse>> getWarehouse();
 
 }

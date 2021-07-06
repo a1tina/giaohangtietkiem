@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.example.ghtk.Customer;
 import com.example.ghtk.LoginResult;
+import com.example.ghtk.models.Warehouse;
 
 public class SharedPrefManager {
     public static  final String SHARED_PREF_NAME = "my_shared_pref";
@@ -84,6 +85,18 @@ public class SharedPrefManager {
                 sharedPreferences.getString("password", null),
                 sharedPreferences.getInt("makh", -1),
                 sharedPreferences.getString("refreshToken", null)
+        );
+    }
+
+    public Warehouse getWarehouseInfo(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return new Warehouse(
+                sharedPreferences.getInt("makho", -1),
+                sharedPreferences.getString("tenkho", null),
+                sharedPreferences.getString("diachi", null),
+                sharedPreferences.getString("tinh", null),
+                sharedPreferences.getString("vido", null),
+                sharedPreferences.getString("kinhdo", null)
         );
     }
 
