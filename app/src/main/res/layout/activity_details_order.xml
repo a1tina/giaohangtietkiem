@@ -14,7 +14,7 @@
         android:textStyle="bold"
         android:textSize="20sp"
         android:textAlignment="center"
-        android:background="@color/light_red"
+        android:background="#3E87EC"
         android:paddingBottom="70dp"
         android:paddingTop="50dp"/>
     <ImageButton
@@ -51,9 +51,10 @@
                 android:layout_gravity="center"
                 android:textSize="18sp"
                 android:drawablePadding="5dp"
-                android:drawableTint="@color/light_red"
+                android:drawableTint="@color/sky_blue"
                 android:drawableLeft="@drawable/ic_goods_id_number"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="10dp"
+                />
             <TextView
                 android:id="@+id/txt_date"
                 android:layout_width="wrap_content"
@@ -62,7 +63,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_below="@id/txt_orderid"
                 android:drawableLeft="@drawable/ic_baseline_date_range_24"
-                android:drawableTint="@color/light_red"
+                android:drawableTint="@color/sky_blue"
                 android:drawablePadding="5dp"
                 android:textSize="18sp"
                 android:layout_marginStart="10dp"/>
@@ -97,7 +98,7 @@
                 android:text="Dịch vụ"
                 android:layout_below="@id/txt_date"
                 android:drawableLeft="@drawable/ic_baseline_airport_shuttle_24"
-                android:drawableTint="@color/light_red"
+                android:drawableTint="@color/sky_blue"
                 android:drawablePadding="5dp"
                 android:textSize="18sp"
                 android:layout_marginStart="10dp"/>
@@ -140,7 +141,7 @@
                             android:fontFamily="sans-serif"
                             android:background="@color/cream"
                             android:layout_marginBottom="10dp"
-                            android:textColor="@color/light_red"
+                            android:textColor="@color/sky_blue"
                             android:textSize="18sp"
                             android:padding="5dp"
                             android:textStyle="bold"/>
@@ -151,8 +152,8 @@
                             android:src="@drawable/ic_right_arrow"
                             android:background="@color/cream"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginTop="8dp"
-                            app:tint="@color/light_red"
+                            android:layout_marginTop="6dp"
+                            app:tint="@color/sky_blue"
                             />
                         <LinearLayout
                             android:id="@+id/linear_sender"
@@ -170,7 +171,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:textSize="16sp"
                                 android:drawablePadding="7dp"
-                                android:drawableTint="@color/light_red"
+                                android:drawableTint="@color/sky_blue"
                                 android:drawableLeft="@drawable/ic_person"
                                 />
                             <TextView
@@ -180,7 +181,7 @@
                                 android:layout_marginBottom="7dp"
                                 android:drawableLeft="@drawable/ic_phone"
                                 android:layout_marginLeft="10dp"
-                                android:drawableTint="@color/light_red"
+                                android:drawableTint="@color/sky_blue"
                                 android:drawablePadding="5dp"
                                 android:textSize="16sp"
                                 />
@@ -189,7 +190,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:drawableLeft="@drawable/ic_location"
-                                android:drawableTint="@color/light_red"
+                                android:drawableTint="@color/sky_blue"
                                 android:layout_marginLeft="10dp"
                                 android:drawablePadding="5dp"
                                 android:textSize="16sp"
@@ -215,7 +216,7 @@
                             android:fontFamily="sans-serif"
                             android:background="@color/cream"
                             android:layout_marginBottom="10dp"
-                            android:textColor="@color/light_red"
+                            android:textColor="@color/sky_blue"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:padding="5dp"/>
@@ -226,8 +227,8 @@
                             android:src="@drawable/ic_right_arrow"
                             android:background="@color/cream"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginTop="8dp"
-                            app:tint="@color/light_red"
+                            android:layout_marginTop="6dp"
+                            app:tint="@color/sky_blue"
                             />
                         <LinearLayout
                             android:id="@+id/linear_receiver"
@@ -244,7 +245,7 @@
                                 android:layout_marginBottom="7dp"
                                 android:textSize="16sp"
                                 android:drawablePadding="5dp"
-                                android:drawableTint="@color/light_red"
+                                android:drawableTint="@color/sky_blue"
                                 android:drawableLeft="@drawable/ic_person"
                                 android:layout_marginLeft="10dp"/>
                             <TextView
@@ -253,7 +254,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="7dp"
                                 android:drawableLeft="@drawable/ic_phone"
-                                android:drawableTint="@color/light_red"
+                                android:drawableTint="@color/sky_blue"
                                 android:drawablePadding="5dp"
                                 android:textSize="16sp"
                                 android:layout_marginLeft="10dp"/>
@@ -262,7 +263,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:drawableLeft="@drawable/ic_location"
-                                android:drawableTint="@color/light_red"
+                                android:drawableTint="@color/sky_blue"
                                 android:drawablePadding="5dp"
                                 android:textSize="16sp"
                                 android:layout_marginLeft="10dp"/>
@@ -286,24 +287,24 @@
                             android:layout_height="wrap_content"
                             android:text="Thông tin vận chuyển"
                             android:fontFamily="sans-serif"
-                            android:background="@color/light_red"
+                            android:background="@color/cream"
                             android:layout_marginBottom="10dp"
-                            android:textColor="@color/white"
+                            android:textColor="@color/sky_blue"
                             android:textSize="18sp"
                             android:padding="5dp"
                             android:textStyle="bold"
                             android:drawableLeft="@drawable/ic_baseline_directions_car_24"
                             android:drawablePadding="10dp"
-                            android:drawableTint="@color/white"/>
+                            android:drawableTint="@color/sky_blue"/>
                         <ImageButton
                             android:id="@+id/ib_expand_delivery"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_right_arrow"
-                            android:background="@color/light_red"
+                            android:background="@color/cream"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginTop="8dp"
-                            app:tint="@color/white"
+                            android:layout_marginTop="6dp"
+                            app:tint="@color/sky_blue"
                             />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
@@ -328,24 +329,24 @@
                                 android:layout_height="wrap_content"
                                 android:text="Thông tin hàng hóa"
                                 android:fontFamily="sans-serif"
-                                android:background="@color/light_red"
+                                android:background="@color/cream"
                                 android:layout_marginBottom="10dp"
-                                android:textColor="@color/white"
+                                android:textColor="@color/sky_blue"
                                 android:textSize="18sp"
                                 android:padding="5dp"
                                 android:textStyle="bold"
                                 android:drawableLeft="@drawable/ic_baseline_card_giftcard_24"
                                 android:drawablePadding="10dp"
-                                android:drawableTint="@color/white"/>
+                                android:drawableTint="@color/sky_blue"/>
                             <ImageButton
                                 android:id="@+id/ib_expand_package"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/ic_right_arrow"
-                                android:background="@color/light_red"
+                                android:background="@color/cream"
                                 android:layout_alignParentEnd="true"
-                                android:layout_marginTop="8dp"
-                                app:tint="@color/white" />
+                                android:layout_marginTop="6dp"
+                                app:tint="@color/sky_blue" />
                         </RelativeLayout>
                         <ListView
                             android:id="@+id/lst_package"
@@ -393,29 +394,29 @@
                             android:layout_height="wrap_content"
                             android:text="Hình ảnh sản phẩm"
                             android:fontFamily="sans-serif"
-                            android:background="@color/light_red"
+                            android:background="@color/cream"
                             android:layout_marginBottom="10dp"
-                            android:textColor="@color/white"
+                            android:textColor="@color/sky_blue"
                             android:textSize="18sp"
                             android:padding="5dp"
                             android:textStyle="bold"
                             android:drawableLeft="@drawable/ic_baseline_directions_car_24"
                             android:drawablePadding="10dp"
-                            android:drawableTint="@color/white"/>
+                            android:drawableTint="@color/sky_blue"/>
                         <ImageButton
                             android:id="@+id/ib_expand_image"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_right_arrow"
-                            android:background="@color/light_red"
+                            android:background="@color/cream"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginTop="8dp"
-                            app:tint="@color/white" />
+                            android:layout_marginTop="6dp"
+                            app:tint="@color/sky_blue" />
                         <ImageView
                             android:id="@+id/iv_image_package"
-                            android:layout_width="200dp"
+                            android:layout_width="250dp"
                             android:layout_height="200dp"
-                            android:scaleType="fitCenter"
+                            android:scaleType="fitXY"
                             android:adjustViewBounds="true"
                             android:layout_below="@id/txt_image"
                             android:layout_centerHorizontal="true"/>
@@ -442,7 +443,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Phí đơn hàng"
                                 android:fontFamily="sans-serif"
-                                android:background="@color/light_red"
+                                android:background="@color/sky_blue"
                                 android:textStyle="bold"
                                 android:layout_marginBottom="10dp"
                                 android:textColor="@color/white"
