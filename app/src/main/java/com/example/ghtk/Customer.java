@@ -21,7 +21,7 @@ public class Customer implements Serializable {
         this.makh = makh;
         this.refreshtoken = refreshtoken;
     }
-
+    public Customer(){}
     public Customer getProfile(){
         Customer customer = new Customer(MaKH, TenKH, SDT, DiaChi, madn, username, password, makh, refreshtoken);
         return customer;

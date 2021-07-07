@@ -33,8 +33,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
- import androidx.appcompat.widget.AppCompatButton;
- import androidx.core.app.ActivityCompat;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.ghtk.api.ApiClient;
@@ -76,11 +76,11 @@ public class CreateOrderActivity extends AppCompatActivity {
     private Button bCreate;
     private TextView bGoods, bServiceChoose, bPhotoDelAll, bAddGoods, tv_total_postage2;
     private EditText et_sender_address, editWeightOrigin, editQuantityOrigin;
-    private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog_send, progressDialog_update_phone;
     private BottomSheetDialog bottomSheetDialog;
     private View dialogView;
-    private float weight = 0;
-    private int quantity = 0;
+    private float totalWeight = 0, totalMoney = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,9 +106,11 @@ public class CreateOrderActivity extends AppCompatActivity {
         editQuantityOrigin = findViewById(R.id.goods_quantity);
 
         //Init progressDialog
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Đang gửi đi");
-        progressDialog.setMessage("Vui lòng đợi...");
+        progressDialog_send = new ProgressDialog(this);
+        progressDialog_update_phone = new ProgressDialog(this);
+        progressDialog_send.setTitle("Đang gửi đi");
+        progressDialog_send.setMessage("Vui lòng đợi...");
+        progressDialog_update_phone.setMessage("Vui lòng đợi...");
         //Create Update Dialog Bottomsheet
         createUpdateDialog();
 
@@ -132,18 +134,9 @@ public class CreateOrderActivity extends AppCompatActivity {
         });
 
         //Set onChange weight and quantity
-        editWeightOrigin.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        TextWatcher textWatcher = getMyTextWatcher(editWeightOrigin, editQuantityOrigin);
+        editWeightOrigin.addTextChangedListener(textWatcher);
+        editQuantityOrigin.addTextChangedListener(textWatcher);
         //Set FontDrawable
         EditText e = findViewById(R.id.goods_name);
         setPackageImageDrawable(e);
@@ -242,9 +235,19 @@ public class CreateOrderActivity extends AppCompatActivity {
                 LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View view = inflater.inflate(R.layout.mcvaddgoods, null);
                 ImageButton b = view.findViewById(R.id.b_delete_goods);
-                EditText e = view.findViewById(R.id.goods_name);
+                //Declare and Initialize view
+                EditText e = view.findViewById(R.id.goods_name),
+                         weightView = view.findViewById(R.id.goods_weight),
+                         quantityView = view.findViewById(R.id.goods_quantity);
                 setPackageImageDrawable(e);
-                b.setOnClickListener(v -> p.removeView(view));
+
+                TextWatcher textWatcher1 = getMyTextWatcher(weightView, quantityView);
+                weightView.addTextChangedListener(textWatcher1);
+                quantityView.addTextChangedListener(textWatcher1);
+                b.setOnClickListener(v -> {
+                    p.removeView(view);
+
+                });
                 p.addView(view);
             }
 
@@ -277,7 +280,39 @@ public class CreateOrderActivity extends AppCompatActivity {
               }
         });
     }
+    private TextWatcher getMyTextWatcher(EditText weight_editText, EditText quantity_editText){
+        return new TextWatcher() {
+            private Float localTotalWeight = 0F, localTotalMoney = 0F;
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            @Override
+            public void afterTextChanged(Editable s) {
+                totalWeight -= localTotalWeight;
+                totalMoney = totalWeight * 5000;
 
+                if(!s.toString().equals("")){
+                    String weight = weight_editText.getText().toString().trim();
+                    String quantity = quantity_editText.getText().toString().trim();
+                    localTotalWeight = Integer.parseInt(quantity) * Float.parseFloat(weight);
+                    totalWeight += localTotalWeight;
+                    totalMoney = totalWeight * 5000;
+                }else{
+                    localTotalWeight = 0F;
+                }
+                tv_total_postage2.setText(String.valueOf(totalMoney));
+            }
+
+            @Override
+            protected void finalize() throws Throwable {
+                super.finalize();
+                totalWeight -= localTotalWeight;
+                totalMoney = totalWeight * 5000;
+                tv_total_postage2.setText(String.valueOf(totalMoney));
+            }
+        };
+    }
     private void createUpdateDialog() {
         dialogView = LayoutInflater.from(this).inflate(R.layout.update_dialog_bottomsheet, null);
         bottomSheetDialog = new BottomSheetDialog(this);
@@ -296,27 +331,29 @@ public class CreateOrderActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        LoginResult loginResult = SharedPrefManager.getInstance(CreateOrderActivity.this).getUser();
+        progressDialog_update_phone.show();
+        LoginResult loginResult = SharedPrefManager.getInstance(this).getUser();
         String accessToken = loginResult.getAccessToken();
         ApiClient.getInstance().getApi().getProfile(accessToken).enqueue(new Callback<Customer>() {
             @Override
             public void onResponse(Call<Customer> call, Response<Customer> response) {
+                progressDialog_update_phone.dismiss();
                 Customer customer = response.body();
                 checkUpdatePhone(customer.getSDT(), customer.getDiaChi());
                 et_sender_address.setText(customer.getDiaChi());
             }
             @Override
-            public void onFailure(Call<Customer> call, Throwable t) { }
+            public void onFailure(Call<Customer> call, Throwable t) { progressDialog_update_phone.dismiss();}
         });
     }
 
     private void checkUpdatePhone(String phone, String address) {
         String s = "Bạn chưa cập nhật ";
-        if(phone == "" || phone == null){
+        if(phone == null || phone.equals("")){
             ((TextView)dialogView.findViewById(R.id.notify_update)).setText(s + "số điện thoại");
             bottomSheetDialog.show();
             bottomSheetDialog.setCancelable(false);
-        }else if(address == "" || address == null){
+        }else if(address == null || address.equals("")){
             ((TextView)dialogView.findViewById(R.id.notify_update)).setText(s + "địa chỉ");
             bottomSheetDialog.show();
             bottomSheetDialog.setCancelable(false);
@@ -324,6 +361,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         else{
             bottomSheetDialog.dismiss();
         }
+
     }
 
     private void setPackageImageDrawable(EditText v) {
@@ -346,7 +384,7 @@ public class CreateOrderActivity extends AppCompatActivity {
     }
 
     private void callApi() {
-        progressDialog.show();
+        progressDialog_send.show();
         if(imageBitmap == null){
             Toast.makeText(CreateOrderActivity.this, "Bạn chưa chụp ảnh", Toast.LENGTH_SHORT).show();
             return;
@@ -355,7 +393,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         getDataDSHH();
         String diachinhan = ((EditText)findViewById(R.id.et_receiver_address)).getText().toString().trim();
         String diachigui = ((EditText)findViewById(R.id.et_sender_address)).getText().toString().trim();
-        String chiphi = ((TextView)findViewById(R.id.tv_total_postage2)).getText().toString().trim();
+        String chiphi = tv_total_postage2.getText().toString().trim();
         String tennguoinhan = ((EditText)findViewById(R.id.et_receiver_name)).getText().toString().trim();
         String sdtnhan = ((EditText)findViewById(R.id.et_receiver_phone)).getText().toString().trim();
         //Convert bitmap to file
@@ -390,7 +428,7 @@ public class CreateOrderActivity extends AppCompatActivity {
             image).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                progressDialog.dismiss();
+                progressDialog_send.dismiss();
                 if(response.isSuccessful()) {
                     Toast.makeText(CreateOrderActivity.this, "Tạo đơn thành công", Toast.LENGTH_SHORT).show();
                     finish();
@@ -398,7 +436,7 @@ public class CreateOrderActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                progressDialog.dismiss();
+                progressDialog_send.dismiss();
                 Toast.makeText(CreateOrderActivity.this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
                 Log.d("LOI LOI LOI", t.getMessage());
             }

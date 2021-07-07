@@ -108,7 +108,6 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:layout_below="@id/tv_create_order_receiver_name"
-
                 android:padding="10dp"
                 android:textSize="16sp"
                 android:inputType="textPersonName"
@@ -208,7 +207,7 @@
                         android:layout_marginHorizontal="10dp"
                         android:padding="10dp"
                         android:hint="Tên hàng hoá"
-                        android:paddingStart="10dp"
+                        android:paddingStart="12dp"
                         android:inputType="text"
                         android:textSize="16sp"
                         android:drawableTint="#B8B8B8"
@@ -216,7 +215,7 @@
 
                     <EditText
                         android:id="@+id/goods_weight"
-                        android:layout_width="200dp"
+                        android:layout_width="170dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:padding="10dp"
@@ -228,21 +227,40 @@
                         android:drawablePadding="10dp"
                         android:layout_below="@id/goods_name"
                         android:background="@color/white"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="kg"
+                        android:layout_alignRight="@id/goods_weight"
+                        android:layout_below="@id/goods_name"
+                        android:textSize="16sp"
+                        android:paddingVertical="10dp"/>
                     <EditText
                         android:id="@+id/goods_quantity"
-                        android:layout_width="200dp"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/goods_name"
                         android:layout_marginEnd="10dp"
-                        android:padding="10dp"
-                        android:hint="Số lượng: "
-                        android:inputType="number"
-                        android:textSize="16sp"
+                        android:background="@color/white"
                         android:drawableTint="#B8B8B8"
+                        android:text="1"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:textSize="16sp"
+                        android:textAlignment="center"
+                        android:layout_alignParentEnd="true"/>
+
+                    <TextView
+                        android:id="@+id/txt_quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Số lượng"
+                        android:layout_toLeftOf="@id/goods_quantity"
+                        android:layout_below="@id/goods_name"
                         android:drawableLeft="@drawable/ic_box"
                         android:drawablePadding="10dp"
-                        android:layout_below="@id/goods_name"
-                        android:layout_toEndOf="@id/goods_weight"
-                        android:background="@color/white"/>
+                        android:padding="10dp"
+                        android:textSize="16sp"/>
                 </RelativeLayout>
             </LinearLayout>
 

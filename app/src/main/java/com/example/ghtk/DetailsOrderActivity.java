@@ -35,7 +35,7 @@ public class DetailsOrderActivity extends AppCompatActivity {
     private List<PackageInfo> list;
     private String orderId;
     private TextView txt_name_receiver, txt_phone_receiver, txt_address_receiver, txt_address_sender, txt_name_sender,
-            txt_phone_sender, txt_total_weight_data;
+            txt_phone_sender, txt_total_weight_data, txt_delivery_fee_data, txt_total_fee_data;
     private ImageView iv_image_package;
     private ProgressDialog progressDialog;
     @Override
@@ -53,6 +53,8 @@ public class DetailsOrderActivity extends AppCompatActivity {
         txt_name_sender = findViewById(R.id.txt_name);
         txt_phone_sender = findViewById(R.id.txt_phone);
         txt_total_weight_data = findViewById(R.id.txt_total_weight_data);
+        txt_delivery_fee_data = findViewById(R.id.txt_delivery_fee_data);
+        txt_total_fee_data = findViewById(R.id.txt_total_fee_data);
         //Init progress
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Đang tải dữ liệu");
@@ -137,11 +139,14 @@ public class DetailsOrderActivity extends AppCompatActivity {
         Picasso.get().load(orderDetail.getUrlImage()).placeholder(R.drawable.border_rectangle).into(iv_image_package);
         txt_address_receiver.setText(orderDetail.getDiachinhan());
         txt_address_sender.setText(orderDetail.getDiachidi());
+        txt_delivery_fee_data.setText(String.valueOf(orderDetail.getChiphi()) + " đ");
+        txt_total_fee_data.setText(String.valueOf(orderDetail.getChiphi()) + " đ");
         float totalWeight = 0;
         for(PackageInfo p : list){
             totalWeight += p.getCannang() * p.getSoluong();
         }
         txt_total_weight_data.setText(String.valueOf(totalWeight) + " kg");
+
     }
 
     private void setListViewAdapter() {

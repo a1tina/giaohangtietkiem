@@ -43,12 +43,11 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.getMenu().getItem(2).setEnabled(false);
         NavController navController = Navigation.findNavController(this, R.id.fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
-
+        binding.fab.setOnClickListener(v -> startActivity(new Intent(this, CreateOrderActivity.class)));
 
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
         myAlarm();
-
 
     }
 

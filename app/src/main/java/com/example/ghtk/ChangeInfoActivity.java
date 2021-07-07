@@ -110,6 +110,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
         });
     }
 
+
     private void saveInfo() {
         String email = tvChangeMail2.getText().toString().trim();
         String password = tietChangePassword.getText().toString().trim();
@@ -126,7 +127,8 @@ public class ChangeInfoActivity extends AppCompatActivity {
             public void onResponse(Call<Customer> call, Response<Customer> response) {
                 customer = response.body();
                 SharedPrefManager.getInstance(ChangeInfoActivity.this)
-                        .saveProfile(customer.getProfile());
+                            .saveProfile(customer.getProfile());
+
             }
 
             @Override

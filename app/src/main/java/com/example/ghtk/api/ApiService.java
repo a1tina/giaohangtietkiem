@@ -3,8 +3,6 @@ package com.example.ghtk.api;
 import com.example.ghtk.Customer;
 import com.example.ghtk.LoginResult;
 import com.example.ghtk.models.Warehouse;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -16,9 +14,9 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface ApiService {
-    Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd HH:mm:ss")
-            .create();
+//    Gson gson = new GsonBuilder()
+//            .setDateFormat("yyyy-MM-dd HH:mm:ss")
+//            .create();
 
     @FormUrlEncoded
     @POST("auth/loginwithgoogle")
