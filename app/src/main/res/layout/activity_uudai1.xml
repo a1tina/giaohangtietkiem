@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Uudai1">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_info_account_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/light_red"
+                android:text="Đón chờ siêu Ưu đãi"
+                android:fontFamily="@font/open_sans_semibold"
+                android:paddingLeft="50dp"
+                android:paddingTop="49dp"
+                android:paddingBottom="20dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textAlignment="textStart"/>
+            <ImageButton
+                android:id="@+id/ibBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="?android:selectableItemBackground"
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/ic_back" />
+            <ImageView
+                android:id="@+id/iv_uudai1"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@id/tv_info_account_title"
+                android:src="@drawable/uudai1"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/acb_receive_coupon"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/open_sans"
+                android:letterSpacing="0"
+                android:text="Nhận mã ngay"
+                android:layout_below="@id/iv_uudai1"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_gradient_style"/>
+            <ImageView
+                android:id="@+id/iv_uudai1_1"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@id/acb_receive_coupon"
+                android:src="@drawable/img_uudai1_1"/>
+            <ImageView
+                android:id="@+id/iv_uudai1_2"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@id/iv_uudai1_1"
+                android:src="@drawable/uudai1_2"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/acb_price_review"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/open_sans"
+                android:letterSpacing="0"
+                android:text="Xem bảng giá vận chuyển"
+                android:layout_below="@id/iv_uudai1_2"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_gradient_style"/>
+
+            <ImageView
+                android:id="@+id/iv_uudai1_3"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@id/acb_price_review"
+                android:src="@drawable/uudai1_3"/>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

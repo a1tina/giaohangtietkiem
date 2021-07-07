@@ -29,8 +29,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ghtk"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".DetailsOrderActivity"></activity>
         <activity android:name=".ChangeInfoActivity"></activity>
+
+        <activity android:name=".Uudai1"></activity>
+
         <activity android:name=".intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,9 +62,9 @@
         <activity android:name=".ContactActivity" />
         <activity android:name=".CreateOrderActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
-        </activity>
-        <receiver android:name="com.example.ghtk.notification.NotificationReceiver"/>
+        <activity android:name=".MainActivity" />
+
+        <receiver android:name=".notification.NotificationReceiver" />
     </application>
 
 </manifest>

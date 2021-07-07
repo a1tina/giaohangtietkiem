@@ -1,6 +1,7 @@
- package com.example.ghtk;
+package com.example.ghtk;
 
- import android.Manifest;
+import android.Manifest;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +38,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.ghtk.R;
 import com.example.ghtk.api.ApiClient;
 import com.example.ghtk.models.PackageInfo;
 import com.example.ghtk.models.ReceiveCustomer;
@@ -65,21 +67,26 @@ import retrofit2.Response;
 public class CreateOrderActivity extends AppCompatActivity {
 
     private static final String TAG = "IN_CREATE_ORDER_ACTIVITY_TAG";
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 3;
     private RelativeLayout rlSenderEdit, rlGrayBg;
     public  static final int REQUEST_PERMISSION_CODE  = 1 ;
     private static final int CAPTURE_IMAGE_CODE = 1;
     private Bitmap imageBitmap;
     private List<PackageInfo> packageInfoList;
+
     private LinearLayout p;
     private ImageButton iBBack, iBPhotoChoose, iBDeleteGoods, iBEdit;
     private CheckBox checkBox4;
     private Button bCreate;
-    private TextView bGoods, bServiceChoose, bPhotoDelAll, bAddGoods, tv_total_postage2;
+    private TextView bGoods, bServiceChoose, bPhotoDelAll, bAddGoods, tv_total_postage2, bCOD;
     private EditText et_sender_address, editWeightOrigin, editQuantityOrigin;
     private ProgressDialog progressDialog_send, progressDialog_update_phone;
     private BottomSheetDialog bottomSheetDialog;
     private View dialogView;
     private float totalWeight = 0, totalMoney = 0;
+
+    NotificationManager notificationManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +108,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         et_sender_address = findViewById(R.id.et_sender_address);
         rlSenderEdit.setVisibility(RelativeLayout.GONE);
         rlGrayBg.setVisibility(RelativeLayout.GONE);
+
         tv_total_postage2 = findViewById(R.id.tv_total_postage2);
         editWeightOrigin = findViewById(R.id.goods_weight);
         editQuantityOrigin = findViewById(R.id.goods_quantity);
@@ -117,6 +125,38 @@ public class CreateOrderActivity extends AppCompatActivity {
         //Set address of sender
 
         //set Event
+
+        //Delete noti when receive intent from NotificationReceiver
+        notificationManager = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.cancelAll();
+
+        //Request permission
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_CONTACTS)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_CONTACTS},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+
         iBBack.setOnClickListener(v -> finish());
 
         bCreate.setOnClickListener(v -> {

@@ -414,7 +414,7 @@
                             app:tint="@color/sky_blue" />
                         <ImageView
                             android:id="@+id/iv_image_package"
-                            android:layout_width="250dp"
+                            android:layout_width="220dp"
                             android:layout_height="200dp"
                             android:scaleType="fitXY"
                             android:adjustViewBounds="true"
